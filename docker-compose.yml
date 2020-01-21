@@ -1,0 +1,10 @@
+version: "3"
+services:
+    webapp:
+        image: ${DOCKER_REGISTRY-}webapp
+        build: Web/Web/
+        ports: "8081:81"
+    thewebapi:
+        image: ${DOCKER_REGISTRY-}thewebapi
+        build: Server/Server/
+        ports: "8080:80"

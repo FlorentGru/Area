@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1-stretch-slim AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8081
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
-COPY ["Web/Web.csproj", "Web/"]
-RUN dotnet restore "Web/Web.csproj"
+COPY ["Web.csproj", ""]
+RUN dotnet restore "./Web.csproj"
 COPY . .
-WORKDIR "/src/Web"
+WORKDIR "/src/."
 RUN dotnet build "Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
