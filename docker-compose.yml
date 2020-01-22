@@ -18,6 +18,13 @@ services:
         networks: 
             - app-network
 
+    thewebapi:
+        build: 
+            context: ./Server/Server/
+            dockerfile: Dockerfile
+        ports: 
+            - 8080:8080
+
     mobile_client:
         build:
             context: ./Mobile/
