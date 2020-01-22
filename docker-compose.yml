@@ -1,10 +1,22 @@
 version: "3"
 services:
-    webapp:
-        image: ${DOCKER_REGISTRY-}webapp
-        build: Web/Web/
-        ports: "8081:81"
     thewebapi:
-        image: ${DOCKER_REGISTRY-}thewebapi
-        build: Server/Server/
-        ports: "8080:80"
+        build: 
+            context: ./Server/Server/
+            dockerfile: Dockerfile
+        ports: 
+            - 8080:8080
+    mobile_client:
+        build:
+            context: ./Mobile/
+            dockerfile: Dockerfile
+        depends_on: 
+            - thewebapi
+    webapp:
+        build: 
+            context: ./Web/Web/
+            dockerfile: Dockerfile
+        ports: 
+            - 8081:81
+        depends_on: 
+            - mobile_client

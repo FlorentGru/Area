@@ -1,27 +1,26 @@
 FROM gradle:4.10.0-jdk8
 
-RUN (printf "\nen_US.UTF-8 UTF-8\n" >> /etc/locale.gen) && (/usr/bin/locale-gen)
-RUN sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
-RUN pacman -Syy
+USER root
+ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
+    ANDROID_HOME="/usr/local/android-sdk" \
+    ANDROID_VERSION=28 \
+    ANDROID_BUILD_TOOLS_VERSION=27.0.3
 
-RUN pacman -S jdk8-openjdk --noconfirm
-ENV JAVA_HOME=/usr/lib/jvm/default
+RUN mkdir "$ANDROID_HOME" .android \
+    && cd "$ANDROID_HOME" \
+    && curl -o sdk.zip $SDK_URL \
+    && unzip sdk.zip \
+    && rm sdk.zip \
+    && mkdir "$ANDROID_HOME/licenses" || true \
+    && echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
 
-RUN pacman -S --noconfirm sudo audit binutils make git fakeroot
-RUN useradd builduser -m 
-RUN passwd -d builduser
-RUN printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
-RUN sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/android-sdk.git && cd android-sdk && makepkg -si --noconfirm'
-RUN sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/android-sdk-build-tools.git  && cd android-sdk-build-tools && makepkg -si --noconfirm'
-RUN sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/android-sdk-platform-tools.git  && cd android-sdk-platform-tools && makepkg -si --noconfirm'
-
-ENV ANDROID_HOME=/opt/android-sdk
 ENV PATH=$PATH:$ANDROID_HOME/emulator
 ENV PATH=$PATH:$ANDROID_HOME/tools
 ENV PATH=$PATH:$ANDROID_HOME/tools/bin
 ENV PATH=$PATH:$ANDROID_HOME/platform-tools
 
-RUN yes | sdkmanager --update
-RUN yes | sdkmanager --licenses
-RUN yes | sdkmanager "build-tools;27.0.3" "platforms;android-27"
+RUN $ANDROID_HOME/tools/bin/sdkmanager --update
+RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
+    "platforms;android-${ANDROID_VERSION}" \
+    "platform-tools"
