@@ -1,26 +1,13 @@
-FROM gradle:4.10.0-jdk8
-
-
-USER root
-ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
-    ANDROID_HOME="/usr/local/android-sdk" \
-    ANDROID_VERSION=28 \
-    ANDROID_BUILD_TOOLS_VERSION=27.0.3
-
-RUN mkdir "$ANDROID_HOME" .android \
-    && cd "$ANDROID_HOME" \
-    && curl -o sdk.zip $SDK_URL \
-    && unzip sdk.zip \
-    && rm sdk.zip \
-    && mkdir "$ANDROID_HOME/licenses" || true \
-    && echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
-
-ENV PATH=$PATH:$ANDROID_HOME/emulator
-ENV PATH=$PATH:$ANDROID_HOME/tools
-ENV PATH=$PATH:$ANDROID_HOME/tools/bin
-ENV PATH=$PATH:$ANDROID_HOME/platform-tools
-
-RUN $ANDROID_HOME/tools/bin/sdkmanager --update
-RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
-    "platforms;android-${ANDROID_VERSION}" \
-    "platform-tools"
+FROM java:8
+ENV DEBIAN_FRONTEND noninteractive
+# Dependencies
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -yq libsdl1.2debian:i386 zlib1g:i386 libncurses5:i386 ant maven --no-install-recommends
+ENV GRADLE_URL http://services.gradle.org/distributions/gradle-2.2.1-all.zip
+RUN curl -L ${GRADLE_URL} -o /tmp/gradle-2.2.1-all.zip && unzip /tmp/gradle-2.2.1-all.zip -d /usr/local && rm /tmp/gradle-2.2.1-all.zip
+ENV GRADLE_HOME /usr/local/gradle-2.2.1
+# Download and untar SDK
+ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.1.2-linux.tgz
+RUN curl -L "${ANDROID_SDK_URL}" | tar --no-same-owner -xz -C /usr/local
+ENV ANDROID_HOME /usr/local/android-sdk-linux
+ENV ANDROID_SDK /usr/local/android-sdk-linux
+ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
