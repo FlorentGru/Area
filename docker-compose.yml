@@ -5,7 +5,7 @@ services:
             context: ./Server/Server/
             dockerfile: Dockerfile
         ports: 
-            - 8080:8080
+            - 8080:80
     mobile_client:
         build:
             context: ./Mobile/
@@ -17,6 +17,6 @@ services:
             context: ./Web/Web/
             dockerfile: Dockerfile
         ports: 
-            - 8081:81
+            - 8081:80
         depends_on: 
             - mobile_client
