@@ -22,10 +22,6 @@ class MyForm extends React.Component {
         this.state = { username: null, password: null, email: null}
     }
 
-    getUsername() {return this.state.username}
-    getPassword() {return this.state.password}
-    getEmail() {return this.state.email}
-
     myChangeHandler = (event) => {
         let nam = event.target.name;
         let val = event.target.value;
@@ -33,8 +29,11 @@ class MyForm extends React.Component {
     }
     mySubmitHandler = (event) => {
         event.preventDefault()
+        Submit.name = this.state.username;
+        Submit.password = this.state.password;
+        Submit.email = this.state.email;
+        displayInfos();
         return (`${this.state.username} ${this.state.password} ${this.state.email}`)
-        alert(`You are Submitting this username: ${this.state.username} with this password ${this.state.password}`)
     }
     render() {
         return (
@@ -66,16 +65,14 @@ class MyForm extends React.Component {
     }
 }
 
-function displayInfos({username = "", password = "", email = ""})
+function displayInfos()
 {
-    // return (
-    //     <>
-    // )
+    console.log(`${Submit.name} ${Submit.password} ${Submit.email}`);
 }
 
 ReactDOM.render(
     <MyForm/>,
-    // <displayInfos username="MyForm.getPassword" />,
+    // <displayInfos username = {Submit.name} password = {Submit.password} email = {Submit.email}/>,
     document.getElementById('root')
 )
 
