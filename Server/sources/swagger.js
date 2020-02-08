@@ -9,8 +9,8 @@ var options = {
             description: 'RESTful API for a web application ' +
                 'that aims to create Actions/REActions between different services',
         },
-        host: 'localhost:3000',
-        basePath: '/api',
+        host: 'localhost:8081',
+        basePath: '',
         produces: [
             "application/json",
             "application/xml"
