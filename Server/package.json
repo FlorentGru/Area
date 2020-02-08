@@ -23,6 +23,10 @@
     "nodemon": "^2.0.2",
     "pug": "^2.0.4",
     "validator": "^12.2.0",
-    "yarn": "^1.22.0"
+    "yarn": "^1.22.0",
+    "express-swagger-generator": "1.1.17"
+  },
+  "devDependencies": {
+    "express-swagger-generator": "^1.1.17"
   }
 }

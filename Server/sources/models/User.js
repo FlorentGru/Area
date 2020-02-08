@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+/**
+ * @typedef User
+ * @property {string} email.required - eg: user@domain
+ * @property {string} name.required
+ * @property {string} password.required
+ */
 const mongoDBSchema = mongoose.Schema({
     name: {
         type: String,

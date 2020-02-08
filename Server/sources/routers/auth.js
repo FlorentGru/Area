@@ -3,6 +3,19 @@ const auth = require('../JWTAuth')
 
 const router = express.Router()
 
+/**
+ * @typedef Error
+ * @property {string} code.required
+ */
+/**
+ * Register new user
+ * @route GET /auth/register
+ * @operationId register
+ * @group Users - General operations on users
+ * @produces application/json
+ * @returns {string} 201 - JWT token
+ * @returns {Error} default - Unexpected error
+ */
 router.post('/auth/register', async (req, res) => {
     try {
         const user = new User(req.body);
@@ -14,6 +27,15 @@ router.post('/auth/register', async (req, res) => {
     }
 });
 
+/**
+ * User login
+ * @route GET /auth/login
+ * @operationId login
+ * @group Users - General operations on users
+ * @produces application/json
+ * @returns {string} 200 - An array of users
+ * @returns {Error} 401 - Login failed or Not authorized
+ */
 router.post('/auth/login', async(req, res) => {
     try {
         const { email, password } = req.body;
