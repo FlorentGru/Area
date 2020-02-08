@@ -12,6 +12,12 @@ function validateEmail(email) {
  * @property {string} name.required
  * @property {string} password.required
  */
+/**
+ * @typedef Login
+ * @property {string} email.required - eg: user@domain
+ * @property {string} password.required
+ */
+
 const mongoDBSchema = mongoose.Schema({
     name: {
         type: String,
@@ -31,7 +37,6 @@ const mongoDBSchema = mongoose.Schema({
     tokens: [{
         token: {
             type: String,
-            required: true
         }
     }]
 });

@@ -15,6 +15,7 @@
     "debug": "~2.6.9",
     "env-cmd": "^10.0.1",
     "express": "~4.16.1",
+    "express-swagger-generator": "^1.1.17",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.4.1",
@@ -22,9 +23,9 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.2",
     "pug": "^2.0.4",
+    "swagger-jsdoc": "^3.5.0",
     "validator": "^12.2.0",
-    "yarn": "^1.22.0",
-    "express-swagger-generator": "1.1.17"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "express-swagger-generator": "^1.1.17"
