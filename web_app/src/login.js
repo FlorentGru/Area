@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom'
 
 let Submit = {
     name: "",
@@ -9,7 +10,7 @@ let Submit = {
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { username: null, password: null, email: null}
+        this.state = { username: null, password: null, email: null, toHome: false}
     }
 
     myChangeHandler = (event) => {
@@ -22,7 +23,7 @@ export default class LoginPage extends React.Component {
         Submit.name = this.state.username;
         Submit.password = this.state.password;
         Submit.email = this.state.email;
-        return (`${this.state.username} ${this.state.password} ${this.state.email}`)
+        this.props.history.push('/Home') 
     }
     render() {
         return (

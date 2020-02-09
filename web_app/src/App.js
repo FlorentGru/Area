@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginPage from './login'
 import Home from './home'
 import About from './about'
@@ -9,7 +9,6 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
           <ul>
             <li>
               <Link to="/">LoginPage</Link>
@@ -21,18 +20,12 @@ export default function App() {
               <Link to="/Home">Home</Link>
             </li>
           </ul>
-        </nav>
-        <Switch>
-          <Route path="/about.json">
-            <About />
-          </Route>
-          <Route path="/Home">
-            <Home />
-          </Route>
-          <Route path="/">
-            <LoginPage />
-          </Route>
-        </Switch>
+          <hr/>
+
+          <Route exact path="/" component={LoginPage}/>
+          <Route path="/Home" component={Home}/>
+          <Route path="/about.json" component={About}/>
+
       </div>
     </Router>
   );
