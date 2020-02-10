@@ -9,6 +9,6 @@ router.get('/services', async(req, res) => {
     } catch (error) {
         res.status(401).send(error);
     }
-})
+});
 
 module.exports = router;

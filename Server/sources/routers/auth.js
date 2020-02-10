@@ -23,7 +23,7 @@ const router = express.Router();
 router.post('/auth/register', async (req, res) => {
         const user = new User(req.body);
         await user.save();
-        const token = await user.generateAuthToken();
+        const token = await user.generateJWT();
         res.status(201).send({ token })
 });
 
@@ -43,7 +43,7 @@ router.post('/auth/login', async(req, res) => {
         if (!user) {
             return res.status(401).send({error: 'Error : Login failed.'})
         }
-        const token = await user.generateAuthToken();
+        const token = await user.generateJWT();
         res.send({ token })
 });
 

@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
 /**
  * @typedef User
  * @property {string} email.required - eg: user@domain
@@ -41,7 +36,7 @@ const mongoDBSchema = mongoose.Schema({
     }]
 });
 
-mongoDBSchema.methods.generateAuthToken = async function() {
+mongoDBSchema.methods.generateJWT = async function() {
     const user = this;
     const token = jwt.sign({_id: user._id}, process.env.JWT_KEY);
     user.tokens = user.tokens.concat({token});
