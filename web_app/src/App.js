@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import LoginPage from './login'
 import Home from './home'
 import About from './about'
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <Router>
       <div>
-          <ul>
+          {/* <ul>
             <li>
               <Link to="/">LoginPage</Link>
             </li>
@@ -19,7 +19,7 @@ export default function App() {
             <li>
               <Link to="/Home">Home</Link>
             </li>
-          </ul>
+          </ul> */}
           <hr/>
 
           <Route exact path="/" component={LoginPage}/>

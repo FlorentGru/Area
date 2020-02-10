@@ -1,11 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom'
-
-let Submit = {
-    name: "",
-    password: "",
-    email: ""
-}
+import Submit from './sumbit'
 
 export default class LoginPage extends React.Component {
     constructor(props) {
@@ -14,21 +8,21 @@ export default class LoginPage extends React.Component {
     }
 
     myChangeHandler = (event) => {
-        let nam = event.target.name;
-        let val = event.target.value;
+        let nam = event.target.name
+        let val = event.target.value
         this.setState({[nam]: val})
     }
     mySubmitHandler = (event) => {
         event.preventDefault()
-        Submit.name = this.state.username;
-        Submit.password = this.state.password;
-        Submit.email = this.state.email;
-        this.props.history.push('/Home') 
+        Submit.name = this.state.username
+        Submit.password = this.state.password
+        Submit.email = this.state.email
+        this.props.history.push('/Home')
     }
     render() {
         return (
             <form onSubmit={this.mySubmitHandler}>
-            <h1>Hello your username is: "{this.state.username}", your password is: "{this.state.password}", your email is: "{this.state.email}"</h1>
+            <h1>Area</h1>
             <p>Enter your name:</p>
             <input
                 type='text'
