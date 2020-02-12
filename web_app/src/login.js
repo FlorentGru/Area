@@ -1,6 +1,10 @@
 import React from 'react';
 import Submit from './sumbit'
 
+const textCenter = {
+    "text-align": "center"
+}
+
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props)
@@ -19,9 +23,13 @@ export default class LoginPage extends React.Component {
         Submit.email = this.state.email
         this.props.history.push('/Home')
     }
+    myChangeHandlerRegister = (event) => {
+        this.props.history.push('/Register')
+    }
     render() {
         return (
-            <form onSubmit={this.mySubmitHandler}>
+            <h1>
+            <form onSubmit={this.mySubmitHandler} style={textCenter}>
             <h1>Area</h1>
             <p>Enter your name:</p>
             <input
@@ -45,6 +53,10 @@ export default class LoginPage extends React.Component {
             <br/>
             <input type="submit" value="Loggin"/>
             </form>
+            <form onSubmit={this.myChangeHandlerRegister} style={textCenter}>
+                <input type="submit" value="Create New Account"/>
+            </form>
+            </h1>
         );
     }
 }
