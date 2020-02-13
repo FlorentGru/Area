@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import LoginPage from './login'
 import Home from './home'
 import About from './about'
+import RegisterPage from './Register'
 
 
 export default function App() {
@@ -20,11 +21,10 @@ export default function App() {
               <Link to="/Home">Home</Link>
             </li>
           </ul> */}
-          <hr/>
-
           <Route exact path="/" component={LoginPage}/>
           <Route path="/Home" component={Home}/>
           <Route path="/about.json" component={About}/>
+          <Route path="/Register" component={RegisterPage}/>
 
       </div>
     </Router>
