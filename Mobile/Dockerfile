@@ -46,7 +46,7 @@ RUN apt-get update && apt-get install build-essential -y && apt-get install file
 
 WORKDIR /Mobile
 
-CMD "./gradlew", "assembleRelease"
+CMD "./gradlew" "assembleRelease"
 
 # RUN ls
 # RUN ls app/build/outputs/apk/release/
