@@ -12,7 +12,7 @@ export default class RegisterPage extends React.Component {
         this.state = { username: null, password: null, email: null, toHome: false}
     }
 
-    returnLogin = () => {
+    returnLoginPage = () => {
         this.props.history.push("/")
     }
 
@@ -60,7 +60,7 @@ export default class RegisterPage extends React.Component {
             <br/>
             <input type="submit" value="Create Account"/>
             <br/>
-            <button onClick={this.returnLogin} >Return login page</button>
+            <button onClick={this.returnLoginPage}>Return login page</button>
             </form>
             </p>
         );
