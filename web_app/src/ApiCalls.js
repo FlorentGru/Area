@@ -7,19 +7,26 @@ const register = "localhost:8081/auth/register"
 
 
 //CALLS
-async function loginUser(name, password) {
+export default async function loginUser(user_email, user_password) {
     try {
-        const response = await axios.get(login)
-        console.log(response)
+        const response = await axios.get({
+            method: 'get',
+            url: login,
+            data: {
+                email: user_email,
+                password: user_password
+            }
+        })
+        alert(response)
     } catch(error) {
-        console.error(error)
+        alert(error)
     }
 }
 
 async function registerUser(user_name, user_password, user_email) {
     try {
         const response = await axios({
-            method: 'get',
+            method: 'post',
             url: register,
             data: {
                 username: user_name,
@@ -27,8 +34,8 @@ async function registerUser(user_name, user_password, user_email) {
                 email: user_email,
             }
         })
-        console.log(response)
+        alert(response)
     } catch (error) {
-        console.error(error)
+        alert(error)
     }
 }

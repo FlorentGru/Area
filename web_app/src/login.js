@@ -1,5 +1,6 @@
 import React from 'react';
 import Submit from './sumbit'
+import loginUser from './ApiCalls'
 
 const textCenter = {
     "text-align": "center"
@@ -16,6 +17,7 @@ export default class LoginPage extends React.Component {
         Submit.name = this.state.username
         Submit.password = this.state.password
         Submit.email = this.state.email
+        loginUser(this.state.email, this.state.password);
         this.props.history.push('/Home')
     }
     myChangeHandlerRegister = (event) => {
@@ -30,16 +32,19 @@ export default class LoginPage extends React.Component {
             <input
                 type='text'
                 name='username'
+                required='true'
             />
             <p>Enter your password</p>
             <input
                 type='password'
                 name='password'
+                required='true'
             />
             <p>Enter your email</p>
             <input
                 type='text'
                 name='email'
+                required='true'
             />
             <br/>
             <br/>

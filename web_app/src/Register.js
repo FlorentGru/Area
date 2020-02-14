@@ -34,26 +34,31 @@ export default class RegisterPage extends React.Component {
             <input
                 type='text'
                 name='username'
+                required='true'
             />
             <p>Enter your password</p>
             <input
                 type='password'
                 name='password'
+                required='true'
             />
             <p>Confirm password</p>
             <input
                 type='password'
                 name='confirm_password'
+                required='true'
             />
             <p>Enter your email</p>
             <input
                 type='text'
                 name='email'
+                required='true'
             />
            <p>Confirm email</p>
             <input
                 type='text'
                 name='confirm_email'
+                required='true'
             />
  
             <br/>
