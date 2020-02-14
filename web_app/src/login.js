@@ -1,6 +1,7 @@
 import React from 'react';
 import Submit from './sumbit'
-import loginUser from './ApiCalls'
+import loginUser from './APICalls/APILogin'
+import RegisterUser from './APICalls/APIRegister'
 
 const textCenter = {
     "text-align": "center"
@@ -20,7 +21,7 @@ export default class LoginPage extends React.Component {
         loginUser(this.state.email, this.state.password);
         this.props.history.push('/Home')
     }
-    myChangeHandlerRegister = (event) => {
+    mySumbitHandlerRegister = () => {
         this.props.history.push('/Register')
     }
     render() {
@@ -50,7 +51,7 @@ export default class LoginPage extends React.Component {
             <br/>
             <input type="submit" value="Loggin"/>
             </form>
-            <form onSubmit={this.myChangeHandlerRegister} style={textCenter}>
+            <form onSubmit={this.mySumbitHandlerRegister} style={textCenter}>
                 <input type="submit" value="Create New Account"/>
             </form>
             </p>
