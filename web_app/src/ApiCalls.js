@@ -16,9 +16,17 @@ async function loginUser(name, password) {
     }
 }
 
-async function registerUser(name, password, email) {
+async function registerUser(user_name, user_password, user_email) {
     try {
-        const response = await axios.post(register)
+        const response = await axios({
+            method: 'get',
+            url: register,
+            data: {
+                username: user_name,
+                password: user_password,
+                email: user_email,
+            }
+        })
         console.log(response)
     } catch (error) {
         console.error(error)
