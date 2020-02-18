@@ -1,8 +1,9 @@
 const express = require('express');
-const auth = require('../JWTAuth');
+const auth = require('../middleware/JWTAuth');
 
-var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+var mongoose = require('mongoose')
+var User = mongoose.model('User');
+var AccessTokens = mongoose.model('AccessTokens');
 
 const router = express.Router();
 
@@ -21,10 +22,20 @@ const router = express.Router();
  * @returns {Error} default - Unexpected error
  */
 router.post('/auth/register', async (req, res) => {
+    try {
         const user = new User(req.body);
         await user.save();
         const token = await user.generateAuthToken();
-        res.status(201).send({ token })
+        const accessTokens = new AccessTokens({
+            userId: user.id,
+            tokens: []
+        });
+        await accessTokens.save();
+        res.status(201).send({token})
+    } catch (err) {
+        console.log(err.errmsg);
+        res.status(400).send(err.errmsg);
+    }
 });
 
 /**
@@ -38,13 +49,20 @@ router.post('/auth/register', async (req, res) => {
  * @returns {Error} 401 - Login failed or Not authorized
  */
 router.post('/auth/login', async(req, res) => {
-        const { email, password } = req.body;
-        const user = await User.fetchUser(email, password);
+    try {
+        const {email, password} = req.body;
+        const user = await User.findByCredentials(email, password);
         if (!user) {
             return res.status(401).send({error: 'Error : Login failed.'})
         }
         const token = await user.generateAuthToken();
-        res.send({ token })
+        const accessTokens = await AccessTokens.fetchAccessToken(user.id,  "discord");
+        console.log(accessTokens);
+        res.send({token});
+    } catch (err) {
+        console.log("ici");
+        res.status(400).send(err);
+    }
 });
 
 module.exports = router;
