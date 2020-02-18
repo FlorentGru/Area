@@ -56,9 +56,9 @@ router.post('/auth/login', async(req, res) => {
             return res.status(401).send({error: 'Error : Login failed.'})
         }
         const token = await user.generateAuthToken();
-        const accessTokens = await AccessTokens.fetchAccessToken(user.id,  "discord");
-        console.log(accessTokens);
-        res.send({token});
+//        const accessTokens = await AccessTokens.fetchAccessToken(user.id,  "discord");
+ //       console.log(accessTokens);
+        res.status(200).send({token});
     } catch (err) {
         console.log("ici");
         res.status(400).send(err);

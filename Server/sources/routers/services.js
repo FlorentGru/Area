@@ -19,7 +19,7 @@ router.put('services/oauth', auth, async (req, res) => {
         await AccessTokens.findOneAndUpdate(query, update, options);
 
         res.status(200).send("OK");
-   }  catch (err) {
+   } catch (err) {
         res.status(400).send(err);
    }
 });
