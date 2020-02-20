@@ -1,5 +1,0 @@
-C:\Users\Florent\TEK3\AREA\Area\Web\Web\bin\Debug\netcoreapp2.1\appsettings.Development.json
-C:\Users\Florent\TEK3\AREA\Area\Web\Web\bin\Debug\netcoreapp2.1\appsettings.json
-C:\Users\Florent\TEK3\AREA\Area\Web\Web\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
-C:\Users\Florent\TEK3\AREA\Area\Web\Web\obj\Debug\netcoreapp2.1\Web.AssemblyInfoInputs.cache
-C:\Users\Florent\TEK3\AREA\Area\Web\Web\obj\Debug\netcoreapp2.1\Web.AssemblyInfo.cs
