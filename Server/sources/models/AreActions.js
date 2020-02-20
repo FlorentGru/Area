@@ -4,6 +4,17 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Schema = mongoose.Schema;
 
+/**
+ * @typedef Param
+ * @property {string} name.required
+ * @property {string} value.required
+ */
+/**
+ * @typedef Action
+ * @property {string} service.required
+ * @property {string} name.required
+ * @property {Array.<Param>} params.required
+ */
 const Action = new mongoose.Schema({
     service: {
         type: "string",
@@ -14,7 +25,10 @@ const Action = new mongoose.Schema({
         required: true
     },
     params: [{
-        param: {
+        name: {
+            type: "string"
+        },
+        value: {
             type: "string"
         }
     }]
