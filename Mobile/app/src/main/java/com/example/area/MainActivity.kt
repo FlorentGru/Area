@@ -12,6 +12,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            
+
         }
 
         object : CountDownTimer(2000, 1000) {
