@@ -1,5 +1,4 @@
 import React from 'react';
-import Submit from './sumbit'
 
 
 export default class Home extends React.Component {
@@ -11,7 +10,7 @@ export default class Home extends React.Component {
     render () {
         return (
             <h1>Home
-                <p>Welcome {Submit.name}</p>
+                <p>Welcome</p>
                 <button onClick={this.disconnect}> Disconnect</button>
             </h1>
             )

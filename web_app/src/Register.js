@@ -1,5 +1,5 @@
 import React from 'react';
-import Submit from './sumbit'
+import registerUser from './APICalls/APIRegister'
 
 const textCenter = {
     "text-align": "center"
@@ -9,21 +9,36 @@ const textCenter = {
 export default class RegisterPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { username: null, password: null, email: null, toHome: false}
+        this.state = { username: null, password: null, confirm_password: null, confirm_email: null, email: null, toHome: false}
     }
 
     returnLoginPage = () => {
         this.props.history.push("/")
     }
 
+    myChangeHandler = (event) => {
+        event.preventDefault()
+        const value = event.target.value;
+        this.setState({[event.target.name]: value});
+    }
+
     mySubmitHandler = (event) => {
         event.preventDefault()
-        Submit.name = this.state.username
-        Submit.password = this.state.password
-        Submit.confirm_password = this.state.confirm_password;
-        Submit.email = this.state.email
-        Submit.confirm_email = this.state.confirm_email
-        this.props.history.push('/Home')
+        let err=0
+//        alert(`${this.state.username} ${this.state.password} ${this.state.confirm_password} ${this.state.email} ${this.state.confirm_email}`)
+        if (this.state.confirm_password !== this.state.password) {
+            alert (`passwords should be identicals ${this.state.confirm_password} && ${this.state.password}`)
+            err = 1
+        }
+        if (this.state.confirm_email !== this.state.email) {
+            alert ("emails should be identicals")
+            err = 1
+        }
+        if (err === 0) {
+            let status = registerUser(this.state.name, this.state.password, this.state.email)
+            if (status === 201)
+                this.props.history.push('/Home')
+        }
     }
     render() {
         return (
@@ -35,30 +50,35 @@ export default class RegisterPage extends React.Component {
                 type='text'
                 name='username'
                 required='true'
+                onChange={this.myChangeHandler}
             />
             <p>Enter your password</p>
             <input
                 type='password'
                 name='password'
                 required='true'
+                onChange={this.myChangeHandler}
             />
             <p>Confirm password</p>
             <input
                 type='password'
                 name='confirm_password'
                 required='true'
+                onChange={this.myChangeHandler}
             />
             <p>Enter your email</p>
             <input
                 type='text'
                 name='email'
                 required='true'
+                onChange={this.myChangeHandler}
             />
            <p>Confirm email</p>
             <input
                 type='text'
                 name='confirm_email'
                 required='true'
+                onChange={this.myChangeHandler}
             />
  
             <br/>
