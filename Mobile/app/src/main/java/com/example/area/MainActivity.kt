@@ -9,6 +9,8 @@ import android.view.View
 import android.view.View.VISIBLE
 import android.view.Window
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,6 +18,9 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
+
+    //private val email = findViewById<EditText>(R.id.emailEditText)
+    //val password = passwordText.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-
+            //sendPostRequest(email, password)
+            //Toast.makeText(this, email.text, Toast.LENGTH_SHORT).show()
         }
 
         object : CountDownTimer(2000, 1000) {
