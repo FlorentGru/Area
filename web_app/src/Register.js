@@ -22,7 +22,7 @@ export default class RegisterPage extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    mySubmitHandler = (event) => {
+    mySubmitHandler = async (event) => {
         event.preventDefault()
         let err=0
 //        alert(`${this.state.username} ${this.state.password} ${this.state.confirm_password} ${this.state.email} ${this.state.confirm_email}`)
@@ -35,49 +35,49 @@ export default class RegisterPage extends React.Component {
             err = 1
         }
         if (err === 0) {
-            let status = registerUser(this.state.name, this.state.password, this.state.email)
+            let status = await registerUser(this.state.username, this.state.password, this.state.email)
             if (status === 201)
                 this.props.history.push('/Home')
         }
     }
     render() {
         return (
-            <p>
+            <div>
             <form onSubmit={this.mySubmitHandler} style={textCenter}>
             <h1>Area</h1>
             <p>Enter your name:</p>
             <input
                 type='text'
                 name='username'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <p>Enter your password</p>
             <input
                 type='password'
                 name='password'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <p>Confirm password</p>
             <input
                 type='password'
                 name='confirm_password'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <p>Enter your email</p>
             <input
                 type='text'
                 name='email'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
            <p>Confirm email</p>
             <input
                 type='text'
                 name='confirm_email'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
  
@@ -87,7 +87,7 @@ export default class RegisterPage extends React.Component {
             <br/>
             <button onClick={this.returnLoginPage}>Return login page</button>
             </form>
-            </p>
+            </div>
         );
     }
 }

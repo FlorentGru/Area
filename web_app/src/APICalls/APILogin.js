@@ -4,15 +4,16 @@ const login = "http://localhost:8081/auth/login"
 export default async function loginUser(user_email, user_password) {
     try {
         const response = await axios({
-            method: 'get',
+            method: "post",
             url: login,
+            headers: {'Content-Type': 'application/json'},
             data: {
                 "email": user_email,
                 "password": user_password
             }
         })
-        alert(response)
+        return (response.status)
     } catch(error) {
-        alert(error)
+        alert(`erreur dans l'appel: ${error.status}`)
     }
 }
