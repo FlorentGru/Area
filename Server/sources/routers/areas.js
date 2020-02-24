@@ -32,6 +32,7 @@ router.get('/area/reactions', async (req, res) => {
 * @route POST /area/new
 * @operationId newArea
 * @group Area - Project Core: Actions and REActions
+* @security JWT
 * @param {Area.model} user.body.required - new area
 * @produces application/json
 * @returns {string} 201 - Area created nothing to do
@@ -56,12 +57,14 @@ router.post('/area/new', auth, oneOf([
         const action = req.body.action;
         const reaction = req.body.reaction;
 
-        const area = new AreActions( {
-            userId: req.user.id,
-            action: action,
-            reaction: reaction
-        });
-        await area.save();
+        const query = { userId: req.user.id };
+        const update = { $push: {
+            areas: {
+                action: action,
+                reaction: reaction
+            }
+        }};
+        await AreActions.findOneAndUpdate(query, update);
 
         if (action.service === 'discord') {
             discord.triggers();
@@ -74,6 +77,7 @@ router.post('/area/new', auth, oneOf([
             res.status(201).send("Created :)");
         }
     } catch(err) {
+        console.log(err);
         res.status(400).send(err);
     }
 });

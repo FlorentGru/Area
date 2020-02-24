@@ -8,6 +8,11 @@ const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 const AreActions = mongoose.model('AreActions');
 
+/*User.collection.drop();
+AccessTokens.collection.drop();
+AreActions.collection.drop();*/
+
+
 const router = express.Router();
 
 /**
@@ -41,10 +46,11 @@ router.post('/auth/register', async (req, res) => {
             areas: []
         });
         await areas.save();
+
         res.status(201).send({token})
     } catch (err) {
-        console.log(err.errmsg);
-        res.status(400).send(err.errmsg);
+        console.log(err);
+        res.status(400).send(err);
     }
 });
 

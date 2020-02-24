@@ -12,7 +12,14 @@ const listener = require('../webhooks/eventListener');
 
 const client = new Discord.Client();
 
-exports.triggers = function () {
+client.on("ready", () => {
+    console.log('bot ready');
+    triggers();
+});
+
+client.login('NjczODc4ODcyMjAyNDEyMDMz.XlPipg.0Rgg9yjhEu--NRl8tqeL8jsxB0M');
+
+const triggers = function () {
     client.on('ready', () => {
         console.log('I am ready!');
     });
@@ -30,27 +37,31 @@ exports.triggers = function () {
         if (err)
             throw err;
         res.forEach(function(area) {
-            if (area.action.service !== 'discord')
-                return;
-            if (area.action.name === 'received') {
-                message(area)
+            console.log("discord action: " + area.areas.action.name);
+            if (area.areas.action.name === 'received') {
+                message(area.areas)
             }
         });
     })
-
-
 };
-
-
+exports.triggers = triggers;
 
 const message = function (area) {
-    if (area.action.nbrParams !== 3)
-        return;
+    console.log(area.action.nbrParam);
+    console.log(area.reaction.service);
+    console.log(area.reaction.name);
+    console.log(area.reaction.nbrParam);
 
-    const param1 = area.action.params.findOne({name: "server"});
-    const param2 = area.action.params.findOne({name: "channel"});
-    const param3 = area.action.params.findOne({name: "startWith"});
+    if (area.action.nbrParam !== 3) {
+        console.log(`wrong number of parameters: ${area.action.nbrParam}`)
+        return;
+    }
+
+    const param1 = area.action.params.find(({ name }) => name === 'server');
+    const param2 = area.action.params.find(({ name }) => name === 'channel');
+    const param3 = area.action.params.find(({ name }) => name === 'startWith');
     if (!param1 || !param2 || !param3) {
+        console.log("wrong parameters")
         return;
     }
 
@@ -58,13 +69,26 @@ const message = function (area) {
         // Ignore messages that aren't from a guild
         if (!message.guild) return;
 
-        if (message.guild.name !== param1.value) return;
+        if (message.author.bot) return;
 
-        const channel = message.member.guild.channels.find('name', param2.value);
-        if (!channel)
+        console.log(`Guild: ${message.guild.name}`)
+        console.log(`Expected: ${param1.value}`);
+        if (message.guild.name !== param1.value) {
+            console.log("wrong server")
             return;
+        }
+
+        const channel = message.guild.channels.find(channel => channel.name === param2.value);
+        if (!channel || channel.id !== message.channel.id) {
+            console.log("wrong channel");
+            return;
+        }
+        console.log(`Channel: ${channel.name}`);
+        console.log(`Expected: ${param2.value}`);
 
         if (message.content.startsWith(param3.value)) {
+            console.log(`triggered by ${message.content}`);
+            console.log(`Expected: ${param3.value}`);
             eventEmitter.emit('pubsub', area.userId, area.reaction);
         }
     });

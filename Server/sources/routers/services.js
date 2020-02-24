@@ -14,9 +14,10 @@ router.put('services/oauth', auth, async (req, res) => {
         const {service, accessToken, refreshToken} = req.body;
 
         const query = { userId: req.user.id };
-        const update = { $set: { 'tokens.$[elem].accessToken': accessToken, 'tokens.$[elem].refreshToken': refreshToken } };
+        const update = { $set: { 'area.$[elem].accessToken': accessToken, 'tokens.$[elem].refreshToken': refreshToken } };
         const options = { new: true, upsert: true, arrayFilters: [{ 'elem.service': service }]};
         await AccessTokens.findOneAndUpdate(query, update, options);
+        await AccessTokens.save();
 
         res.status(200).send("OK");
    } catch (err) {

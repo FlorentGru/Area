@@ -25,7 +25,7 @@ const Action = new mongoose.Schema({
         type: String,
         required: true
     },
-    nbrParams: {
+    nbrParam: {
         type: Number,
         required:true
     },

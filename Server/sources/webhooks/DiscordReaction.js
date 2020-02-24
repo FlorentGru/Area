@@ -15,15 +15,16 @@ const sendMessage = function(webhookId, webhookToken, content) {
 };
 
 exports.react = async function(reaction) {
-    if (reaction.service === "Discord" && reaction.name === "sendMessage") {
+    if (reaction.service === "discord" && reaction.name === "message") {
 
-        const param1 = await reaction.params.findOne({name: "webhookId"});
-        const param2 = await reaction.params.findOne({name: "webhookToken"});
-        const param3 = await reaction.params.findOne({name: "content"});
+        const param1 = reaction.params.find(({ name }) => name === 'webhookId');
+        const param2 = reaction.params.find(({ name }) => name === 'webhookToken');
+        const param3 = reaction.params.find(({ name }) => name === 'content');
 
         if (!param1 || !param2 || !param3) {
             return;
         }
+        console.log("send message");
         sendMessage(param1.value, param2.value, param3.value);
     }
 };
