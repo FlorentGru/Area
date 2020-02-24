@@ -1,21 +1,34 @@
 version: "3"
 services:
+    nginx:
+        restart: always
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - '8082:80'
+
     thewebserver:
         build: 
             context: ./Server/
             dockerfile: Dockerfile
+        image: api
         ports: 
             - 8081:8081
+
     mobile_client:
         build:
             context: ./Mobile/
             dockerfile: Dockerfile
+        image: mobile
         depends_on: 
             - thewebserver
+
     webapp:
         build: 
             context: ./web_app/
             dockerfile: Dockerfile
+        image: web_client
         ports: 
             - 3000:3000
         depends_on: 
