@@ -13,15 +13,15 @@ const mongoDBSchema = new mongoose.Schema({
     },
     tokens: [{
         service: {
-            type: "string",
+            type: String,
             required: true
         },
         accessToken: {
-            type: "string",
+            type: String,
             required: true
         },
         refreshToken: {
-            type: "string",
+            type: String,
             required: true
         }
 

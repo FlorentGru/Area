@@ -17,6 +17,7 @@ const swagger = require('express-swagger-generator')(app);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
+app.use(bodyParser.urlencoded({ extended:true}));
 app.use(express.json());
 
 swagger(require('./swagger'));

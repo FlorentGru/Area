@@ -3,9 +3,10 @@
 const express = require('express');
 const auth = require('../middleware/JWTAuth');
 
-var mongoose = require('mongoose')
-var User = mongoose.model('User');
-var AccessTokens = mongoose.model('AccessTokens');
+const mongoose = require('mongoose')
+const User = mongoose.model('User');
+const AccessTokens = mongoose.model('AccessTokens');
+const AreActions = mongoose.model('AreActions');
 
 const router = express.Router();
 
@@ -28,11 +29,18 @@ router.post('/auth/register', async (req, res) => {
         const user = new User(req.body);
         await user.save();
         const token = await user.generateAuthToken();
+
         const accessTokens = new AccessTokens({
             userId: user.id,
             tokens: []
         });
         await accessTokens.save();
+
+        const areas = new AreActions( {
+            userId: user.id,
+            areas: []
+        });
+        await areas.save();
         res.status(201).send({token})
     } catch (err) {
         console.log(err.errmsg);

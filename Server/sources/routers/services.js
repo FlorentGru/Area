@@ -24,4 +24,22 @@ router.put('services/oauth', auth, async (req, res) => {
    }
 });
 
+router.get('services/oauth/connected', auth, async (req, res) => {
+    try {
+        const service = req.query.service;
+        if (!service)
+            throw ("Need service in query")
+
+        const token = AccessTokens.fetchAccessToken(req.user.id, service);
+        if (!token) {
+            res.status(200).send(false);
+        }
+        else {
+            res.status(200).send(true);
+        }
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
 module.exports = router;

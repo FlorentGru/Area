@@ -1,19 +1,36 @@
+'use strict';
+
+const Axios = require('axios');
+const Discord = require('discord.js');
+
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
-const axios = require('axios');
 
-exports.sendMessage = function(userToken, webhookId, webhookToken, content) {
-    var userId = User.GetIdByToken(userToken);
-    if (!userId) {
-        return ("Invalid");
-    }
-    var serviceTokens = AccessTokens.fetchAccessToken(userId, "discord");
-    if (!serviceTokens) {
-        return ("Invalid");
-    }
+const sendMessage = function(webhookId, webhookToken, content) {
 
-    axios.post(`https://discordapp.com/api/webhooks/${webhookId}/${webhookToken}`, {
+    const hook = new Discord.WebhookClient(webhookId, webhookToken);
+
+    hook.send(content);
+};
+
+exports.react = async function(reaction) {
+    if (reaction.service === "Discord" && reaction.name === "sendMessage") {
+
+        const param1 = await reaction.params.findOne({name: "webhookId"});
+        const param2 = await reaction.params.findOne({name: "webhookToken"});
+        const param3 = await reaction.params.findOne({name: "content"});
+
+        if (!param1 || !param2 || !param3) {
+            return;
+        }
+        sendMessage(param1.value, param2.value, param3.value);
+    }
+};
+
+
+
+    /*axios.post(`https://discordapp.com/api/webhooks/${webhookId}/${webhookToken}`, {
         content: content
     }, {
         headers: {
@@ -27,4 +44,4 @@ exports.sendMessage = function(userToken, webhookId, webhookToken, content) {
         .catch((error) => {
             console.error(error)
         })
-};
+};*/

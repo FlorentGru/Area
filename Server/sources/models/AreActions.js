@@ -13,23 +13,28 @@ const Schema = mongoose.Schema;
  * @typedef Action
  * @property {string} service.required
  * @property {string} name.required
+ * @property {integer} nbrParam.required
  * @property {Array.<Param>} params.required
  */
 const Action = new mongoose.Schema({
     service: {
-        type: "string",
+        type: String,
         required: true
     },
     name: {
-        type: "string",
+        type: String,
         required: true
+    },
+    nbrParams: {
+        type: Number,
+        required:true
     },
     params: [{
         name: {
-            type: "string"
+            type: String
         },
         value: {
-            type: "string"
+            type: String
         }
     }]
 });
