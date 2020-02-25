@@ -2,7 +2,7 @@ import React from 'react';
 import loginUser from './APICalls/APILogin'
 
 const textCenter = {
-    "text-align": "center"
+    "textAlign": "center"
 }
 
 export default class LoginPage extends React.Component {
@@ -17,9 +17,9 @@ export default class LoginPage extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    mySubmitHandlerLoggin = (event) => {
+    mySubmitHandlerLoggin = async (event) => {
         event.preventDefault()
-        let status = loginUser(this.state.email, this.state.password);
+        let status = await loginUser(this.state.email, this.state.password);
         if (status === 200)
             this.props.history.push('/Home')
     }
@@ -28,28 +28,28 @@ export default class LoginPage extends React.Component {
     }
     render() {
         return (
-            <p>
+            <div>
             <form onSubmit={this.mySubmitHandlerLoggin} style={textCenter}>
             <h1>Area</h1>
             <p>Enter your name:</p>
             <input
                 type='text'
                 name='username'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <p>Enter your password</p>
             <input
                 type='password'
                 name='password'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <p>Enter your email</p>
             <input
                 type='text'
                 name='email'
-                required='true'
+                required={true}
                 onChange={this.myChangeHandler}
             />
             <br/>
@@ -59,7 +59,7 @@ export default class LoginPage extends React.Component {
             <form onSubmit={this.mySumbitHandlerRegister} style={textCenter}>
                 <input type="submit" value="Create New Account"/>
             </form>
-            </p>
+            </div>
         );
     }
 }
