@@ -14,11 +14,17 @@ services:
             dockerfile: Dockerfile
         image: api
         ports: 
+<<<<<<< HEAD
             - 8080:8080
         networks: 
             - app-network
         links:
             - db
+=======
+            - 8081:8081
+        networks: 
+            - app-network
+>>>>>>> Finish to create the certificat and the part of nginx on docker
 
     mobile_client:
         build:
