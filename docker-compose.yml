@@ -8,13 +8,15 @@ services:
         ports:
             - '8082:80'
 
-    thewebserver:
+    api:
         build: 
             context: ./Server/
             dockerfile: Dockerfile
         image: api
         ports: 
             - 8081:8081
+        networks: 
+            - app-network
 
     mobile_client:
         build:
@@ -22,7 +24,8 @@ services:
             dockerfile: Dockerfile
         image: mobile
         depends_on: 
-            - thewebserver
+            - api
+            - nginx
 
     webapp:
         build: 
@@ -30,7 +33,11 @@ services:
             dockerfile: Dockerfile
         image: web_client
         ports: 
-            - 3000:3000
+            - 8080:8080
         depends_on: 
             - mobile_client
-            - thewebserver
+            - api
+
+networks:
+    app-network:
+        driver: bridge
