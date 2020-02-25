@@ -67,7 +67,7 @@ router.post('/area/new', auth, oneOf([
         await AreActions.findOneAndUpdate(query, update);
 
         if (action.service === 'discord') {
-            discord.triggers();
+            discord.restart();
             res.status(201).send("https://discordapp.com/api/oauth2/authorize?client_id=673878872202412033&permissions=0&response_type=code&scope=identify%20email%20bot");
         } else if (reaction.service === 'discord' && reaction.name === "emoji") {
             res.status(201).send("https://discordapp.com/api/oauth2/authorize?client_id=673878872202412033&permissions=0&response_type=code&scope=identify%20email%20bot");

@@ -10,20 +10,28 @@ const AreActions = mongoose.model('AreActions');
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
 
-const client = new Discord.Client();
+let client = new Discord.Client();
 
 client.on("ready", () => {
     console.log('bot ready');
-    triggers();
+    trigger();
 });
 
 client.login('NjczODc4ODcyMjAyNDEyMDMz.XlPipg.0Rgg9yjhEu--NRl8tqeL8jsxB0M');
 
-const triggers = function () {
-    client.on('ready', () => {
-        console.log('I am ready!');
+const restart = function () {
+    client.destroy().then(() => {
+        client = new Discord.Client();
+        client.on("ready", () => {
+            console.log('bot ready');
+            trigger();
+        });
+        client.login('NjczODc4ODcyMjAyNDEyMDMz.XlPipg.0Rgg9yjhEu--NRl8tqeL8jsxB0M');
     });
+};
+exports.restart = restart;
 
+const trigger = function () {
     AreActions.aggregate([
         {
             "$project": {
@@ -42,16 +50,11 @@ const triggers = function () {
                 message(area.areas)
             }
         });
-    })
+    });
 };
-exports.triggers = triggers;
+exports.triggers = trigger;
 
 const message = function (area) {
-    console.log(area.action.nbrParam);
-    console.log(area.reaction.service);
-    console.log(area.reaction.name);
-    console.log(area.reaction.nbrParam);
-
     if (area.action.nbrParam !== 3) {
         console.log(`wrong number of parameters: ${area.action.nbrParam}`)
         return;
