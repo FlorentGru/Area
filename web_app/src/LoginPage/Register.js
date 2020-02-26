@@ -1,5 +1,5 @@
 import React from 'react';
-import registerUser from './APICalls/APIRegister'
+import registerUser from '../APICalls/APIRegister'
 
 const textCenter = {
     "text-align": "center"

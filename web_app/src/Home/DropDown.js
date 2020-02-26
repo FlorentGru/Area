@@ -1,5 +1,5 @@
 import React from 'react';
-import './CSS/home.css'
+import '../CSS/home.css'
 
 export default class Card extends React.Component {
     constructor(props) {
@@ -14,14 +14,14 @@ export default class Card extends React.Component {
     }
     
     showMenu(event) {
-        event.preventDefault();
-        
+        event.preventDefault();        
         this.setState({ show: true }, () => {
             document.addEventListener('click', this.closeMenu);
         });
     }
         
-    closeMenu() {
+    closeMenu(event) {
+        event.preventDefault();
         this.setState({ show: false }, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -38,7 +38,7 @@ export default class Card extends React.Component {
             this.state.show
                 ? (
                 <div className="menu">
-                    <button className="menuButton"> Connection Discord</button>
+                    <button className="menuButton" onClick={this.disconnect}> Connection Discord</button>
                     <button className="menuButton"> Connection GitHub</button>
                     <button className="menuButton"> Connection Google Calendar</button>
                     <button className="menuButton"> Connection Instagram</button>

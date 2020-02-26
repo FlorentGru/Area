@@ -1,16 +1,16 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import LoginPage from './login'
-import Home from './home'
+import LoginPage from './LoginPage/login'
+import Home from './Home/home'
 import About from './about'
-import RegisterPage from './Register'
-import DiscordForm from './ConnectionForms/Discord'
-import GitHubForm from './ConnectionForms/GitHub'
-import GoogleCalendarForm from './ConnectionForms/GoogleCalendar'
-import InstagramForm from './ConnectionForms/Instagram'
-import MessengerForm from './ConnectionForms/Messenger'
-import OneDriveForm from './ConnectionForms/OneDrive'
-import OutlookForm from './ConnectionForms/Outlook'
+import RegisterPage from './LoginPage/Register'
+import DiscordForm from './Home/ConnectionForms/Discord'
+import GitHubForm from './Home/ConnectionForms/GitHub'
+import GoogleCalendarForm from './Home/ConnectionForms/GoogleCalendar'
+import InstagramForm from './Home/ConnectionForms/Instagram'
+import MessengerForm from './Home/ConnectionForms/Messenger'
+import OneDriveForm from './Home/ConnectionForms/OneDrive'
+import OutlookForm from './Home/ConnectionForms/Outlook'
 
 export default function App() {
   return (

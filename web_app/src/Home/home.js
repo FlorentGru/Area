@@ -2,9 +2,6 @@ import React from 'react';
 import DropDown from './DropDown'
 
 export default class Home extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     disconnect = () => {
         this.props.history.push("/")
     }
@@ -12,7 +9,6 @@ export default class Home extends React.Component {
     render () {
         return (
             <div>Home
-                <div>Welcome</div>
                 <br/>
                 <DropDown/>
                 <br/>

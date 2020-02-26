@@ -1,5 +1,5 @@
 import React from 'react';
-import loginUser from './APICalls/APILogin'
+import loginUser from '../APICalls/APILogin'
 
 const textCenter = {
     "textAlign": "center"
@@ -23,7 +23,8 @@ export default class LoginPage extends React.Component {
         if (status === 200)
             this.props.history.push('/Home')
     }
-    mySumbitHandlerRegister = () => {
+    mySumbitHandlerRegister = (event) => {
+        event.preventDefault()
         this.props.history.push('/Register')
     }
     render() {
