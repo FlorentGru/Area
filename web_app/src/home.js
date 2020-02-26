@@ -1,18 +1,23 @@
 import React from 'react';
-
+import DropDown from './DropDown'
 
 export default class Home extends React.Component {
-
+    constructor(props) {
+        super(props)
+    }
     disconnect = () => {
         this.props.history.push("/")
     }
 
     render () {
         return (
-            <h1>Home
-                <p>Welcome</p>
-                <button onClick={this.disconnect}> Disconnect</button>
-            </h1>
+            <div>Home
+                <div>Welcome</div>
+                <br/>
+                <DropDown/>
+                <br/>
+                <button className="menuButton" onClick={this.disconnect}>Disconnect</button>
+            </div>
             )
     }
 }
