@@ -12,7 +12,6 @@ const AreActions = mongoose.model('AreActions');
 AccessTokens.collection.drop();
 AreActions.collection.drop();*/
 
-
 const router = express.Router();
 
 /**

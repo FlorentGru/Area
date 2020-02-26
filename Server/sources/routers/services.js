@@ -9,7 +9,19 @@ var AccessTokens = mongoose.model('AccessTokens');
 
 const router = express.Router();
 
-router.put('services/oauth', auth, async (req, res) => {
+/**
+ * add OAuth2 connection for a service
+ * @route POST services/oauth/add
+ * @operationId addOAuth
+ * @group Services - Operations on services supported by the application
+ * @security JWT
+ * @param {Token.model} token.body.required - new token
+ * @produces application/json
+ * @returns {string} 200 - success
+ * @returns {Error} 401 - Unauthorized
+ * @returns {Error} default - Unexpected error
+ */
+router.put('services/oauth/add', auth, async (req, res) => {
    try {
         const {service, accessToken, refreshToken} = req.body;
 
@@ -17,9 +29,8 @@ router.put('services/oauth', auth, async (req, res) => {
         const update = { $set: { 'area.$[elem].accessToken': accessToken, 'tokens.$[elem].refreshToken': refreshToken } };
         const options = { new: true, upsert: true, arrayFilters: [{ 'elem.service': service }]};
         await AccessTokens.findOneAndUpdate(query, update, options);
-        await AccessTokens.save();
 
-        res.status(200).send("OK");
+        res.status(200).send("success");
    } catch (err) {
         res.status(400).send(err);
    }

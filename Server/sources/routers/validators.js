@@ -13,4 +13,4 @@ exports.validate = (method) => {
             ]
         }
     }
-}
+};

@@ -8,7 +8,10 @@ const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 const AreActions = mongoose.model('AreActions');
 
-const discord = require('../webhooks/DiscordAction');
+const eventEmitter = require('../webhooks/eventEmitter');
+const listener = require('../webhooks/eventListener');
+
+const discord = require('../webhooks/discordAction');
 const { body, oneOf, validationResult } = require('express-validator');
 
 
@@ -33,7 +36,7 @@ router.get('/area/reactions', async (req, res) => {
 * @operationId newArea
 * @group Area - Project Core: Actions and REActions
 * @security JWT
-* @param {Area.model} user.body.required - new area
+* @param {Area.model} area.body.required - new area
 * @produces application/json
 * @returns {string} 201 - Area created nothing to do
 * @returns {string} 200 - discord bot OAuth link (for discord action)
@@ -44,12 +47,12 @@ router.get('/area/reactions', async (req, res) => {
 router.post('/area/new', auth, oneOf([
     body('action').exists(),
     body('reaction').exists(),
-    body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger']),
-    body('action.name').exists(),
-    body('action.nbrParams').exists(),
-    body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger']),
-    body('reaction.name').exists(),
-    body('reaction.nbrParams').exists(),
+    body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
+    body('action.name').exists().isAlpha(),
+    body('action.nbrParam').exists().isNumeric(),
+    body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
+    body('reaction.name').exists().isAlpha(),
+    body('reaction.nbrParam').exists().isNumeric(),
 ]), async(req, res) => {
     try {
         validationResult(req).throw();
@@ -66,16 +69,8 @@ router.post('/area/new', auth, oneOf([
         }};
         await AreActions.findOneAndUpdate(query, update);
 
-        if (action.service === 'discord') {
-            discord.restart();
-            res.status(201).send("https://discordapp.com/api/oauth2/authorize?client_id=673878872202412033&permissions=0&response_type=code&scope=identify%20email%20bot");
-        } else if (reaction.service === 'discord' && reaction.name === "emoji") {
-            res.status(201).send("https://discordapp.com/api/oauth2/authorize?client_id=673878872202412033&permissions=0&response_type=code&scope=identify%20email%20bot");
-        } else if (reaction.service === 'discord' && reaction.name === "sendMessage") {
-            res.status(201).send("https://discordapp.com/api/oauth2/authorize?client_id=673878872202412033&permissions=0&response_type=code&scope=identify%20email%20webhook.incoming");
-        } else {
-            res.status(201).send("Created :)");
-        }
+        eventEmitter.emit('webhook', req.user.id, action);
+        res.status(201).send("Created :)");
     } catch(err) {
         console.log(err);
         res.status(400).send(err);
