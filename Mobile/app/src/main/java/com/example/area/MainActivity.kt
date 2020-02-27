@@ -7,24 +7,27 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.view.View.VISIBLE
-import android.view.Window
-import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.HttpURLConnection
-import java.net.URL
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
-
-    //private val email = findViewById<EditText>(R.id.emailEditText)
-    //val password = passwordText.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val ipAddress = findViewById<EditText>(R.id.ipEditText)
+        val url = ipAddress.text.toString();
+        val email = findViewById<EditText>(R.id.emailEditText)
+        val password = findViewById<EditText>(R.id.passwordEditText)
 
         signUp.setOnClickListener {
             Toast.makeText(this@MainActivity, "Registering", Toast.LENGTH_SHORT).show()
@@ -33,8 +36,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            //sendPostRequest(email, password)
-            //Toast.makeText(this, email.text, Toast.LENGTH_SHORT).show()
+            val que = Volley.newRequestQueue(this@MainActivity)
+            val req = JsonObjectRequest(
+                Request.Method.GET,url,null,
+                    Response.Listener {
+
+                    },Response.ErrorListener {
+
+                })
         }
 
         object : CountDownTimer(2000, 1000) {
