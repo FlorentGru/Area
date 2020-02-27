@@ -1,55 +1,48 @@
 import React from 'react';
 import '../CSS/home.css'
 
-export default class Card extends React.Component {
+export default class DropDown extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            show: false,
+            show: false
         }
         
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
+        this.showMenu = this.showMenu.bind(this)
     }
     
     showMenu(event) {
-        event.preventDefault();        
-        this.setState({ show: true }, () => {
-            document.addEventListener('click', this.closeMenu);
-        });
-    }
-        
-    closeMenu(event) {
         event.preventDefault();
-        this.setState({ show: false }, () => {
-            document.removeEventListener('click', this.closeMenu);
-        });
+        if (this.state.show === true) {
+            this.setState({show: false})
+        } else {
+            this.setState({show: true})
+        }
+    }
+
+    discord = (event) => {
+        event.preventDefault();
+        this.props.history.push("/Home/LoginDiscord")
     }
 
     render() {
         return (
         <div>
-            <button className="menuButton" onClick={this.showMenu}>
-            Se connecter à un Service
-            </button>
-            
+            <button className="menuButton" onClick={this.showMenu}>Se connecter à un Service</button>
             {
             this.state.show
                 ? (
-                <div className="menu">
-                    <button className="menuButton" onClick={this.disconnect}> Connection Discord</button>
-                    <button className="menuButton"> Connection GitHub</button>
-                    <button className="menuButton"> Connection Google Calendar</button>
-                    <button className="menuButton"> Connection Instagram</button>
-                    <button className="menuButton"> Connection Messenger</button>
-                    <button className="menuButton"> Connection OneDrive</button>
-                    <button className="menuButton"> Connection Outlook</button>
-                </div>
-                )
-                : (
-                null
-                )
+                <div>
+                    <br/>
+                    <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
+                    <a className="dropDownButton"> Connection GitHub</a>
+                    <a className="dropDownButton"> Connection Google Calendar</a>
+                    <a className="dropDownButton"> Connection Instagram</a>
+                    <a className="dropDownButton"> Connection Messenger</a>
+                    <a className="dropDownButton"> Connection OneDrive</a>
+                    <a className="dropDownButton"> Connection Outlook</a>
+                </div>) : (null)
             }
         </div>
         );

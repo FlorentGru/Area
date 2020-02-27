@@ -1,9 +1,7 @@
 import React from 'react';
 import loginUser from '../APICalls/APILogin'
+import '../CSS/login.css'
 
-const textCenter = {
-    "textAlign": "center"
-}
 
 export default class LoginPage extends React.Component {
     constructor(props) {
@@ -30,7 +28,7 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <div>
-            <form onSubmit={this.mySubmitHandlerLoggin} style={textCenter}>
+            <form onSubmit={this.mySubmitHandlerLoggin} className="formStyle">
             <h1>Area</h1>
             <p>Enter your name:</p>
             <input
@@ -57,7 +55,7 @@ export default class LoginPage extends React.Component {
             <br/>
             <input type="submit" value="Loggin"/>
             </form>
-            <form onSubmit={this.mySumbitHandlerRegister} style={textCenter}>
+            <form onSubmit={this.mySumbitHandlerRegister} className="formStyle">
                 <input type="submit" value="Create New Account"/>
             </form>
             </div>

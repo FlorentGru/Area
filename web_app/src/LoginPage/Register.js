@@ -1,15 +1,11 @@
 import React from 'react';
 import registerUser from '../APICalls/APIRegister'
-
-const textCenter = {
-    "text-align": "center"
-}
-
+import '../CSS/login.css'
 
 export default class RegisterPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { username: null, password: null, confirm_password: null, confirm_email: null, email: null, toHome: false}
+        this.state = { username: null, password: null, confirm_password: null, confirm_email: null, email: null}
     }
 
     returnLoginPage = () => {
@@ -24,8 +20,7 @@ export default class RegisterPage extends React.Component {
 
     mySubmitHandler = async (event) => {
         event.preventDefault()
-        let err=0
-//        alert(`${this.state.username} ${this.state.password} ${this.state.confirm_password} ${this.state.email} ${this.state.confirm_email}`)
+        let err = 0
         if (this.state.confirm_password !== this.state.password) {
             alert (`passwords should be identicals ${this.state.confirm_password} && ${this.state.password}`)
             err = 1
@@ -43,7 +38,7 @@ export default class RegisterPage extends React.Component {
     render() {
         return (
             <div>
-            <form onSubmit={this.mySubmitHandler} style={textCenter}>
+            <form onSubmit={this.mySubmitHandler} className="formStyle">
             <h1>Area</h1>
             <p>Enter your name:</p>
             <input
