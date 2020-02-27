@@ -40,6 +40,12 @@ router.post('/auth/register', async (req, res) => {
         });
         await accessTokens.save();
 
+        const userTokens = await AccessTokens.findOne({ userId: user.id});
+        if (!userTokens) {
+            console.log('???');
+            return;
+        }
+
         const areas = new AreActions( {
             userId: user.id,
             areas: []

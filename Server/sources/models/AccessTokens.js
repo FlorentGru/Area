@@ -18,7 +18,8 @@ const mongoDBSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    tokens: [{
+    tokens: [
+        {
         service: {
             type: String,
             required: true
@@ -31,8 +32,8 @@ const mongoDBSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-
-    }]
+        }
+    ]
 });
 
 mongoDBSchema.statics.fetchAccessToken = async function(userId, service) {

@@ -14,7 +14,7 @@ var options = {
         produces: [
             "application/json"
         ],
-        schemes: ['http', 'https'],
+        schemes: ['https'],
         securityDefinitions: {
             JWT: {
                 type: 'apiKey',

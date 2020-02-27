@@ -13,7 +13,6 @@ const Schema = mongoose.Schema;
  * @typedef Action
  * @property {string} service.required
  * @property {string} name.required
- * @property {integer} nbrParam.required
  * @property {Array.<Param>} params.required
  */
 const Action = new mongoose.Schema({
@@ -24,10 +23,6 @@ const Action = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    },
-    nbrParam: {
-        type: Number,
-        required:true
     },
     params: [{
         name: {

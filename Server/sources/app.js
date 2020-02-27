@@ -8,11 +8,14 @@ require('./mongodb');
 const bodyParser = require('body-parser');
 
 const authRouter = require('./routers/auth');
-const servicesRouter = require('./routers/services');
+const servicesRouter = require('./routers/oauth2');
 const webhooksRouter = require('./routers/endpoints');
 const areasRouter = require('./routers/areas');
 
-var cors = require('cors');
+const passport = require('passport');
+const passportInit = require('./services/passportsInit');
+
+const cors = require('cors');
 const port = process.env.PORT;
 
 const swagger = require('express-swagger-generator')(app);
@@ -22,6 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 app.use(bodyParser.urlencoded({ extended:true}));
 app.use(express.json());
+
+app.use(passport.initialize());
+passportInit();
 
 swagger(require('./swagger'));
 

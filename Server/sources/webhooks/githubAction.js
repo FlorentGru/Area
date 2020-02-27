@@ -16,8 +16,7 @@ exports.createWebhook = function (userId, action) {
         return;
     }
 
-    const username = tokens.accessToken;
-    const password = tokens.refreshToken;
+    const token = tokens.accessToken;
     const event = action.name;
     if (event !== "pullRequest" && event !== "push") {
         console.log("invalid action name");
@@ -34,8 +33,7 @@ exports.createWebhook = function (userId, action) {
         eventType = "pull_request";
 
     const gh = new GitHub({
-        username: username,
-        password: password
+        token: token
     });
     const fork = gh.getRepo(username, repo);
     const hookDef = {

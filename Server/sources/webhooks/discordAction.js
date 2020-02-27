@@ -55,8 +55,8 @@ const trigger = function () {
 exports.triggers = trigger;
 
 const message = function (area) {
-    if (area.areas.action.nbrParam !== 3) {
-        console.log(`wrong number of parameters: ${area.areas.action.nbrParam}`)
+    if (area.areas.action.params.length !== 3) {
+        console.log(`wrong number of parameters, expected: 3`)
         return;
     }
 
@@ -74,7 +74,7 @@ const message = function (area) {
 
         if (message.author.bot) return;
 
-        console.log(`Guild: ${message.guild.name}`)
+        console.log(`Guild: ${message.guild.name}`);
         console.log(`Expected: ${param1.value}`);
         if (message.guild.name !== param1.value) {
             console.log("wrong server")
@@ -95,5 +95,4 @@ const message = function (area) {
             eventEmitter.emit('react', area.userId, area.areas.reaction);
         }
     });
-
 };
