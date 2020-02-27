@@ -18,6 +18,8 @@ const passportInit = require('./services/passportsInit');
 const cors = require('cors');
 const port = process.env.PORT;
 
+console.log(process.env.SERVER_ADDRESS);
+
 const swagger = require('express-swagger-generator')(app);
 
 app.use(cors());

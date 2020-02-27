@@ -66,15 +66,16 @@ router.get('/oauth2/github/callback', githubOAuth2.getToken, async (req, res) =>
  * @group OAuth2 - service authentications
  * @security JWT
  * @param {string} service.query.required
- * @returns {string} 200 - redirect Url
+ * @returns {boolean} 200 - yes or no
  * @returns {Error} 401 - Unauthorized
  */
-router.get('/oauth/connected', auth, async (req, res) => {
+router.get('/oauth2/connected', auth, async (req, res) => {
     try {
         const service = req.query.service;
         if (!service) throw("Need service in query");
 
-        const token = AccessTokens.fetchAccessToken(req.user.id, service);
+        const token = await AccessTokens.fetchAccessToken(req.user.id, service);
+        console.log(token.accessToken);
         if (!token) {
             res.status(200).send(false);
         } else {
