@@ -24,6 +24,9 @@ emitter.on('react', async function(userId, reaction) {
     if (reaction.service === "discord") {
         discordR.react(reaction);
     }
+    if (reaction.service === 'google') {
+        sendMail(user.getMail(),"","");
+    }
 });
 
 emitter.on('push', async function(body) {
