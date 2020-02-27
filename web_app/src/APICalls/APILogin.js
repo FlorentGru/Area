@@ -1,18 +1,20 @@
 const axios = require('axios').default;
-const login = "localhost:8081/auth/login"
+const login = "https://localhost:8081/auth/login"
 
 export default async function loginUser(user_email, user_password) {
     try {
         const response = await axios({
-            method: 'post',
+            method: "post",
             url: login,
+            headers: {'Content-Type': 'application/json'},
             data: {
-                email: user_email,
-                password: user_password
+                "email": user_email,
+                "password": user_password
             }
         })
-        alert(response)
+        return (response.status)
     } catch(error) {
-        alert(error)
+        alert(`Mauvais mot de passe ou email`)
+        return (400)
     }
 }

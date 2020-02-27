@@ -1,19 +1,21 @@
 const axios = require('axios').default;
-const register = "localhost:8081/auth/register"
+const register = "https://localhost:8081/auth/register"
 
 export default async function registerUser(user_name, user_password, user_email) {
     try {
         const response = await axios({
-            method: 'post',
+            method: "post",
             url: register,
+            headers: {'Content-Type': 'application/json'},
             data: {
-                username: user_name,
-                password: user_password,
-                email: user_email,
+                "email": user_email,
+                "name": user_name,
+                "password": user_password
             }
         })
-        alert(response)
+        return (response.status)
     } catch (error) {
-        alert(error)
+        alert(`Impossible de creer le compte: l'adresse email a déjà été utilisée, ou la connection au serveur est impossible`)
+        return (400)
     }
 }

@@ -1,9 +1,49 @@
-const emitter = require('./eventEmitter');
-var discord = require('./DiscordReaction');
+'use strict';
 
-emitter.on('pubsub', function(requestBody) {
-    if (requestBody.service === "Discord") {
-        console.log("tried to send");
-        discord.sendMessage(1, '676864537827344447', '1zBlGVRZ77m_FBY-h_jmoiDheq7DonCYNsZDTUpSYf7AtYuQj2BfC4Ln4_JL2-1qFNdU', "COUCOU LES AMIS C'EST AREA QUI VOUS PARLE")
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const AccessTokens = mongoose.model('AccessTokens');
+const AreActions = mongoose.model('AreActions');
+
+const emitter = require('./eventEmitter');
+
+const githubA = require('./githubAction');
+const discordR = require('../services/discordReaction');
+const discordA = require('../webhooks/discordAction');
+
+emitter.on('webhook', async function(userId, action) {
+    if (action.service === 'discord') {
+        discordA.restart();
+    }
+    if (action.service === 'github') {
+        githubA.createWebhook(userId, action);
+    }
+});
+
+emitter.on('react', async function(userId, reaction) {
+    if (reaction.service === "discord") {
+        discordR.react(reaction);
+    }
+});
+
+emitter.on('push', async function(body) {
+    const repo = body.repository.name;
+    const owner = body.repository.owner.name;
+    const event = "push";
+
+    if (!body.hook) {
+        github.trigger(repo, owner, event)
+    }
+});
+
+emitter.on('pullRequest', async function(body) {
+    const repo = body.repository.name;
+    const owner = body.repository.owner.name;
+    const event = "push";
+
+    if (!body.action) return;
+
+    if (body.action === 'opened') {
+        github.trigger(repo, owner, event);
     }
 });

@@ -4,6 +4,13 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Schema = mongoose.Schema;
 
+
+/**
+ * @typedef Token
+ * @property {string} service.required
+ * @property {string} accessToken.required
+ * @property {string} refreshToken.required
+ */
 const mongoDBSchema = new mongoose.Schema({
     userId: {
         type: Schema.Types.ObjectId,
@@ -13,15 +20,15 @@ const mongoDBSchema = new mongoose.Schema({
     },
     tokens: [{
         service: {
-            type: "string",
+            type: String,
             required: true
         },
         accessToken: {
-            type: "string",
+            type: String,
             required: true
         },
         refreshToken: {
-            type: "string",
+            type: String,
             required: true
         }
 

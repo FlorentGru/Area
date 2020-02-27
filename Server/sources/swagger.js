@@ -12,8 +12,7 @@ var options = {
         host: 'localhost:8081',
         basePath: '',
         produces: [
-            "application/json",
-            "application/xml"
+            "application/json"
         ],
         schemes: ['http', 'https'],
         securityDefinitions: {
