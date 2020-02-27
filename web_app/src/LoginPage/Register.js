@@ -1,5 +1,5 @@
 import React from 'react';
-import registerUser from './APICalls/APIRegister'
+import registerUser from '../APICalls/APIRegister'
 
 const textCenter = {
     "text-align": "center"
@@ -37,7 +37,7 @@ export default class RegisterPage extends React.Component {
         if (err === 0) {
             let status = await registerUser(this.state.username, this.state.password, this.state.email)
             if (status === 201)
-                this.props.history.push('/Home')
+                this.props.history.push('/')
         }
     }
     render() {
