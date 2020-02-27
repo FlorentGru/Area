@@ -1,4 +1,6 @@
 'use strict';
+const GitHub = require("github-api");
+const Promise = require("es6-promise").Promise;
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
@@ -8,43 +10,52 @@ const AreActions = mongoose.model('AreActions');
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
 
-exports.createWebhook = function (userId, action) {
+exports.createWebhook = async function (userId, action) {
 
-    const tokens = AccessTokens.fetchAccessToken(userId, "github");
-    if (!token) {
+    const tokens = await AccessTokens.fetchAccessToken(userId, "github");
+    if (!tokens) {
         console.log("user not connected to service");
         return;
     }
-
+    console.log(tokens);
     const token = tokens.accessToken;
+
     const event = action.name;
     if (event !== "pullRequest" && event !== "push") {
         console.log("invalid action name");
         return;
     }
-    const repo = action.params.find(({ name }) => name === 'repo');
-    if (!repo) return;
 
-    const GitHub = require("github-api");
-    const Promise = require("es6-promise").Promise;
+    const param1 = action.params.find(({ name }) => name === 'repo');
+    const param2 = action.params.find(({ name }) => name === 'owner');
+    if (!param1 || !param2) return;
+
+    const repo = param1.value;
+    const owner = param2.value;
+
     let eventType = "push";
-
     if (event === "pullRequest")
         eventType = "pull_request";
+
+    console.log(`token: ${token}`);
+    console.log(`event: ${event}`);
+    console.log(`repo: ${repo}`);
+    console.log(`owner: ${owner}`);
+    console.log(`endpoint: ${process.env.SERVER_ADDRESS}/webhook/github/pullRequest`);
 
     const gh = new GitHub({
         token: token
     });
-    const fork = gh.getRepo(username, repo);
+    const fork = gh.getRepo(owner, repo);
     const hookDef = {
         "name" : "web",
-        "active" : true,
-        "events" : [eventType],
         "config" : {
-            "url" : "https://a6e4fd9a.ngrok.io/webhook/github/pullRequest",
+            "url" : `${process.env.SERVER_ADDRESS}/webhook/github/${event}`,
             "content_type": "json",
             "insecure_ssl": "0"
-        }
+        },
+        "events" : [eventType],
+        "active" : true
     };
     fork.createHook(hookDef)
         .then(function({data: hook}) {
@@ -75,10 +86,8 @@ exports.trigger = function(repo, owner, event) {
 };
 
 const checkParams = function (repo, owner, area) {
-    if (area.areas.action.nbrParam !== 2) return;
-
-    const param1 = area.action.params.find(({ name }) => name === 'owner');
-    const param2 = area.action.params.find(({ name }) => name === 'repo');
+    const param1 = area.areas.action.params.find(({ name }) => name === 'owner');
+    const param2 = area.areas.action.params.find(({ name }) => name === 'repo');
 
     if (!param1 || !param2) return;
 

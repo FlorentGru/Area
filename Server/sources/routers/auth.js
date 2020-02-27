@@ -1,6 +1,9 @@
 'use strict';
 
 const express = require('express');
+
+global.ServerAddress = "";
+
 const auth = require('../middleware/JWTAuth');
 
 const mongoose = require('mongoose')
@@ -13,6 +16,31 @@ AccessTokens.collection.drop();
 AreActions.collection.drop();*/
 
 const router = express.Router();
+/**
+* Config new server address
+* @route PUT /config/address
+* @operationId updateAddress
+* @group Config - Operations on server config
+* @param {string} address.query.required - ngrok server address
+* @produces application/json
+* @returns {string} 200 - success
+* @returns {string} 400 - Invalid address
+* @returns {Error} default - Unexpected error
+*/
+router.put('/config/address', async (req, res) => {
+    try {
+        const address = req.query.address;
+        if (!address) throw ('no address');
+        if (!address.startsWith("https://") || !address.endsWith('.ngrok.io')) {
+            throw ('invalid address');
+        }
+
+        process.env.SERVER_ADDRESS = address;
+        res.status(200).send("success");
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
 
 /**
  * @typedef Error
@@ -42,7 +70,6 @@ router.post('/auth/register', async (req, res) => {
 
         const userTokens = await AccessTokens.findOne({ userId: user.id});
         if (!userTokens) {
-            console.log('???');
             return;
         }
 
@@ -73,16 +100,11 @@ router.post('/auth/login', async(req, res) => {
     try {
         const {email, password} = req.body;
         const user = await User.findByCredentials(email, password);
-        if (!user) {
-            return res.status(401).send({error: 'Error : Login failed.'})
-        }
+
         const token = await user.generateAuthToken();
-//        const accessTokens = await AccessTokens.fetchAccessToken(user.id,  "discord");
- //       console.log(accessTokens);
         res.status(200).send({token});
     } catch (err) {
-        console.log("ici");
-        res.status(400).send(err);
+        res.status(401).send(err);
     }
 });
 

@@ -16,12 +16,13 @@ emitter.on('webhook', async function(userId, action) {
         discordA.restart();
     }
     if (action.service === 'github') {
-        githubA.createWebhook(userId, action);
+        await githubA.createWebhook(userId, action);
     }
 });
 
 emitter.on('react', async function(userId, reaction) {
     if (reaction.service === "discord") {
+        console.log("react discord");
         discordR.react(reaction);
     }
     if (reaction.service === 'google') {
@@ -35,7 +36,7 @@ emitter.on('push', async function(body) {
     const event = "push";
 
     if (!body.hook) {
-        github.trigger(repo, owner, event)
+        githubA.trigger(repo, owner, event)
     }
 });
 
@@ -44,7 +45,9 @@ emitter.on('pullRequest', async function(body) {
     const owner = body.repository.owner.name;
     const event = "push";
 
-    if (!body.action) return;
+    if (!body.action) {
+        return;
+    }
 
     if (body.action === 'opened') {
         github.trigger(repo, owner, event);
