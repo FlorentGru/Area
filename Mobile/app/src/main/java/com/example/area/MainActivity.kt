@@ -8,7 +8,6 @@ import android.os.CountDownTimer
 import android.view.View
 import android.view.View.VISIBLE
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.android.volley.Request
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val ipAddress = findViewById<EditText>(R.id.ipEditText)
-        val url = ipAddress.text.toString();
+        val url = ipAddress.text.toString()
         val email = findViewById<EditText>(R.id.emailEditText)
         val password = findViewById<EditText>(R.id.passwordEditText)
 
@@ -35,15 +34,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val jsonobj = JSONObject()
+
         loginButton.setOnClickListener {
+            jsonobj.put("email",emailEditText.text)
+            jsonobj.put("password",passwordEditText.text)
+
             val que = Volley.newRequestQueue(this@MainActivity)
             val req = JsonObjectRequest(
-                Request.Method.GET,url,null,
+                Request.Method.POST,url,jsonobj,
                     Response.Listener {
+                        response ->
+                        Toast.makeText(this, response["success"].toString(), Toast.LENGTH_SHORT).show()
 
                     },Response.ErrorListener {
-
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
                 })
+            que.add(req)
         }
 
         object : CountDownTimer(2000, 1000) {

@@ -8,11 +8,11 @@ services:
         ports:
             - '8082:80'
 
-    api:
+    server:
         build: 
             context: ./Server/
             dockerfile: Dockerfile
-        image: api
+        image: server
         ports: 
             - 8081:8081
         networks: 
@@ -24,7 +24,7 @@ services:
             dockerfile: Dockerfile
         image: mobile
         depends_on: 
-            - api
+            - server
             - nginx
 
     webapp:
@@ -36,7 +36,7 @@ services:
             - 8080:8080
         depends_on: 
             - mobile_client
-            - api
+            - server
 
 networks:
     app-network:
