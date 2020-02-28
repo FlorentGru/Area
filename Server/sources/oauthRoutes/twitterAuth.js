@@ -9,7 +9,7 @@ const AccessTokens = mongoose.model('AccessTokens');
 
 const router = express.Router();
 
-const oauth = require('./oauth2');
+const oauth = require('../models/updateToken');
 
 const Twitter = require('twitter-lite');
 
@@ -42,7 +42,7 @@ router.get('/oauth2/twitter', auth, async (req, res, next) => {
                 reqTkn: res.oauth_token,
                 reqTknSecret: res.oauth_token_secret
             })
-        })
+        });
     res.status(200).send(`https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`);
 });
 
