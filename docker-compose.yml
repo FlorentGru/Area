@@ -8,11 +8,11 @@ services:
         ports:
             - '8082:80'
 
-    server:
+    api:
         build: 
-            context: ./Server/
+            context: ./server
             dockerfile: Dockerfile
-        image: server
+        image: api
         ports: 
 <<<<<<< HEAD
             - 8080:8080
@@ -32,7 +32,7 @@ services:
             dockerfile: Dockerfile
         image: mobile
         depends_on: 
-            - server
+            - api
             - nginx
 
     webapp:
@@ -44,7 +44,10 @@ services:
             - 8081:8081
         depends_on: 
             - mobile_client
-            - server
+            - api
+
+volumes:
+    apk:
 
     db:
         image: "mongo"
