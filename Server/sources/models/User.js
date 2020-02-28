@@ -31,6 +31,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    callback: {
+        type: String,
+    },
     tokens: [{
         token: {
             type: String,

@@ -8,17 +8,19 @@ require('./mongodb');
 const bodyParser = require('body-parser');
 
 const authRouter = require('./routers/auth');
-const servicesRouter = require('./routers/oauth2');
+const oauthRouter = require('./oauthRoutes/oauth2');
+const discordRouter = require('./oauthRoutes/discordAuth');
+const dropboxRouter = require('./oauthRoutes/dropboxAuth');
+const githubRouter = require('./oauthRoutes/githubAuth');
+const twitterRouter = require('./oauthRoutes/twitterAuth');
 const webhooksRouter = require('./routers/endpoints');
 const areasRouter = require('./routers/areas');
 
-const passport = require('passport');
-const passportInit = require('./services/passportsInit');
+/*const passport = require('passport');
+const passportInit = require('./services/passportsInit');*/
 
 const cors = require('cors');
 const port = process.env.PORT;
-
-console.log(process.env.SERVER_ADDRESS);
 
 const swagger = require('express-swagger-generator')(app);
 
@@ -28,13 +30,17 @@ app.use(bodyParser.raw());
 app.use(bodyParser.urlencoded({ extended:true}));
 app.use(express.json());
 
-app.use(passport.initialize());
-passportInit();
+/*app.use(passport.initialize());
+passportInit();*/
 
 swagger(require('./swagger'));
 
 app.use(authRouter);
-app.use(servicesRouter);
+app.use(oauthRouter);
+app.use(discordRouter);
+app.use(dropboxRouter);
+app.use(githubRouter);
+app.use(twitterRouter);
 app.use(webhooksRouter);
 app.use(areasRouter);
 

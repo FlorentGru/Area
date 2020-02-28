@@ -16,12 +16,6 @@ Router.post('/webhook', async (req, res) => {
     res.status(200).send('success');
 });
 
-Router.post('/webhook/test', async (req, res) => {
-    console.log(JSON.stringify(req.headers));
-    console.log(req.body);
-    res.status(200).send('success');
-});
-
 Router.post('/webhook/github/push', async (req, res) => {
     console.log(req.body);
     eventEmitter.emit('push', req.body);

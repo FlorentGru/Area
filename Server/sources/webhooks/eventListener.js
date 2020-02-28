@@ -10,6 +10,7 @@ const emitter = require('./eventEmitter');
 const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
+const gmailR = require('../services/gmailReaction');
 
 emitter.on('webhook', async function(userId, action) {
     if (action.service === 'discord') {
@@ -25,8 +26,8 @@ emitter.on('react', async function(userId, reaction) {
         console.log("react discord");
         discordR.react(reaction);
     }
-    if (reaction.service === 'google') {
-        sendMail(user.getMail(),"","");
+    if (reaction.service === 'gmail') {
+        await gmailR.react(reaction);
     }
 });
 

@@ -36,6 +36,7 @@ router.put('/config/address', async (req, res) => {
         }
 
         process.env.SERVER_ADDRESS = address;
+        console.log(process.env.SERVER_ADDRESS);
         res.status(200).send("success");
     } catch (err) {
         res.status(400).send(err);
