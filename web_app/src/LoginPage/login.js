@@ -2,7 +2,6 @@ import React from 'react';
 import loginUser from '../APICalls/APILogin'
 import '../CSS/login.css'
 
-
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props)
@@ -17,9 +16,11 @@ export default class LoginPage extends React.Component {
 
     mySubmitHandlerLoggin = async (event) => {
         event.preventDefault()
-        let status = await loginUser(this.state.email, this.state.password);
-        if (status === 200)
+        let response = await loginUser(this.state.email, this.state.password);
+        if (response.status === 200) {
+            localStorage.setItem("token", response.data.token)
             this.props.history.push('/Home')
+        }
     }
     mySumbitHandlerRegister = (event) => {
         event.preventDefault()

@@ -12,7 +12,7 @@ export default async function loginUser(user_email, user_password) {
                 "password": user_password
             }
         })
-        return (response.status)
+        return (response)
     } catch(error) {
         alert(`Mauvais mot de passe ou email`)
         return (400)

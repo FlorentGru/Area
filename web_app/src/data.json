@@ -1,0 +1,59 @@
+{
+    "token": "",
+    "discord": {
+        "actions": {
+            "action": "action"
+        },
+        "reactions": {
+            "reaction": "reaction"
+        }
+    },
+    "GitHub" : {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    },
+    "GoogleCalendar": {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    },
+    "Instagram": {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    },
+    "Messenger": {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    },
+    "OneDrive": {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    },
+    "Outlook": {
+        "actions": {
+
+        },
+        "reactions": {
+
+        }
+    }
+}
