@@ -12,7 +12,7 @@ import logoOutlook from '../logo/outlook.jpg'
 export default class RegisterPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { username: null, password: null, confirm_password: null, confirm_email: null, email: null}
+        this.state = {password: null, confirm_password: null, confirm_email: null, email: null}
     }
 
     returnLoginPage = () => {

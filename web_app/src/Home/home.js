@@ -23,12 +23,9 @@ export default class Home extends React.Component {
     render () {
         this.callGitHub()
         return (
-            <div>Home
-                <br/>
+            <div>
                 <DropDown/>
-                <br/>
-                {/* <Discord data={data.discord}/> */}
-                <button className="menuButton" onClick={this.disconnect}>Disconnect</button>
+                <button className="disconnectButton" onClick={this.disconnect}>Disconnect</button>
             </div>
             )
     }
