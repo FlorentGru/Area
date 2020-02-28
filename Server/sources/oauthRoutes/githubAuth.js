@@ -32,7 +32,7 @@ router.get('/oauth2/github', auth, async (req, res) => {
         gitDirectory: 'Users',
         userAgent: "Area - Epitech Project"
     });
-
+    console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
     res.status(200).send(githubOAuth2.getRedirectURL(req.user.id.toString()));
 });
 
