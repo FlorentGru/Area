@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.connection.ConnectionViewModel">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackDiscord">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="@string/Connection"
+                android:textColor="@color/whiteFont"
+                android:textSize="30sp">
+            </TextView>
+
+            <Button
+                android:id="@+id/OneDrive"
+                android:gravity="center_vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:layout_marginTop="40dp"
+                android:text="@string/OneDrive"/>
+
+            <Button
+                android:id="@+id/Messenger"
+                android:gravity="center_vertical"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/Messenger" />
+
+            <Button
+                android:id="@+id/Outlook"
+                android:layout_width="fill_parent"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:gravity="center_vertical"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/Outlook"/>
+
+            <Button
+                android:id="@+id/insta"
+                android:layout_width="fill_parent"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:gravity="center_vertical"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/Insta" />
+
+            <Button
+                android:id="@+id/github"
+                android:layout_width="fill_parent"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:gravity="center_vertical"
+                android:layout_marginTop="40dp"
+                android:layout_height="150dp"
+                android:text="@string/GitHub" />
+
+            <Button
+                android:id="@+id/Discord"
+                android:layout_width="fill_parent"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:gravity="center_vertical"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/Discord" />
+
+            <Button
+                android:id="@+id/Calendargoogle"
+                android:gravity="center_vertical"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/CalendarGoogle" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
