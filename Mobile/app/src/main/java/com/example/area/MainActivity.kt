@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val ipAddress = findViewById<EditText>(R.id.ipEditText)
-        val url = ipAddress.text.toString()
-        val email = findViewById<EditText>(R.id.emailEditText)
-        val password = findViewById<EditText>(R.id.passwordEditText)
-
         signUp.setOnClickListener {
             Toast.makeText(this@MainActivity, "Registering", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, RegisterActivity::class.java)
@@ -37,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         val jsonobj = JSONObject()
 
         loginButton.setOnClickListener {
+            val ipAddress = ipEditText.text.toString()
+            val login = "/auth/login"
+            val url = "$ipAddress$login"
+
             jsonobj.put("email",emailEditText.text)
             jsonobj.put("password",passwordEditText.text)
 

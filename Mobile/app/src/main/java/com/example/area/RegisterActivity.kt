@@ -22,18 +22,16 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val ipAddress = findViewById<EditText>(R.id.ipText)
-        val ipString = ipAddress.text.toString()
-        val register = "/auth/register"
-        val url = "$ipString $register"
-
-        val jsonobj = JSONObject()
 
         registerBtn.setOnClickListener {
+            val ipString = ipText.text.toString()
+            val register = "/auth/register"
+            val url = "$ipString$register"
+
+            val jsonobj = JSONObject()
             jsonobj.put("email",etadress.text)
             jsonobj.put("name",etname.text)
             jsonobj.put("password",etpassword.text)
-            Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
