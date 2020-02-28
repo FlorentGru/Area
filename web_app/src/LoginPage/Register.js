@@ -1,6 +1,13 @@
 import React from 'react';
 import registerUser from '../APICalls/APIRegister'
 import '../CSS/login.css'
+import logoDiscord from '../logo/discord.png'
+import logoGitHub from '../logo/github.png'
+import logoGoogleCalendar from '../logo/googleCalendar.png'
+import logoInstagram from '../logo/instagram.png'
+import logoMessenger from '../logo/messenger.svg'
+import logoOneDrive from '../logo/onedrive.png'
+import logoOutlook from '../logo/outlook.jpg'
 
 export default class RegisterPage extends React.Component {
     constructor(props) {
@@ -40,10 +47,17 @@ export default class RegisterPage extends React.Component {
             <div>
             <form onSubmit={this.mySubmitHandler} className="formStyle">
             <h1>Area</h1>
-            <p>Enter your name:</p>
+            <p>Enter your email</p>
             <input
                 type='text'
-                name='username'
+                name='email'
+                required={true}
+                onChange={this.myChangeHandler}
+            />
+           <p>Confirm email</p>
+            <input
+                type='text'
+                name='confirm_email'
                 required={true}
                 onChange={this.myChangeHandler}
             />
@@ -61,21 +75,13 @@ export default class RegisterPage extends React.Component {
                 required={true}
                 onChange={this.myChangeHandler}
             />
-            <p>Enter your email</p>
-            <input
-                type='text'
-                name='email'
-                required={true}
-                onChange={this.myChangeHandler}
-            />
-           <p>Confirm email</p>
-            <input
-                type='text'
-                name='confirm_email'
-                required={true}
-                onChange={this.myChangeHandler}
-            />
- 
+            <img src={logoDiscord} className="imgDiscord"></img>
+            <img src={logoGitHub} className="imgGitHub"></img>
+            <img src={logoGoogleCalendar} className="imgGoogleCalendar"></img>
+            <img src={logoInstagram} className="imgInstagram"></img>
+            <img src={logoMessenger} className="imgMessenger"></img>
+            <img src={logoOneDrive} className="imgOneDrive"></img>
+            <img src={logoOutlook} className="imgOutlook"></img> 
             <br/>
             <br/>
             <input type="submit" value="Create Account"/>

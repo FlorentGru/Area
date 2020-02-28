@@ -1,11 +1,18 @@
 import React from 'react';
 import loginUser from '../APICalls/APILogin'
 import '../CSS/login.css'
+import logoDiscord from '../logo/discord.png'
+import logoGitHub from '../logo/github.png'
+import logoGoogleCalendar from '../logo/googleCalendar.png'
+import logoInstagram from '../logo/instagram.png'
+import logoMessenger from '../logo/messenger.svg'
+import logoOneDrive from '../logo/onedrive.png'
+import logoOutlook from '../logo/outlook.jpg'
 
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { username: null, password: null, email: null, toHome: false}
+        this.state = {password: null, email: null, toHome: false}
     }
 
     myChangeHandler = (event) => {
@@ -31,10 +38,10 @@ export default class LoginPage extends React.Component {
             <div>
             <form onSubmit={this.mySubmitHandlerLoggin} className="formStyle">
             <h1>Area</h1>
-            <p>Enter your name:</p>
+            <p>Enter your email</p>
             <input
                 type='text'
-                name='username'
+                name='email'
                 required={true}
                 onChange={this.myChangeHandler}
             />
@@ -45,13 +52,6 @@ export default class LoginPage extends React.Component {
                 required={true}
                 onChange={this.myChangeHandler}
             />
-            <p>Enter your email</p>
-            <input
-                type='text'
-                name='email'
-                required={true}
-                onChange={this.myChangeHandler}
-            />
             <br/>
             <br/>
             <input type="submit" value="Loggin"/>
@@ -59,6 +59,13 @@ export default class LoginPage extends React.Component {
             <form onSubmit={this.mySumbitHandlerRegister} className="formStyle">
                 <input type="submit" value="Create New Account"/>
             </form>
+            <img src={logoDiscord} className="imgDiscord"></img>
+            <img src={logoGitHub} className="imgGitHub"></img>
+            <img src={logoGoogleCalendar} className="imgGoogleCalendar"></img>
+            <img src={logoInstagram} className="imgInstagram"></img>
+            <img src={logoMessenger} className="imgMessenger"></img>
+            <img src={logoOneDrive} className="imgOneDrive"></img>
+            <img src={logoOutlook} className="imgOutlook"></img>
             </div>
         );
     }
