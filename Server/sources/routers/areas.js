@@ -49,10 +49,8 @@ router.post('/area/new', auth, oneOf([
     body('reaction').exists(),
     body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
     body('action.name').exists().isAlpha(),
-    body('action.nbrParam').exists().isNumeric(),
     body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
     body('reaction.name').exists().isAlpha(),
-    body('reaction.nbrParam').exists().isNumeric(),
 ]), async(req, res) => {
     try {
         validationResult(req).throw();

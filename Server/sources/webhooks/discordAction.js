@@ -74,8 +74,8 @@ const message = function (area) {
 
         if (message.author.bot) return;
 
-        console.log(`Guild: ${message.guild.name}`);
-        console.log(`Expected: ${param1.value}`);
+//        console.log(`Guild: ${message.guild.name}`);
+//        console.log(`Expected: ${param1.value}`);
         if (message.guild.name !== param1.value) {
             console.log("wrong server")
             return;
@@ -86,8 +86,8 @@ const message = function (area) {
             console.log("wrong channel");
             return;
         }
-        console.log(`Channel: ${channel.name}`);
-        console.log(`Expected: ${param2.value}`);
+//        console.log(`Channel: ${channel.name}`);
+//        console.log(`Expected: ${param2.value}`);
 
         if (message.content.startsWith(param3.value)) {
             console.log(`triggered by ${message.content}`);

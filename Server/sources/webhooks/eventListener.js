@@ -10,22 +10,24 @@ const emitter = require('./eventEmitter');
 const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
+const gmailR = require('../services/gmailReaction');
 
 emitter.on('webhook', async function(userId, action) {
     if (action.service === 'discord') {
         discordA.restart();
     }
     if (action.service === 'github') {
-        githubA.createWebhook(userId, action);
+        await githubA.createWebhook(userId, action);
     }
 });
 
 emitter.on('react', async function(userId, reaction) {
     if (reaction.service === "discord") {
+        console.log("react discord");
         discordR.react(reaction);
     }
-    if (reaction.service === 'google') {
-        sendMail(user.getMail(),"","");
+    if (reaction.service === 'gmail') {
+        await gmailR.react(reaction);
     }
 });
 
@@ -35,7 +37,7 @@ emitter.on('push', async function(body) {
     const event = "push";
 
     if (!body.hook) {
-        github.trigger(repo, owner, event)
+        githubA.trigger(repo, owner, event)
     }
 });
 
@@ -44,7 +46,9 @@ emitter.on('pullRequest', async function(body) {
     const owner = body.repository.owner.name;
     const event = "push";
 
-    if (!body.action) return;
+    if (!body.action) {
+        return;
+    }
 
     if (body.action === 'opened') {
         github.trigger(repo, owner, event);

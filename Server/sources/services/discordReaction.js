@@ -9,7 +9,6 @@ const AccessTokens = mongoose.model('AccessTokens');
 
 const sendMessage = function(webhookId, webhookToken, content) {
     const hook = new Discord.WebhookClient(webhookId, webhookToken);
-
     hook.send(content);
 };
 

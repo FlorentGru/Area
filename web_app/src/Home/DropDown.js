@@ -1,12 +1,13 @@
 import React from 'react';
 import '../CSS/home.css'
+import GitHubCall from '../APICalls/Github'
 
 export default class DropDown extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            show: false
+            show: false,
         }
         
         this.showMenu = this.showMenu.bind(this)
@@ -21,9 +22,9 @@ export default class DropDown extends React.Component {
         }
     }
 
-    discord = (event) => {
-        event.preventDefault();
-        this.props.history.push("/Home/LoginDiscord")
+    callGitHub = async () => {
+        const response = await GitHubCall(this.props.token)
+        console.log(response)
     }
 
     render() {
@@ -36,14 +37,15 @@ export default class DropDown extends React.Component {
                 <div>
                     <br/>
                     <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
-                    <a className="dropDownButton"> Connection GitHub</a>
-                    <a className="dropDownButton"> Connection Google Calendar</a>
-                    <a className="dropDownButton"> Connection Instagram</a>
-                    <a className="dropDownButton"> Connection Messenger</a>
-                    <a className="dropDownButton"> Connection OneDrive</a>
-                    <a className="dropDownButton"> Connection Outlook</a>
+                    <a className="dropDownButton" /*href='/LoginGitHub'*/ onClick={this.callGitHub}> Connection GitHub</a>
+                    <a className="dropDownButton" href='/LoginGoogleCalendar'> Connection Google Calendar</a>
+                    <a className="dropDownButton" href='/LoginInstagram'> Connection Instagram</a>
+                    <a className="dropDownButton" href='/LoginMessenger'> Connection Messenger</a>
+                    <a className="dropDownButton" href='/LoginOneDrive'> Connection OneDrive</a>
+                    <a className="dropDownButton" href='/LoginOutlook'> Connection Outlook</a>
                 </div>) : (null)
             }
+            <div></div>
         </div>
         );
     }
