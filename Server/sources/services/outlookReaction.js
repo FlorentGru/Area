@@ -24,7 +24,7 @@ const sendMail = async function(to, subject, content) {
         }
     });
     let info = await transporter.sendMail({
-        from: '"AREA" <area.epitech.nantes.2022@gmail.com>',
+        from: '"AREA" <area.epitech.nantes.2022@outlook.fr>',
         to: to,
         subject: subject,
         text: content,
