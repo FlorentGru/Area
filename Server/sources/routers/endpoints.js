@@ -18,12 +18,14 @@ Router.post('/webhook', async (req, res) => {
 });
 
 Router.post('/webhook/github/push', async (req, res) => {
+    console.log("GITHUB PUSH TRIGGERED")
     console.log(req.body);
     eventEmitter.emit('push', req.body);
     res.status(200).send('success');
 });
 
 Router.post('/webhook/github/pullRequest', async (req, res) => {
+    console.log("GITHUB PULL REQUEST TRIGGERED")
     console.log(req.body);
     eventEmitter.emit('pullRequest', req.body);
     res.status(200).send('success');
@@ -38,8 +40,8 @@ Router.post('/webhook/google/sendMail', async (req, res) => {
 */
 
 Router.post('/webhook/dropbox', async (req, res) => {
+    console.log("DROPBOX TRIGGERED")
     console.log(req.body);
-    dropboxA.getAction(req.body.list_folder.accounts, req.body.delta.users);
     eventEmitter.emit('dropbox', req.body);
     res.status(200).send('success');
 });
@@ -50,6 +52,7 @@ Router.get('/webhook/dropbox', async (req, res) => {
 });
 
 Router.post('/webhook/twitter', async (req, res) => {
+    console.log("TWITTER TRIGGERED")
     console.log(req.body);
     res.status(200).send('success');
 });

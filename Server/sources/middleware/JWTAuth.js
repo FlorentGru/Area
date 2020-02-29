@@ -6,9 +6,6 @@ const JWTAuth = async(req, res, next) => {
         const token = req.header('Authorization').replace('Bearer ', '');
         const data = jwt.verify(token, process.env.JWT_KEY);
 
-        if (!process.env.SERVER_ADDRESS) {
-            throw ({ error: 'You didn\'t update the server address!' });
-        }
         const user = await User.findOne({ _id: data._id, 'tokens.token': token });
         if (!user) {
             throw ({ error: 'Unauthorized' });

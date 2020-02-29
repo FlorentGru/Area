@@ -2,8 +2,6 @@
 
 const express = require('express');
 
-global.ServerAddress = "";
-
 const auth = require('../middleware/JWTAuth');
 
 const mongoose = require('mongoose')
