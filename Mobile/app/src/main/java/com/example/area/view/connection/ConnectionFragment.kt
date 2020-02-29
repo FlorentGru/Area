@@ -4,22 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.example.area.R
+import com.example.area.presenter.ConnectionCallback
+import kotlinx.android.synthetic.*
 
 class ConnectionFragment : Fragment() {
-
-    private lateinit var connectionViewModel: ConnectionViewModel
+    private var _baseUrl= ""
+    private var _connectionCallback = ConnectionCallback(this)
+    private var _view : View? = null
+    private lateinit var _buttonGithub :Button;
+    var webViewToCall = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        connectionViewModel =
-            ViewModelProviders.of(this).get(ConnectionViewModel::class.java)
-        val root = inflater.inflate(R.layout.connection, container, false)
-        return root
+        _view = inflater.inflate(R.layout.connection, container, false)
+        _buttonGithub = _view!!.findViewById(R.id.github)
+        _buttonGithub.setOnClickListener {
+            _connectionCallback.getResponse("github")
+        }
+        return _view
+    }
+
+    fun getUrl() : String {
+        return _baseUrl
     }
 }
