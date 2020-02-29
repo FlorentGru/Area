@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity()
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
         val jsonobj = JSONObject()
 
         loginButton.setOnClickListener {
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity()
                         response ->
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, navBar::class.java)
+                        intent.putExtra("url", ipAddress)
                         startActivity(intent)
 
                     },Response.ErrorListener {
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity()
                 })
             que.add(req)
         }
+
 
         object : CountDownTimer(2000, 1000) {
             override fun onFinish() {
