@@ -8,18 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.area.R
 
-class ServiceFragment : Fragment()
-{
-    private lateinit var serviceViewModel: ServiceViewModel
+class ServiceFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        serviceViewModel =
-            ViewModelProviders.of(this).get(ServiceViewModel::class.java)
-        val root = inflater.inflate(R.layout.service , container, false)
-        return root
+        return inflater.inflate(R.layout.service, container, false)
     }
 }

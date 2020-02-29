@@ -4,6 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.service.ServiceViewModel"
     android:background="@color/blackDiscord">
 </androidx.constraintlayout.widget.ConstraintLayout>
