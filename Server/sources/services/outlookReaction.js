@@ -40,13 +40,13 @@ exports.sendMail = async function(to, subject, content) {
         port: 465,
         secure: true,
         auth: {
-            user: "admin@bonacte.com",
-            pass: "Hasherlesmdpcestpourlesnuls",
+            user: "area.epitek.nantes.2022@zohomail.com",
+            pass: "Hasherlesmdpcestpourlesnuls#1",
         }
     });
     console.log("here");
     let info = await transporter.sendMail({
-        from: '"AREA" <admin@bonacte.com>',
+        from: '"AREA" <area.epitek.nantes.2022@zohomail.com>',
         to: to,
         subject: subject,
         text: content,
