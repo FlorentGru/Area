@@ -26,19 +26,25 @@ let dropbox = dropboxV2Api.authenticate({
  * @operationId dropboxAuth
  * @group OAuth2 - service authentications
  * @security JWT
+ *
  * @returns {string} 200 - redirect Url
  * @returns {Error} 401 - Unauthorized
  */
 router.get('/oauth2/dropbox', auth, async (req, res) => {
+    try {
+        const callback = req.query.callback;
+        if (!callback) throw ("missing callback");
 
-    dropbox = dropboxV2Api.authenticate({
-        client_id: process.env.DROPBOX_CLIENT_ID,
-        client_secret: process.env.DROPBOX_CLIENT_SECRET,
-        redirect_uri: `${process.env.SERVER_ADDRESS}/oauth2/dropbox/callback`,
-    });
+        dropbox = dropboxV2Api.authenticate({
+            client_id: process.env.DROPBOX_CLIENT_ID,
+            client_secret: process.env.DROPBOX_CLIENT_SECRET,
+            redirect_uri: `${process.env.SERVER_ADDRESS}/oauth2/dropbox/callback`,
+        });
 
-    console.log(req.user.id.toString());
-    res.status(200).send(dropbox.generateAuthUrl() + `&state=${req.user.id.toString()}`);
+        res.status(200).send(dropbox.generateAuthUrl() + `&state=${req.user.id.toString()} ${callback}`);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 });
 
 router.get('/oauth2/dropbox/callback', async function(req, res) {
@@ -46,9 +52,12 @@ router.get('/oauth2/dropbox/callback', async function(req, res) {
         const params = req.query;
         await dropbox.getToken(params.code, async function (err, result) {
             if (err) throw ("error fetching token");
+
             console.log('user\'s access_token: ', result.access_token);
 
-            const userId = params.state;
+            const state = req.state.split(" ");
+            const userId = state[0];
+            const callback = state[1];
             const token = result.access_token;
             const service = "dropbox";
 
@@ -59,7 +68,7 @@ router.get('/oauth2/dropbox/callback', async function(req, res) {
 
                 console.log(`infos: ${accountInfos}`);
                 await oauth.updateToken(userId, token, accountInfos, service);
-                res.status(200).send("OK");
+                res.redirect(callback);
             });
         });
     } catch (err) {

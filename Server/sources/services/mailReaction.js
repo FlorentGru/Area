@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const gmail = require('./gmailReaction');
+const outlook = require('./outlookReaction');
 
 exports.react = async function(reaction) {
     if (reaction.name === "sendTo") {
@@ -9,6 +11,10 @@ exports.react = async function(reaction) {
             console.log("Error missing param");
             return;
         }
-        await sendMail(param1.value, param2.value, param3.value);
+        if (reaction.service === "gmail") {
+            await gmail.sendMail(param1.value, param2.value, param3.value);
+        } else {
+            await outlook.sendMail(param1.value, param2.value, param3.value);
+        }
     }
 };

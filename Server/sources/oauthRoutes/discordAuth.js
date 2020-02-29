@@ -23,31 +23,35 @@ const oauth = require('../models/updateToken');
  * @security JWT
  * @param {boolean} bot.query.required
  * @param {boolean} webhook.query.required
+ * @param {string} callback.query.required
  * @returns {string} 200 - redirect Url
  * @returns {Error} 401 - Unauthorized
  */
 router.get('/oauth2/discord', auth, async (req, res) => {
     const bot = req.query.bot;
     const webhook = req.query.webhook;
+    const callback = req.query.callback;
     let redirect = encodeURIComponent(`${process.env.SERVER_ADDRESS}/oauth2/discord/callback`);
-    let url = "";
-    if (!bot && !webhook) {
-
-    } else if (!webhook && bot) {
-        url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=bot`;
-    } else if (!bot && webhook) {
-        url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=webhook.incoming`;
+    if ((!bot && !webhook) || !callback) {
+        res.status(400).send("Missing parameters")
     } else {
-        url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=webhook.incoming%20bot`;
+        let url = "";
+        if ((webhook === "false") && (bot === "true")) {
+            url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=bot&state=${callback}`;
+        } else if (bot === "false" && webhook === "true") {
+            url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=webhook.incoming&state=${callback}`;
+        } else {
+            url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=webhook.incoming%20bot&state=${callback}`;
+        }
+        res.status(200).send(url);
     }
-
-    res.status(200).send(url);
 });
 
 router.get('/oauth2/discord/callback', async (req, res) => {
     try {
         if (!req.query.code) throw ('NoCodeProvided');
         const code = req.query.code;
+        const state = req.query.state;
 
         let redirect = encodeURIComponent(`${process.env.SERVER_ADDRESS}/oauth2/discord/callback`);
 
@@ -61,9 +65,9 @@ router.get('/oauth2/discord/callback', async (req, res) => {
             });
         const json = await response.json();
         if (!json.webhook) {
-            res.status(200).send("success");
+            res.redirect(state);
         } else {
-            res.status(201).send({ webhookId: json.webhook.id, webhookToken: json.webhook.token })
+            res.redirect(`${state}?webhookId=${webhookId}&webhookToken=${webhookToken}`)
         }
     } catch (err) {
         res.status(400).send(err);

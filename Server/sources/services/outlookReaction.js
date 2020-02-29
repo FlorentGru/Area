@@ -1,20 +1,6 @@
 const nodemailer = require('nodemailer');
 
-exports.react = async function(reaction) {
-    if (reaction.name === "sendTo") {
-        const param1 = reaction.params.find( ({name}) => name === "dest");
-        const param2 = reaction.params.find( ({name}) => name === "subject");
-        const param3 = reaction.params.find( ({name}) => name === "content");
-        if (!param1 || !param2 || !param3) {
-            console.log("Error missing param");
-            return;
-        }
-
-        await sendMail(param1.value, param2.value, param3.value);
-    }
-};
-
-const sendMail = async function(to, subject, content) {
+exports.sendMail = async function(to, subject, content) {
     let transporter = await nodemailer.createTransport({
         service: "outlook",
         secure: true,
@@ -23,6 +9,7 @@ const sendMail = async function(to, subject, content) {
             pass: "Hasherlesmdpcestpourlesnuls",
         }
     });
+    console.log("here");
     let info = await transporter.sendMail({
         from: '"AREA" <area.epitech.nantes.2022@outlook.fr>',
         to: to,
@@ -31,7 +18,7 @@ const sendMail = async function(to, subject, content) {
         html: `<p>${content}</p>`
     }, function(err, data) {
         if (err) {
-            console.log("Error Occurs");
+            console.log(err);
         } else {
             console.log("Email Sent !");
         }
