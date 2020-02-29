@@ -12,17 +12,27 @@ export async function alarm_clock(hours, minutes) {
     }
 }
 
-export async function countdown(hours, minutes) {
+export async function countdown_loop(hours, minutes) {
     var seconds = hours * 3600 + minutes * 60;
 
-    setInterval(decrement, seconds);
+    for (let i = 0; i < 1000; i++) {
+        setInterval(await (seconds = countdown(seconds)), 1000);
+    }
+}
+
+export async function countdown(seconds) {
+    setInterval((seconds = decrement(seconds)), 1000);
+    if (seconds === 0) {
+        return("ok: fin timer");
+    } else {
+        return (--seconds);
+    }
 }
 
 function decrement(second) {
-    second--;
     if (second === 0) {
-        console.log("OK: Fin Timer");
+        return ("OK: Fin Timer");
     } else {
-        console.log("OK: Error");
+        return (--second);
     }
 }

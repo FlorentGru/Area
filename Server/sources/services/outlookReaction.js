@@ -2,8 +2,12 @@ const nodemailer = require('nodemailer');
 
 exports.sendMail = async function(to, subject, content) {
     let transporter = await nodemailer.createTransport({
-        service: "outlook",
-        secure: true,
+        host: "smtp-mail.outlook.com",
+        secureConnection: false,
+        port: 587,
+        tls: {
+            ciphers:'SSLv3'
+        },
         auth: {
             user: "area.epitech.nantes.2022@outlook.fr",
             pass: "Hasherlesmdpcestpourlesnuls",
