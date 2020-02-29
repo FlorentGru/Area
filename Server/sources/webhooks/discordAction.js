@@ -17,7 +17,7 @@ client.on("ready", () => {
     trigger();
 });
 
-client.login('NjczODc4ODcyMjAyNDEyMDMz.XlPipg.0Rgg9yjhEu--NRl8tqeL8jsxB0M');
+client.login(process.env.DISCORD_BOT_SECRET);
 
 const restart = function () {
     client.destroy().then(() => {
@@ -26,7 +26,7 @@ const restart = function () {
             console.log('bot ready');
             trigger();
         });
-        client.login('NjczODc4ODcyMjAyNDEyMDMz.XlPipg.0Rgg9yjhEu--NRl8tqeL8jsxB0M');
+        client.login(process.env.DISCORD_BOT_SECRET);
     });
 };
 exports.restart = restart;
@@ -42,10 +42,9 @@ const trigger = function () {
         { "$unwind": "$areas" },
         { "$match": { "areas.action.service": "discord"} },
     ], function (err, res) {
-        if (err)
-            throw err;
+        if (err) throw err;
         res.forEach(function(area) {
-            console.log("discord action: " + area.areas.action.name);
+//            console.log("discord action: " + area.areas.action.name);
             if (area.areas.action.name === 'received') {
                 message(area)
             }
@@ -77,21 +76,19 @@ const message = function (area) {
 //        console.log(`Guild: ${message.guild.name}`);
 //        console.log(`Expected: ${param1.value}`);
         if (message.guild.name !== param1.value) {
-            console.log("wrong server")
+//            console.log("wrong server")
             return;
         }
 
         const channel = message.guild.channels.find(channel => channel.name === param2.value);
         if (!channel || channel.id !== message.channel.id) {
-            console.log("wrong channel");
+//            console.log("wrong channel");
             return;
         }
 //        console.log(`Channel: ${channel.name}`);
 //        console.log(`Expected: ${param2.value}`);
 
         if (message.content.startsWith(param3.value)) {
-            console.log(`triggered by ${message.content}`);
-            console.log(`Expected: ${param3.value}`);
             eventEmitter.emit('react', area.userId, area.areas.reaction);
         }
     });

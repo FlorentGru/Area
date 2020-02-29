@@ -24,29 +24,40 @@ const githubOAuth2 = require('node-github-oauth2');
  * @returns {Error} 401 - Unauthorized
  */
 router.get('/oauth2/github', auth, async (req, res) => {
+    try {
+        const callback = req.query.callback;
+        if (!callback) throw ("missing callback");
 
-    githubOAuth2.initialize({
-        clientId: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        redirectURI: `${process.env.SERVER_ADDRESS}/oauth2/github/callback`,
-        scope: 'public_repo',
-        gitDirectory: 'Users',
-        userAgent: "Area - Epitech Project"
-    });
-    console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
-    res.status(200).send(githubOAuth2.getRedirectURL(req.user.id.toString()));
+        githubOAuth2.initialize({
+            clientId: process.env.GITHUB_CLIENT_ID,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET,
+            redirectURI: `${process.env.SERVER_ADDRESS}/oauth2/github/callback`,
+            scope: 'public_repo',
+            gitDirectory: 'Users',
+            userAgent: "Area - Epitech Project"
+        });
+
+        const state = req.user.id.toString() + ' ' + callback;
+
+        console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
+        res.status(200).send(githubOAuth2.getRedirectURL(state));
+    } catch (err) {
+        res.status(400).send(err);
+    }
 });
 
 router.get('/oauth2/github/callback', githubOAuth2.getToken, async (req, res) => {
     try {
-        const userId = req.state;
+        const state = req.state.split(" ");
+        const userId = state[0];
+        const callback = state[1];
         const token = req.token;
         const service = "github";
 
         console.log(`token: ${token}`);
         await oauth.updateToken(userId, token, "", service);
 
-        res.status(200).send("success");
+        res.redirect(callback);
     } catch (err) {
         res.status(400).send(err);
     }

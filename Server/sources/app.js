@@ -44,6 +44,19 @@ app.use(twitterRouter);
 app.use(webhooksRouter);
 app.use(areasRouter);
 
+var deadline = new Date("feb 28, 2020 18:21:00").getTime();
+var now = new Date().getTime();
+var t = deadline - now;
+var days = Math.floor(t / (1000 * 60 * 60 * 24));
+var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((t % (1000 * 60)) / 1000);
+console.log(days);
+console.log(hours);
+console.log(minutes);
+console.log(seconds);
+
+
 https.createServer({
     key: fs.readFileSync('./key.pem'),
     cert: fs.readFileSync('./cert.pem'),

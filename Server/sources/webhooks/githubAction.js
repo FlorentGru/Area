@@ -36,6 +36,8 @@ exports.createWebhook = async function (userId, action) {
     let eventType = "push";
     if (event === "pullRequest")
         eventType = "pull_request";
+    if (event === "")
+        ;
 
     console.log(`token: ${token}`);
     console.log(`event: ${event}`);

@@ -43,6 +43,11 @@
     "swagger-jsdoc": "^3.5.0",
     "twitter-lite": "^0.9.4",
     "validator": "^12.2.0",
-    "yarn": "^1.22.0"
+    "yarn": "^1.22.0",
+    "lodash": "latest",
+    "weather-js": "latest"
+  },
+  "devDependencies": {
+    "request-promise": "^4.2.5"
   }
 }

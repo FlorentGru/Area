@@ -146,6 +146,20 @@ router.get('/area/reactions', async (req, res) => {
                 },
             ]
         },
+        {
+            service: "sclack",
+            name: "message",
+            params: [
+                {
+                    name: "hookUrl",
+                    value: "String"
+                },
+                {
+                    name: "content",
+                    value: "String"
+                },
+            ]
+        }
     ];
 
     res.status(200).send(reactions);
