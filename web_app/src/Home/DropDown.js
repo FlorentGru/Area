@@ -29,7 +29,7 @@ export default class DropDown extends React.Component {
             {
             this.state.show
                 ? (
-                <div>
+                <div z-index={10}>
                     <br/>
                     <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
                     <br/><br/><br/>

@@ -1,6 +1,14 @@
 import React from 'react';
 import DropDown from './DropDown'
 import GitHubAuth from '../APICalls/Github'
+import ActionReactionForm from './ActionReactionForm'
+import DiscordList from './ActionAndReactionLists/Discord'
+import GitHubList from './ActionAndReactionLists/GitHub'
+import GoogleCalendarList from './ActionAndReactionLists/GoogleCalendar'
+import InstagramList from './ActionAndReactionLists/Instagram'
+import MessengerList from './ActionAndReactionLists/Messenger'
+import OneDriveList from './ActionAndReactionLists/OneDrive'
+import OutlookList from './ActionAndReactionLists/Outlook'
 
 const token = localStorage.getItem("token")
 localStorage.setItem("discord", false)
@@ -30,6 +38,14 @@ export default class Home extends React.Component {
         this.callGitHub()
         return (
             <div>
+                <ActionReactionForm/>
+                <DiscordList/>
+                <GitHubList/>
+                <GoogleCalendarList/>
+                <InstagramList/>
+                <MessengerList/>
+                <OneDriveList/>
+                <OutlookList/>
                 <DropDown/>
                 <button className="disconnectButton" onClick={this.disconnect}>Disconnect</button>
             </div>

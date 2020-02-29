@@ -6,8 +6,8 @@ export default class InstagramForm extends React.Component {
     render() {
         return (
             <div>
-                <ListAction name="Instagram" type="Action" data={data.Instagram.actions}/>
-                <ListAction name="Instagram" type="Reaction" data={data.Instagram.reactions}/>
+                <ListAction top="40%" left="8%" name="Instagram" type="Action" data={data.Instagram.actions}/>
+                <ListAction top="40%" left="20%" name="Instagram" type="Reaction" data={data.Instagram.reactions}/>
             </div>
         )
     }

@@ -6,8 +6,8 @@ export default class OneDriveForm extends React.Component {
     render() {
         return (
             <div>
-                <ListAction name="OneDrive" type="Action" data={data.OneDrive.actions}/>
-                <ListAction name="OneDrive" type="Reaction" data={data.OneDrive.reactions}/>
+                <ListAction top="70%" left="8%" name="OneDrive" type="Action" data={data.OneDrive.actions}/>
+                <ListAction top="70%" left="20%" name="OneDrive" type="Reaction" data={data.OneDrive.reactions}/>
             </div>
         )
     }
