@@ -6,8 +6,8 @@ export default class MessengerForm extends React.Component {
     render() {
         return (
             <div>
-                <ListAction name="Messenger" type="Action" data={data.Messenger.actions}/>
-                <ListAction name="Messenger" type="Reaction" data={data.Messenger.reactions}/>
+                <ListAction top="40%" left="66%" name="Messenger" type="Action" data={data.Messenger.actions}/>
+                <ListAction top="40%" left="78%" name="Messenger" type="Reaction" data={data.Messenger.reactions}/>
             </div>
         )
     }
