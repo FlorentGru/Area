@@ -59,13 +59,13 @@ export default class LoginPage extends React.Component {
             <form onSubmit={this.mySumbitHandlerRegister} className="formStyle">
                 <input type="submit" value="Create New Account"/>
             </form>
-            <img src={logoDiscord} className="imgDiscord"></img>
-            <img src={logoGitHub} className="imgGitHub"></img>
-            <img src={logoGoogleCalendar} className="imgGoogleCalendar"></img>
-            <img src={logoInstagram} className="imgInstagram"></img>
-            <img src={logoMessenger} className="imgMessenger"></img>
-            <img src={logoOneDrive} className="imgOneDrive"></img>
-            <img src={logoOutlook} className="imgOutlook"></img>
+            <img src={logoDiscord} className="imgDiscord" alt=""></img>
+            <img src={logoGitHub} className="imgGitHub" alt=""></img>
+            <img src={logoGoogleCalendar} className="imgGoogleCalendar" alt=""></img>
+            <img src={logoInstagram} className="imgInstagram" alt=""></img>
+            <img src={logoMessenger} className="imgMessenger" alt=""></img>
+            <img src={logoOneDrive} className="imgOneDrive" alt=""></img>
+            <img src={logoOutlook} className="imgOutlook" alt=""></img>
             </div>
         );
     }

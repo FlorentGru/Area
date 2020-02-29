@@ -1,59 +1,30 @@
 {
-    "token": "",
-    "discord": {
-        "actions": {
-            "action": "action"
-        },
-        "reactions": {
-            "reaction": "reaction"
-        }
+    "Discord": {
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "GitHub" : {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "GoogleCalendar": {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "Instagram": {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "Messenger": {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "OneDrive": {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     },
     "Outlook": {
-        "actions": {
-
-        },
-        "reactions": {
-
-        }
+        "actions" : ["action1", "action2"],
+        "reactions" : ["reaction1", "reaction2"]
     }
 }
