@@ -6,29 +6,27 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 
-exports.updateToken = async function (userId, token, service) {
+exports.updateToken = async function (userId, accessToken, refreshToken, service) {
     const userTokens = await AccessTokens.findOne({ userId: mongoose.Types.ObjectId(userId)});
     if (!userTokens) {
         return;
     }
 
-    console.log(userTokens.tokens);
     const serviceToken = userTokens.tokens.find(({ service }) => service === service);
     if (!serviceToken) {
         const update = {
             $push: {
                 tokens: {
                     service: service,
-                    accessToken: token,
-                    refreshToken: ""
+                    accessToken: accessToken,
+                    refreshToken: refreshToken
                 }
             }
         };
 
         await userTokens.updateOne(update);
     } else {
-        console.log("ici");
-        const update = {$set: {'tokens.$[elem].accessToken': token, 'tokens.$[elem].refreshToken': ""}};
+        const update = {$set: {'tokens.$[elem].accessToken': accessToken, 'tokens.$[elem].refreshToken': refreshToken}};
         const options = {arrayFilters: [{'elem.service': service}]};
 
         await userTokens.updateOne(update, options);

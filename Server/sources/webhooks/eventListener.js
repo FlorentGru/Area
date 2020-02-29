@@ -11,13 +11,18 @@ const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
 const gmailR = require('../services/gmailReaction');
+const dropboxA = require('./dropboxAction');
 
-emitter.on('webhook', async function(userId, action) {
+emitter.on('webhook', async function(area) {
+    const userId = area.userId;
+    const action = area
     if (action.service === 'discord') {
         discordA.restart();
     }
     if (action.service === 'github') {
         await githubA.createWebhook(userId, action);
+    }
+    if (action.service === 'dropbox') {
     }
 });
 
@@ -29,6 +34,12 @@ emitter.on('react', async function(userId, reaction) {
     if (reaction.service === 'gmail') {
         await gmailR.react(reaction);
     }
+});
+
+emitter.on('dropbox', async function(body) {
+    const accoundId = body.list_folder.accounts[0];
+
+    dropboxA.updateActions(accoundId);
 });
 
 emitter.on('push', async function(body) {

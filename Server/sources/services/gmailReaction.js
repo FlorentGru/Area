@@ -31,5 +31,4 @@ const sendMail = async function(to, subject, content) {
         text: content,
         html: `<p>${content}</p>`,
     });
-    console.log(info);
 }
