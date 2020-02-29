@@ -215,5 +215,14 @@ router.post('/area/new', auth, oneOf([
     }
 });
 
+router.get('/about.json', async(req, res) => {
+    console.log(req.body);
+    let file = fs.readFileSync('../about.json');
+    let about = JSON.parse(file);
+    about.client.host = process.env.SERVER_ADDRESS;
+    about.server.current_time = Date.now();
+    console.log(JSON.stringify(about));
+    res.status(200).send('success');
+});
 
 module.exports = router;

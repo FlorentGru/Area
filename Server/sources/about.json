@@ -1,0 +1,62 @@
+{
+  "client": {
+    "host": "IP"
+  },
+  "server": {
+    "current_time": 1,
+    "services": [{
+      "name": "discord",
+      "actions": [{
+        "name": "receiveMessage",
+        "description": "Receive a message in any channel of a server"
+      }],
+      "reactions": [{
+        "name": "sendMessage",
+        "description": "Send a message in a special channel of a server"
+      }]
+    }, {
+      "name": "github",
+      "actions": [{
+        "name": "push",
+        "description": "Someone push on the repository"
+      }, {
+        "name": "pullRequest",
+        "description": "Someone make a pull request on the repository"
+      }],
+      "reactions": [{
+        "name": "createIssue",
+        "description": "Create an issue"
+      }]
+    }, {
+      "name": "gmail",
+      "actions": [],
+      "reactions": [{
+        "name": "sendMail",
+        "description": "Send a mail to someone"
+      }]
+    }, {
+      "name": "slack",
+      "actions": [],
+      "reactions": [{
+        "name": "send_message",
+        "description": "Send a message to special channel in a slack server"
+      }]
+    }, {
+      "name": "dropBox",
+      "actions": [{
+        "name": "create",
+        "description": "Someone create a files in the user's dropBox"
+      }, {
+        "name": "delete",
+        "description": "Someone delete a files in the user's dropBox"
+      }, {
+        "name": "rename",
+        "description": "Someone rename a files in the user's dropBox"
+      }, {
+        "name": "move",
+        "description": "Someone move a files in the user's dropBox"
+      }],
+      "reactions": []
+    }]
+  }
+}
