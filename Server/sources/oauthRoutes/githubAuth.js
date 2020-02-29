@@ -9,7 +9,7 @@ const AccessTokens = mongoose.model('AccessTokens');
 
 const router = express.Router();
 
-const oauth = require('./oauth2');
+const oauth = require('../models/updateToken');
 
 const githubOAuth2 = require('node-github-oauth2');
 
@@ -18,6 +18,7 @@ const githubOAuth2 = require('node-github-oauth2');
  * @route GET /oauth2/github
  * @operationId githubAuth
  * @group OAuth2 - service authentications
+ * @param {string} callback.query.required
  * @security JWT
  * @returns {string} 200 - redirect Url
  * @returns {Error} 401 - Unauthorized
@@ -32,7 +33,7 @@ router.get('/oauth2/github', auth, async (req, res) => {
         gitDirectory: 'Users',
         userAgent: "Area - Epitech Project"
     });
-
+    console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
     res.status(200).send(githubOAuth2.getRedirectURL(req.user.id.toString()));
 });
 
@@ -43,7 +44,7 @@ router.get('/oauth2/github/callback', githubOAuth2.getToken, async (req, res) =>
         const service = "github";
 
         console.log(`token: ${token}`);
-        await oauth.updateToken(userId, token, service);
+        await oauth.updateToken(userId, token, "", service);
 
         res.status(200).send("success");
     } catch (err) {

@@ -1,3 +1,59 @@
 .formStyle {
     text-align: center
 }
+
+.imgDiscord {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+}
+
+.imgGitHub {
+    width: 20%;
+    height: auto;
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+
+.imgGoogleCalendar {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    top: 60%;
+    left: 35%;
+}
+
+.imgInstagram {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    top: 60%;
+    left: 47%;
+}
+
+.imgMessenger {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    top: 60%;
+    left: 60%;
+}
+
+.imgOneDrive {
+    width: 15%;
+    height: auto;
+    position: absolute;
+    top: 40%;
+    left: 70%;
+}
+
+.imgOutlook {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    top: 20%;
+    left: 80%;
+}

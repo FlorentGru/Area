@@ -37,5 +37,4 @@ const sendMail = async function(to, subject, content) {
             console.log("Email Sent !");
         }
     });
-    console.log(info);
 };
