@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 exports.react = async function(reaction) {
     if (reaction.name === "sendTo") {
@@ -29,7 +29,13 @@ const sendMail = async function(to, subject, content) {
         to: to,
         subject: subject,
         text: content,
-        html: `<p>${content}</p>`,
+        html: `<p>${content}</p>`
+    }, function(err, data) {
+        if (err) {
+            console.log("Error Occurs");
+        } else {
+            console.log("Email Sent !");
+        }
     });
     console.log(info);
-}
+};
