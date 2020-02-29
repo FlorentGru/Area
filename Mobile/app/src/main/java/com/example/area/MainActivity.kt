@@ -1,6 +1,7 @@
 package com.example.area
 
 import android.animation.Animator
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity()
 {
@@ -44,7 +46,9 @@ class MainActivity : AppCompatActivity()
                 Request.Method.POST,url,jsonobj,
                     Response.Listener {
                         response ->
-                        Toast.makeText(this, response["success"].toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, navBar::class.java)
+                        startActivity(intent)
 
                     },Response.ErrorListener {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
