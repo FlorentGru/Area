@@ -18,11 +18,137 @@ const { body, oneOf, validationResult } = require('express-validator');
 const router = express.Router();
 
 router.get('/area/actions', async (req, res) => {
+    const actions = [
+        {
+            service: "discord",
+            name: "message",
+            params: [
+                {
+                    name: "server",
+                    value: "String"
+                },
+                {
+                    name: "channel",
+                    value: "String"
+                },
+                {
+                    name: "startWith",
+                    value: "String"
+                },
+            ]
+        },
+        {
+            service: "discord",
+            name: "mention",
+            params: [
+                {
+                    name: "server",
+                    value: "String"
+                },
+                {
+                    name: "channel",
+                    value: "String"
+                }
+            ]
+        },
+        {
+            service: "github",
+            name: "push",
+            params: [
+                {
+                    name: "owner",
+                    value: "String"
+                },
+                {
+                    name: "repo",
+                    value: "String"
+                }
+            ]
+        },
+        {
+            service: "github",
+            name: "pullRequest",
+            params: [
+                {
+                    name: "owner",
+                    value: "String"
+                },
+                {
+                    name: "repo",
+                    value: "String"
+                }
+            ]
+        },
+        {
+            service: "dropbox",
+            name: "delete",
+            params: [
+            ]
+        },
+        {
+            service: "dropbox",
+            name: "created",
+            params: [
+            ]
+        },
+        {
+            service: "dropbox",
+            name: "rename",
+            params: [
+            ]
+        },
+        {
+            service: "dropbox",
+            name: "path change",
+            params: [
+            ]
+        },
+    ];
 
+    res.status(200).send(actions);
 });
 
 router.get('/area/reactions', async (req, res) => {
+    const reactions = [
+        {
+            service: "discord",
+            name: "message",
+            params: [
+                {
+                    name: "webhookId",
+                    value: "String"
+                },
+                {
+                    name: "webhookToken",
+                    value: "String"
+                },
+                {
+                    name: "content",
+                    value: "String"
+                },
+            ]
+        },
+        {
+            service: "gmail",
+            name: "sendTo",
+            params: [
+                {
+                    name: "dest",
+                    value: "email"
+                },
+                {
+                    name: "subject",
+                    value: "String"
+                },
+                {
+                    name: "content",
+                    value: "String"
+                },
+            ]
+        },
+    ];
 
+    res.status(200).send(reactions);
 });
 
 /**
