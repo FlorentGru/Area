@@ -5,9 +5,9 @@ export default function ListAction(props) {
         <div>
             {props.name} {props.type}
             {props.data.map(item =>
-            <div key={item}>
-                <div>{item}</div>
-            </div>)}
+            <li key={item}>
+                {item}
+            </li>)}
         </div>
     );
 };
