@@ -4,13 +4,17 @@ The objective of this project is to create a business application by implementin
 The authenticated user can create some AREA in order to execute a REAction when an Action is found.
 
 ##Configuration
-
+Requires docker, docker-compose and ngrok
 ```bash
 docker-compose build
 ```
 &
 ```bash
 docker-compose up
+```
+&
+```bash
+ngrok http https://localhost:8080/
 ```
 
 ##Routes Api
