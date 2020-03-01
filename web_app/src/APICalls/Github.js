@@ -5,7 +5,7 @@ export default async function GitHubAuth(token) {
     try {
         const response = await axios({
             method: "get",
-            url: `${localStorage.getItem("address")}/oauth2/github?callback=http://localhost8080/home`,
+            url: `${localStorage.getItem("address")}/oauth2/github?callback=http://localhost:8081/home`,
             headers: {'Authorization': `Bearer ${token}`},
         });
         return (response.data.data)
