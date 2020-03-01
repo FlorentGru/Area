@@ -21,7 +21,6 @@ export default class DropDown extends React.Component {
         }
     }
 
-
     render() {
         return (
         <div>
@@ -31,8 +30,8 @@ export default class DropDown extends React.Component {
                 ? (
                 <div z-index={10}>
                     <br/>
-                    <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
-                    <br/><br/><br/>
+                    {/* <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
+                    <br/><br/><br/> */}
                     <a className="dropDownButton" href={localStorage.getItem("GitHubUrl")}> Connection GitHub</a>
                     <br/><br/><br/>
                     <a className="dropDownButton" href='/LoginGoogleCalendar'> Connection Google Calendar</a>
@@ -41,7 +40,7 @@ export default class DropDown extends React.Component {
                     <br/><br/><br/>
                     <a className="dropDownButton" href='/LoginMessenger'> Connection Messenger</a>
                     <br/><br/><br/>
-                    <a className="dropDownButton" href='/LoginOneDrive'> Connection OneDrive</a>
+                    <a className="dropDownButton" href='/LoginDropBox'> Connection DropBox</a>
                     <br/><br/><br/>
                     <a className="dropDownButton" href='/LoginOutlook'> Connection Outlook</a>
                 </div>) : (null)

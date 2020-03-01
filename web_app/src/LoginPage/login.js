@@ -6,7 +6,7 @@ import logoGitHub from '../logo/github.png'
 import logoGoogleCalendar from '../logo/googleCalendar.png'
 import logoInstagram from '../logo/instagram.png'
 import logoMessenger from '../logo/messenger.svg'
-import logoOneDrive from '../logo/onedrive.png'
+import logoDropBox from '../logo/dropbox.png'
 import logoOutlook from '../logo/outlook.jpg'
 
 export default class LoginPage extends React.Component {
@@ -64,7 +64,7 @@ export default class LoginPage extends React.Component {
             <img src={logoGoogleCalendar} className="imgGoogleCalendar" alt=""></img>
             <img src={logoInstagram} className="imgInstagram" alt=""></img>
             <img src={logoMessenger} className="imgMessenger" alt=""></img>
-            <img src={logoOneDrive} className="imgOneDrive" alt=""></img>
+            <img src={logoDropBox} className="imgDropBox" alt=""></img>
             <img src={logoOutlook} className="imgOutlook" alt=""></img>
             </div>
         );

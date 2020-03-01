@@ -19,7 +19,7 @@
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "OneDrive": {
+    "DropBox": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
