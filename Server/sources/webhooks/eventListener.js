@@ -35,7 +35,7 @@ emitter.on('react', async function(userId, reaction, param) {
     if (reaction.service === "discord") {
         console.log("react discord");
         discordR.react(reaction, param);
-    } else if (reaction.service === 'outlook' || reaction.service === 'gmail') {
+    } else if (reaction.service === 'zoho' || reaction.service === 'gmail') {
         console.log("mail reaction");
         await mailR.react(reaction, param);
     } else if (reaction.service === 'github') {
