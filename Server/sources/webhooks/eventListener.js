@@ -7,15 +7,17 @@ const AreActions = mongoose.model('AreActions');
 
 const emitter = require('./eventEmitter');
 
+const githubR = require('../services/githubReaction');
 const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
 const mailR = require('../services/mailReaction');
 const dropboxA = require('./dropboxAction');
 
-emitter.on('webhook', async function(area) {
-    const userId = area.userId;
-    const action = area
+emitter.setMaxListeners(0);
+
+emitter.on('webhook', async function(userId, action) {
+
     if (action.service === 'discord') {
         discordA.restart();
     }
@@ -26,14 +28,16 @@ emitter.on('webhook', async function(area) {
     }
 });
 
-emitter.on('react', async function(userId, reaction) {
+emitter.on('react', async function(userId, reaction, param) {
     if (reaction.service === "discord") {
         console.log("react discord");
         discordR.react(reaction);
-    }
-    if (reaction.service === 'outlook' || reaction.service === 'gmail') {
+    } else if (reaction.service === 'outlook' || reaction.service === 'gmail') {
         console.log("mail reaction");
         await mailR.react(reaction);
+    } else if (reaction.service === 'github') {
+        console.log("github reaction")
+        await githubR.react(userId, reaction, param);
     }
 });
 
