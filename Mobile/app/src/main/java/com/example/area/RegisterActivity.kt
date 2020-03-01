@@ -22,7 +22,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-
         registerBtn.setOnClickListener {
             val ipString = ipText.text.toString()
             val register = "/auth/register"
@@ -46,7 +45,6 @@ class RegisterActivity : AppCompatActivity() {
                 })
             que.add(req)
         }
-
         tvlogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

@@ -41,7 +41,6 @@ class ServiceFragment : Fragment() {
         @SerializedName ("params")
         var params: List<Param> = mutableListOf())
 
-    private var _baseUrl = ""
     private var _view: View? = null
     private lateinit var _buttongmail : Button
     private lateinit var _buttonzoho : Button
@@ -109,6 +108,7 @@ class ServiceFragment : Fragment() {
         _buttonDeletedDropbox.setOnClickListener {
             Action.service = DropboxService
             Action.service = DropboxNameDeleted
+            Toast.makeText(activity, DropboxService + DropboxNameDeleted, Toast.LENGTH_SHORT).show()
         }
         _buttonCreatedDropbox.setOnClickListener {
             Action.service = DropboxService
