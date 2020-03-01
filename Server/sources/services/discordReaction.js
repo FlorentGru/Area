@@ -16,7 +16,6 @@ exports.react = function(reaction, param) {
     if (reaction.name === "message") {
         const param1 = reaction.params.find(({ name }) => name === 'webhookId');
         const param2 = reaction.params.find(({ name }) => name === 'webhookToken');
-
         if (!param1 || !param2) {
             return;
         }
@@ -28,26 +27,4 @@ exports.react = function(reaction, param) {
         console.log("send message");
         sendMessage(param1.value, param2.value, param);
     }
-
-    if (reaction.name === "emoji") {
-
-    }
 };
-
-
-
-    /*axios.post(`https://discordapp.com/api/webhooks/${webhookId}/${webhookToken}`, {
-        content: content
-    }, {
-        headers: {
-            Authorization: `Bearer ${serviceTokens.accessToken}`
-        }
-    })
-        .then((res) => {
-            console.log(`statusCode: ${res.status}`)
-            //console.log(res)
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-};*/

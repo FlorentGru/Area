@@ -33,7 +33,7 @@ router.get('/oauth2/discord', auth, async (req, res) => {
     const callback = req.query.callback;
     let redirect = encodeURIComponent(`${process.env.SERVER_ADDRESS}/oauth2/discord/callback`);
     if ((!bot && !webhook) || !callback) {
-        res.status(400).send("Missing parameters")
+        res.status(400).send({error: "Missing parameters"});
     } else {
         let url = "";
         if ((webhook === "false") && (bot === "true")) {
@@ -43,7 +43,7 @@ router.get('/oauth2/discord', auth, async (req, res) => {
         } else {
             url = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=65600&redirect_uri=${redirect}&response_type=code&scope=webhook.incoming%20bot&state=${callback}`;
         }
-        res.status(200).send(url);
+        res.status(200).send({url});
     }
 });
 
@@ -67,7 +67,7 @@ router.get('/oauth2/discord/callback', async (req, res) => {
         if (!json.webhook) {
             res.redirect(state);
         } else {
-            res.redirect(`${state}?webhookId=${webhookId}&webhookToken=${webhookToken}`)
+            res.redirect(`${state}?webhookId=${json.webhook.id}&webhookToken=${json.webhook.token}`)
         }
     } catch (err) {
         res.status(400).send(err);

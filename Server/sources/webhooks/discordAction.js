@@ -48,7 +48,7 @@ const trigger = function () {
             if (err) throw err;
             res.forEach(function (area) {
 //            console.log("discord action: " + area.areas.action.name);
-                if (area.areas.action.name === 'received') {
+                if (area.areas.action.name === 'message') {
                     isMessage(area, message);
                 }
             });
@@ -58,11 +58,6 @@ const trigger = function () {
 exports.triggers = trigger;
 
 const isMessage = function (area, message) {
-    if (area.areas.action.params.length !== 3) {
-        console.log(`wrong number of parameters, expected: 3`)
-        return;
-    }
-
     const param1 = area.areas.action.params.find(({name}) => name === 'server');
     const param2 = area.areas.action.params.find(({name}) => name === 'channel');
     const param3 = area.areas.action.params.find(({name}) => name === 'startWith');
@@ -71,15 +66,13 @@ const isMessage = function (area, message) {
         return;
     }
 
-    // Ignore messages that aren't from a guild
     if (!message.guild) return;
-
     if (message.author.bot) return;
 
 //        console.log(`Guild: ${message.guild.name}`);
 //        console.log(`Expected: ${param1.value}`);
     if (message.guild.name !== param1.value) {
-//            console.log("wrong server")
+ //           console.log("wrong server")
         return;
     }
 
@@ -94,5 +87,7 @@ const isMessage = function (area, message) {
     if (message.content.startsWith(param3.value)) {
         const size = param3.value.length + 1;
         eventEmitter.emit('react', area.userId, area.areas.reaction, message.content.substring(size));
+    } else {
+        console.log("start with was: ", param3.value);
     }
 };

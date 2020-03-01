@@ -18,6 +18,63 @@ const fs = require('fs')
 
 const router = express.Router();
 
+/**
+ * @typedef Area
+ * @property {Action.model} action.required
+ * @property {Action.model} reaction.required
+ */
+/**
+ * new Action/REAction
+ * @route POST /area/new
+ * @operationId newArea
+ * @group Area - Project Core: Actions and REActions
+ * @security JWT
+ * @param {Area.model} area.body.required - new area
+ * @produces application/json
+ * @returns {string} 201 - Area created nothing to do
+ * @returns {Error} 401 - Unauthorized
+ * @returns {Error} default - Unexpected error
+ */
+router.post('/area/new', auth, oneOf([
+    body('action').exists(),
+    body('reaction').exists(),
+    body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
+    body('action.name').exists().isAlpha(),
+    body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
+    body('reaction.name').exists().isAlpha(),
+]), async(req, res) => {
+    try {
+        validationResult(req).throw();
+
+        const action = req.body.action;
+        const reaction = req.body.reaction;
+
+        const query = { userId: req.user.id };
+        const update = { $push: {
+                areas: {
+                    action: action,
+                    reaction: reaction
+                }
+            }};
+        await AreActions.findOneAndUpdate(query, update);
+
+        eventEmitter.emit('webhook', req.user.id, action, reaction);
+        res.status(201).send("Created :)");
+    } catch(err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+});
+
+/**
+ * get supported Actions
+ * @route POST /area/actions
+ * @operationId getActions
+ * @group Area - Project Core: Actions and REActions
+ * @produces application/json
+ * @returns {Array.<Action>} 200 - success
+ * @returns {Error} default - Unexpected error
+ */
 router.get('/area/actions', async (req, res) => {
     const actions = [
         {
@@ -145,6 +202,16 @@ router.get('/area/actions', async (req, res) => {
     res.status(200).send(actions);
 });
 
+
+/**
+ * get supported REActions
+ * @route POST /area/reactions
+ * @operationId getReactions
+ * @group Area - Project Core: Actions and REActions
+ * @produces application/json
+ * @returns {Array.<Action>} 200 - success
+ * @returns {Error} default - Unexpected error
+ */
 router.get('/area/reactions', async (req, res) => {
     const reactions = [
         {
@@ -180,68 +247,14 @@ router.get('/area/reactions', async (req, res) => {
             name: "message",
             params: [
                 {
-                    name: "hookUrl",
-                    value: "String"
-                },
-                {
-                    name: "content",
-                    value: "String"
-                },
+                    name: "hook",
+                    value: "url"
+                }
             ]
         }
     ];
 
     res.status(200).send(reactions);
-});
-
-/**
- * @typedef Area
- * @property {Action.model} action.required
- * @property {Action.model} reaction.required
- */
-/**
-* new Action/REAction
-* @route POST /area/new
-* @operationId newArea
-* @group Area - Project Core: Actions and REActions
-* @security JWT
-* @param {Area.model} area.body.required - new area
-* @produces application/json
-* @returns {string} 201 - Area created nothing to do
-* @returns {string} 200 - discord bot OAuth link (for discord action)
-* @returns {string} 300 - discord webhook OAuth link (for discord reaction)
-* @returns {Error} 401 - Unauthorized
-* @returns {Error} default - Unexpected error
-*/
-router.post('/area/new', auth, oneOf([
-    body('action').exists(),
-    body('reaction').exists(),
-    body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
-    body('action.name').exists().isAlpha(),
-    body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
-    body('reaction.name').exists().isAlpha(),
-]), async(req, res) => {
-    try {
-        validationResult(req).throw();
-
-        const action = req.body.action;
-        const reaction = req.body.reaction;
-
-        const query = { userId: req.user.id };
-        const update = { $push: {
-            areas: {
-                action: action,
-                reaction: reaction
-            }
-        }};
-        await AreActions.findOneAndUpdate(query, update);
-
-        eventEmitter.emit('webhook', req.user.id, action, reaction);
-        res.status(201).send("Created :)");
-    } catch(err) {
-        console.log(err);
-        res.status(400).send(err);
-    }
 });
 
 router.get('/about.json', async(req, res) => {

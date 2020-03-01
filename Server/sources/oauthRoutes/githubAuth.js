@@ -47,9 +47,9 @@ router.get('/oauth2/github', auth, async (req, res) => {
         const state = req.user.id.toString() + ' ' + callback;
 
         console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
-        res.status(200).send(githubOAuth2.getRedirectURL(state));
+        res.status(200).send({data: githubOAuth2.getRedirectURL(state)});
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send({error: err});
     }
 });
 

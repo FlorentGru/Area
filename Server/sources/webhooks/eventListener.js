@@ -7,13 +7,14 @@ const AreActions = mongoose.model('AreActions');
 
 const emitter = require('./eventEmitter');
 
+const slackR = require('../services/slackReaction');
 const githubR = require('../services/githubReaction');
 const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
 const mailR = require('../services/mailReaction');
 const dropboxA = require('./dropboxAction');
-const timer = require('./timerAction')
+const timer = require('./timerAction');
 
 emitter.on('webhook', async function(userId, action, reaction) {
 
@@ -40,6 +41,9 @@ emitter.on('react', async function(userId, reaction, param) {
     } else if (reaction.service === 'github') {
         console.log("github reaction");
         await githubR.react(userId, reaction, param);
+    } else if (reaction.service === 'slack') {
+        console.log('slack reaction');
+        await slackR.react(userId, reaction, param);
     }
 });
 
