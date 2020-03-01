@@ -34,15 +34,15 @@ export default class DropDown extends React.Component {
                     <br/><br/><br/> */}
                     <a className="dropDownButton" href={localStorage.getItem("GitHubUrl")}> Connection GitHub</a>
                     <br/><br/><br/>
-                    <a className="dropDownButton" href='/LoginGoogleCalendar'> Connection Google Calendar</a>
-                    <br/><br/><br/>
-                    <a className="dropDownButton" href='/LoginInstagram'> Connection Instagram</a>
-                    <br/><br/><br/>
-                    <a className="dropDownButton" href='/LoginMessenger'> Connection Messenger</a>
-                    <br/><br/><br/>
+                    {/* <a className="dropDownButton" href='/LoginGoogleCalendar'> Connection Google Calendar</a>
+                    <br/><br/><br/> */}
+                    {/* <a className="dropDownButton" href='/LoginInstagram'> Connection Instagram</a>
+                    <br/><br/><br/> */}
+                    {/* <a className="dropDownButton" href='/LoginMessenger'> Connection Messenger</a>
+                    <br/><br/><br/> */}
                     <a className="dropDownButton" href={localStorage.getItem("DropBoxUrl")}> Connection DropBox</a>
                     <br/><br/><br/>
-                    <a className="dropDownButton" href='/LoginOutlook'> Connection Outlook</a>
+                        {/* <a className="dropDownButton" href='/LoginOutlook'> Connection Outlook</a> */}
                 </div>) : (null)
             }
             <div></div>

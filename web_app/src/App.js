@@ -2,7 +2,6 @@ import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import LoginPage from './LoginPage/login'
 import Home from './Home/home'
-import About from './about'
 import RegisterPage from './LoginPage/Register'
 import DiscordForm from './Home/ActionAndReactionLists/Discord'
 import GitHubForm from './Home/ActionAndReactionLists/GitHub'
