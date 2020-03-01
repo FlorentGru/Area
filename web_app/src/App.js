@@ -4,7 +4,6 @@ import LoginPage from './LoginPage/login'
 import Home from './Home/home'
 import AddressPage from './Adress'
 import RegisterPage from './LoginPage/Register'
-import CreateAREA from './Home/Area'
 import DiscordForm from './Home/ActionAndReactionLists/Discord'
 import GitHubForm from './Home/ActionAndReactionLists/GitHub'
 import SlackForm from './Home/ActionAndReactionLists/Slack'
@@ -27,7 +26,6 @@ export default function App() {
       <Route path="/LoginZoho" component={ZohoForm}/>
       <Route path="/LoginDropBox" component={DropBoxForm}/>
       <Route path="/LoginGmail" component={GmailForm}/>
-      <Route path="/CreateAREA" component={CreateAREA}/>
     </Router>
   );
 }

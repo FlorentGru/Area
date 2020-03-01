@@ -1,6 +1,7 @@
 import React from 'react';
 import '../CSS/home.css'
-import { Redirect } from 'react-router-dom';
+import AreaCreation from '../APICalls/AreaCreation'
+// import { Redirect } from 'react-router-dom';
 
 const getParamAction = (service, action) =>
 {
@@ -8,10 +9,8 @@ const getParamAction = (service, action) =>
     let result = null;
 
     obj.forEach(element => {
-        if (element.service === service) {
-            if (element.name === action) {
-                result = element.params
-            }
+        if (element.name === action) {
+            result = element.params
         }
     });
     return (result)
@@ -22,10 +21,8 @@ const getParamReaction = (service, reaction) => {
     let result = null;
 
     obj.forEach(element => {
-        if (element.service === service) {
-            if (element.name === reaction) {
-                result = element.params
-            }
+        if (element.name === reaction) {
+            result = element.params
         }
     });
     return (result)
@@ -35,7 +32,7 @@ const getParamReaction = (service, reaction) => {
 export default class ActionReactionForm extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {service: null, action: null, reaction: null, valid: false}
+        this.state = {actionService: null, action: null, reactionService: null, reaction: null}
     }
 
     myChangeHandler = (event) => {
@@ -44,7 +41,7 @@ export default class ActionReactionForm extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    submitNewActionReaction = (event) => {
+    submitNewActionReaction = async (event) => {
         event.preventDefault()
         const paramAction = getParamAction(this.state.service, this.state.action)
         const paramReaction = getParamReaction(this.state.service, this.state.reaction)
@@ -52,22 +49,28 @@ export default class ActionReactionForm extends React.Component {
         localStorage.setItem("finalParamRaection", paramReaction);
         if (paramAction == null || paramReaction == null) {
             alert("action ou reaction inconnue")
-        } else {this.setState({valid: true})}
+        } else {
+            const response = await AreaCreation()
+            if (response === 200) {
+                alert("Area created")
+            } else {
+                alert("Error when creating Area")
+            }
+        }
     }
 
     render() {
         localStorage.setItem("parametersAction", [])
         localStorage.setItem("parametersReaction", [])
-        if (this.state.valid === true) {
-            return (<Redirect to='/CreateAREA'></Redirect>)
-        }
         return (
             <form className='formActionReaction' onSubmit={this.submitNewActionReaction}>
                 <p>Add an Area</p>
                 <p>The service</p>
-                <input type='text' name='service' required={true} onChange={this.myChangeHandler}/>
+                <input type='text' name='actionService' required={true} onChange={this.myChangeHandler}/>
                 <p>The action you want</p>
                 <input type='text' name='action' required={true} onChange={this.myChangeHandler}/>
+                <p>The service</p>
+                <input type='text' name='reactionService' required={true} onChange={this.myChangeHandler}/>
                 <p>The reaction you want</p>
                 <input type='text' name='reaction' required={true} onChange={this.myChangeHandler}/>
                 <br/><br/>
