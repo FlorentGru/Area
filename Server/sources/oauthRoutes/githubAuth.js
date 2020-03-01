@@ -44,7 +44,7 @@ router.get('/oauth2/github', auth, async (req, res) => {
             userAgent: "Area - Epitech Project"
         });
 
-        const state = req.user.id.toString() + '%20' + callback;
+        const state = req.user.id.toString() + ' ' + callback;
 
         console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
         res.status(200).send(githubOAuth2.getRedirectURL(state));

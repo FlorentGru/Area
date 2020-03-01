@@ -122,6 +122,10 @@ const getAction = async function (token, cursor, res) {
             action = 'created';
             name = result.entries[0].name + ' created in your Dropbox'
         }
+        else if (result.entries[0]['.tag'] === 'folder') {
+            action = 'createdFolder';
+            name = result.entries[0].name + ' folder created in your Dropbox'
+        }
         res(action, name, result.cursor);
     })
 };

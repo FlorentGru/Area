@@ -26,7 +26,7 @@ let dropbox = dropboxV2Api.authenticate({
  * @operationId dropboxAuth
  * @group OAuth2 - service authentications
  * @security JWT
- *
+ * @param {string} callback.query.required
  * @returns {string} 200 - redirect Url
  * @returns {Error} 401 - Unauthorized
  */
