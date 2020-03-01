@@ -14,6 +14,7 @@ const listener = require('../webhooks/eventListener');
 const discord = require('../webhooks/discordAction');
 const { body, oneOf, validationResult } = require('express-validator');
 
+const fs = require('fs')
 
 const router = express.Router();
 
@@ -217,12 +218,11 @@ router.post('/area/new', auth, oneOf([
 
 router.get('/about.json', async(req, res) => {
     console.log(req.body);
-    let file = fs.readFileSync('../about.json');
+    let file = fs.readFileSync("sources/about.json")
     let about = JSON.parse(file);
     about.client.host = process.env.SERVER_ADDRESS;
     about.server.current_time = Date.now();
-    console.log(JSON.stringify(about));
-    res.status(200).send('success');
+    res.status(200).send(about);
 });
 
 module.exports = router;

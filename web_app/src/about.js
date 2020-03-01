@@ -1,9 +1,14 @@
 import React from 'react';
+import JSONPretty from 'react-json-prettify';
+
 
 export default class About extends React.Component {
-    render () {
+    render() {
+        const json = localStorage.getItem("about")
+        console.log(json)
         return (
-            <h1>About</h1>
+            // <div>oui</div>
+            <JSONPretty json={json}/>
         )
     }
 }

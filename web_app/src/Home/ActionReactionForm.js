@@ -32,6 +32,7 @@ export default class ActionReactionForm extends React.Component {
                 <input type='text' name='reaction' required={true} onChange={this.myChangeHandler}/>
                 <br/><br/>
                 <input type='submit' value='Create a Area'/>
+                <input type='reset' value='reset fields'/>
             </form>
         )
     }

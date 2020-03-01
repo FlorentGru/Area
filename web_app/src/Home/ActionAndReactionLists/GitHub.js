@@ -4,7 +4,6 @@ import ListAction from './ListActions'
 
 export default class GitHubList extends React.Component {
     render() {
-        console.log("github coucou")
         return (
             <div>
                 <ListAction top="10%" left="37%" name="GitHub" type="Action" data={data.GitHub.actions}/>

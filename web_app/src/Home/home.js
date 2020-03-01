@@ -7,7 +7,7 @@ import GitHubList from './ActionAndReactionLists/GitHub'
 import GoogleCalendarList from './ActionAndReactionLists/GoogleCalendar'
 import InstagramList from './ActionAndReactionLists/Instagram'
 import MessengerList from './ActionAndReactionLists/Messenger'
-import OneDriveList from './ActionAndReactionLists/OneDrive'
+import DropBoxList from './ActionAndReactionLists/DropBox'
 import OutlookList from './ActionAndReactionLists/Outlook'
 
 const token = localStorage.getItem("token")
@@ -16,26 +16,26 @@ localStorage.setItem("github", false)
 localStorage.setItem("googlecalendar", false)
 localStorage.setItem("instagram", false)
 localStorage.setItem("messenger", false)
-localStorage.setItem("onedrive", false)
-localStorage.setItem("outlook", false)
+localStorage.setItem("DropBox", false)
+localStorage.setItem("Outlook", false)
+
+const setGitHubUrl = async () => {
+    const response = await GitHubAuth(token)
+    if (response !== 400) {
+        localStorage.setItem("GitHubUrl", response)
+    } else {
+        console.log("Can't connect to GitHub")
+    }
+}
+
+setGitHubUrl()
 
 export default class Home extends React.Component {
-
-    callGitHub = async () => {
-        const response = await GitHubAuth(token)
-        if (response !== 400) {
-            localStorage.setItem("GitHubUrl", response)
-        } else {
-            alert("Can't connect to GitHub")
-        }
-    }
-
     disconnect = () => {
         this.props.history.push("/")
     }
 
     render () {
-        this.callGitHub()
         return (
             <div>
                 <ActionReactionForm/>
@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                 <GoogleCalendarList/>
                 <InstagramList/>
                 <MessengerList/>
-                <OneDriveList/>
+                <DropBoxList/>
                 <OutlookList/>
                 <DropDown/>
                 <button className="disconnectButton" onClick={this.disconnect}>Disconnect</button>
