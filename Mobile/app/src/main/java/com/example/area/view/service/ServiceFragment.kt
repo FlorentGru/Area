@@ -9,11 +9,14 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+<<<<<<< HEAD
 import androidx.lifecycle.ViewModelProviders
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+=======
+>>>>>>> add webview to connect
 import com.example.area.R
 import com.example.area.Service_Reaction
 import kotlinx.android.synthetic.main.service.*

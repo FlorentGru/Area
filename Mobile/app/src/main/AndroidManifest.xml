@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WebViewActivity"/>
         <activity android:name=".navBar">
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Service_Reaction" />
     </application>
-
 </manifest>

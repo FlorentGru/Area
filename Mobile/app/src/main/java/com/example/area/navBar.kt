@@ -40,7 +40,6 @@ class navBar : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navbar)
 
-
         nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 

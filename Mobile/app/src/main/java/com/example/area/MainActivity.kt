@@ -16,6 +16,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.system.exitProcess
 
@@ -39,6 +40,12 @@ class MainActivity : AppCompatActivity()
             val login = "/auth/login"
             val url = "$_ipAddress$login"
 
+            val giveBaseUrl = JsonObjectRequest(
+                Request.Method.PUT,_ipAddress + "/config/address?address=" + _ipAddress,null,
+            Response.Listener{
+            }, Response.ErrorListener {
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                })
             jsonobj.put("email",emailEditText.text)
             jsonobj.put("password",passwordEditText.text)
 
@@ -47,15 +54,18 @@ class MainActivity : AppCompatActivity()
                 Request.Method.POST,url,jsonobj,
                     Response.Listener {
                         response ->
+                        val jsonObj : JSONObject = JSONObject(response.toString())
+                        val token = jsonObj.get("token").toString()
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, navBar::class.java)
+                        intent.putExtra("token", token)
                         intent.putExtra("baseUrl", _ipAddress)
-                        Toast.makeText(this, _ipAddress, Toast.LENGTH_SHORT).show()
                         startActivity(intent)
 
                     },Response.ErrorListener {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
                 })
+            que.add(giveBaseUrl)
             que.add(req)
         }
 

@@ -26,46 +26,6 @@
             </TextView>
 
             <Button
-                android:id="@+id/OneDrive"
-                android:gravity="center_vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                android:background="@color/blueDiscord"
-                android:textColor="@color/whiteFont"
-                android:layout_marginTop="40dp"
-                android:text="@string/OneDrive"/>
-
-            <Button
-                android:id="@+id/Messenger"
-                android:gravity="center_vertical"
-                android:background="@color/blueDiscord"
-                android:textColor="@color/whiteFont"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="40dp"
-                android:text="@string/Messenger" />
-
-            <Button
-                android:id="@+id/Outlook"
-                android:layout_width="fill_parent"
-                android:background="@color/blueDiscord"
-                android:textColor="@color/whiteFont"
-                android:gravity="center_vertical"
-                android:layout_height="150dp"
-                android:layout_marginTop="40dp"
-                android:text="@string/Outlook"/>
-
-            <Button
-                android:id="@+id/insta"
-                android:layout_width="fill_parent"
-                android:background="@color/blueDiscord"
-                android:textColor="@color/whiteFont"
-                android:gravity="center_vertical"
-                android:layout_height="150dp"
-                android:layout_marginTop="40dp"
-                android:text="@string/Insta" />
-
-            <Button
                 android:id="@+id/github"
                 android:layout_width="fill_parent"
                 android:background="@color/blueDiscord"
@@ -76,24 +36,14 @@
                 android:text="@string/GitHub" />
 
             <Button
-                android:id="@+id/Discord"
+                android:id="@+id/dropBox"
                 android:layout_width="fill_parent"
                 android:background="@color/blueDiscord"
                 android:textColor="@color/whiteFont"
                 android:gravity="center_vertical"
                 android:layout_height="150dp"
                 android:layout_marginTop="40dp"
-                android:text="@string/Discord" />
-
-            <Button
-                android:id="@+id/Calendargoogle"
-                android:gravity="center_vertical"
-                android:background="@color/blueDiscord"
-                android:textColor="@color/whiteFont"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="40dp"
-                android:text="@string/CalendarGoogle" />
+                android:text="@string/Dropbox" />
 
         </LinearLayout>
     </ScrollView>
