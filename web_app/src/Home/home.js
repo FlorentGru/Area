@@ -15,14 +15,6 @@ import GmailList from './ActionAndReactionLists/Gmail'
 
 const token = localStorage.getItem("token")
 
-localStorage.setItem("discord", false)
-localStorage.setItem("github", false)
-localStorage.setItem("Slack", false)
-localStorage.setItem("Timer", false)
-localStorage.setItem("Zoho", false)
-localStorage.setItem("DropBox", false)
-localStorage.setItem("Gmail", false)
-
 const setGitHubUrl = async () => {
     const response = await GitHubAuth(token)
     if (response !== 400) {

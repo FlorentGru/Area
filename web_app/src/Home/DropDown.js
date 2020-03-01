@@ -1,6 +1,12 @@
 import React from 'react';
 import '../CSS/home.css'
 
+const axios = require('axios').default
+const token = localStorage.getItem("token")
+
+localStorage.setItem("github", false)
+localStorage.setItem("dropbox", false)
+
 export default class DropDown extends React.Component {
     constructor(props) {
         super(props);
@@ -29,20 +35,11 @@ export default class DropDown extends React.Component {
             this.state.show
                 ? (
                 <div z-index={10}>
-                    <br/>
-                    {/* <a className="dropDownButton" href='/LoginDiscord'> Connection Discord</a>
-                    <br/><br/><br/> */}
+                <br/>
                     <a className="dropDownButton" href={localStorage.getItem("GitHubUrl")}> Connection GitHub</a>
                     <br/><br/><br/>
-                    {/* <a className="dropDownButton" href='/LoginSlack'> Connection Google Calendar</a>
-                    <br/><br/><br/> */}
-                    {/* <a className="dropDownButton" href='/LoginTimer'> Connection Timer</a>
-                    <br/><br/><br/> */}
-                    {/* <a className="dropDownButton" href='/LoginZoho'> Connection Zoho</a>
-                    <br/><br/><br/> */}
                     <a className="dropDownButton" href={localStorage.getItem("DropBoxUrl")}> Connection DropBox</a>
                     <br/><br/><br/>
-                        {/* <a className="dropDownButton" href='/LoginGmail'> Connection Gmail</a> */}
                 </div>) : (null)
             }
             <div></div>
