@@ -13,10 +13,9 @@ const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
 const mailR = require('../services/mailReaction');
 const dropboxA = require('./dropboxAction');
+const timer = require('./timerAction')
 
-emitter.setMaxListeners(0);
-
-emitter.on('webhook', async function(userId, action) {
+emitter.on('webhook', async function(userId, action, reaction) {
 
     if (action.service === 'discord') {
         discordA.restart();
@@ -25,6 +24,9 @@ emitter.on('webhook', async function(userId, action) {
         await githubA.createWebhook(userId, action);
     }
     if (action.service === 'dropbox') {
+    }
+    if (action.service === 'timer') {
+       await timer.act(userId, action, reaction);
     }
 });
 

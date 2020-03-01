@@ -81,6 +81,42 @@ router.get('/area/actions', async (req, res) => {
             ]
         },
         {
+            service: "timer",
+            name: "countdown",
+            params: [
+                {
+                    name: "hours",
+                    value: "integer"
+                },
+                {
+                    name: "minutes",
+                    value: "integer"
+                },
+                {
+                    name: "message",
+                    value: "String"
+                }
+            ]
+        },
+        {
+            service: "timer",
+            name: "loop",
+            params: [
+                {
+                    name: "hours",
+                    value: "integer"
+                },
+                {
+                    name: "minutes",
+                    value: "integer"
+                },
+                {
+                    name: "message",
+                    value: "String"
+                }
+            ]
+        },
+        {
             service: "dropbox",
             name: "deleted",
             params: [
@@ -122,11 +158,7 @@ router.get('/area/reactions', async (req, res) => {
                 {
                     name: "webhookToken",
                     value: "String"
-                },
-                {
-                    name: "content",
-                    value: "String"
-                },
+                }
             ]
         },
         {
@@ -140,11 +172,7 @@ router.get('/area/reactions', async (req, res) => {
                 {
                     name: "subject",
                     value: "String"
-                },
-                {
-                    name: "content",
-                    value: "String"
-                },
+                }
             ]
         },
         {
@@ -208,7 +236,7 @@ router.post('/area/new', auth, oneOf([
         }};
         await AreActions.findOneAndUpdate(query, update);
 
-        eventEmitter.emit('webhook', req.user.id, action);
+        eventEmitter.emit('webhook', req.user.id, action, reaction);
         res.status(201).send("Created :)");
     } catch(err) {
         console.log(err);
