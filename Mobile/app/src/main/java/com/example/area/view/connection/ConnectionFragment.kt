@@ -12,7 +12,7 @@ import com.example.area.presenter.ConnectionCallback
 import com.example.area.WebViewActivity
 
 class ConnectionFragment() : Fragment() {
-    private var _baseUrl= ""
+    private lateinit var _baseUrl :String
     private var _connectionCallback = ConnectionCallback(this)
     private var _view : View? = null
     private lateinit var _buttonGithub :Button

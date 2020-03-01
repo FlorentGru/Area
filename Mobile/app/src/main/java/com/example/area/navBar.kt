@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.navbar.*
 
 class navBar : AppCompatActivity()
 {
+    var base_url : String = ""
+
     companion object {
         var addr: String? = ""
     }
@@ -39,12 +41,11 @@ class navBar : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navbar)
-
         nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    private fun replaceFragment(fragment: Fragment){
-
+    private fun replaceFragment(fragment: Fragment)
+    {
         val fragmentTransaction = this.supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
         fragmentTransaction.addToBackStack(null)
