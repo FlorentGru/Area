@@ -8,7 +8,7 @@
       "name": "discord",
       "actions": [{
         "name": "receiveMessage",
-        "description": "Receive a message in any channel of a server"
+        "description": "Receive a message in any channel of a server when he start with our parameter"
       }],
       "reactions": [{
         "name": "sendMessage",
@@ -53,10 +53,30 @@
         "name": "rename",
         "description": "Someone rename a files in the user's dropBox"
       }, {
+        "name": "createFolder",
+        "description": "Someone create a folder in the user's dropBox"
+      }, {
         "name": "move",
         "description": "Someone move a files in the user's dropBox"
       }],
       "reactions": []
+    }, {
+      "name": "timer",
+      "actions": [{
+        "name": "countdown",
+        "description": "Active X min after the start"
+      }, {
+        "name": "loop",
+        "description": "Active X min after the start and its repeat every time"
+      }],
+      "reactions": []
+    }, {
+      "name": "zoho",
+      "actions": [],
+      "reactions": [{
+        "name": "sendMail",
+        "description": "Send a mail to someone"
+      }]
     }]
   }
 }
