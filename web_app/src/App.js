@@ -5,11 +5,11 @@ import Home from './Home/home'
 import RegisterPage from './LoginPage/Register'
 import DiscordForm from './Home/ActionAndReactionLists/Discord'
 import GitHubForm from './Home/ActionAndReactionLists/GitHub'
-import GoogleCalendarForm from './Home/ActionAndReactionLists/GoogleCalendar'
+import SlackForm from './Home/ActionAndReactionLists/Slack'
 import InstagramForm from './Home/ActionAndReactionLists/Instagram'
 import MessengerForm from './Home/ActionAndReactionLists/Messenger'
 import DropBoxForm from './Home/ActionAndReactionLists/DropBox'
-import OutlookForm from './Home/ActionAndReactionLists/Outlook'
+import GmailForm from './Home/ActionAndReactionLists/Gmail'
 
 export default function App() {
   return (
@@ -19,11 +19,11 @@ export default function App() {
       <Route path="/Register" component={RegisterPage}/>
       <Route path="/LoginDiscord" component={DiscordForm}/>
       <Route path="/LoginGitHub" component={GitHubForm}/>
-      <Route path="/LoginGoogleCalendar" component={GoogleCalendarForm}/>
+      <Route path="/LoginSlack" component={SlackForm}/>
       <Route path="/LoginInstagram" component={InstagramForm}/>
       <Route path="/LoginMessenger" component={MessengerForm}/>
       <Route path="/LoginDropBox" component={DropBoxForm}/>
-      <Route path="/LoginOutlook" component={OutlookForm}/>
+      <Route path="/LoginGmail" component={GmailForm}/>
     </Router>
   );
 }

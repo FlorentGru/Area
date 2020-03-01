@@ -7,7 +7,7 @@
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "GoogleCalendar": {
+    "Slack": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
@@ -23,7 +23,7 @@
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Outlook": {
+    "Gmail": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     }

@@ -7,21 +7,21 @@ import DropBoxAuth from '../APICalls/DropBox'
 import ActionReactionForm from './ActionReactionForm'
 import DiscordList from './ActionAndReactionLists/Discord'
 import GitHubList from './ActionAndReactionLists/GitHub'
-import GoogleCalendarList from './ActionAndReactionLists/GoogleCalendar'
+import SlackList from './ActionAndReactionLists/Slack'
 import InstagramList from './ActionAndReactionLists/Instagram'
 import MessengerList from './ActionAndReactionLists/Messenger'
 import DropBoxList from './ActionAndReactionLists/DropBox'
-import OutlookList from './ActionAndReactionLists/Outlook'
+import GmailList from './ActionAndReactionLists/Gmail'
 
 const token = localStorage.getItem("token")
 
 localStorage.setItem("discord", false)
 localStorage.setItem("github", false)
-localStorage.setItem("googlecalendar", false)
+localStorage.setItem("Slack", false)
 localStorage.setItem("instagram", false)
 localStorage.setItem("messenger", false)
 localStorage.setItem("DropBox", false)
-localStorage.setItem("Outlook", false)
+localStorage.setItem("Gmail", false)
 
 const setGitHubUrl = async () => {
     const response = await GitHubAuth(token)
@@ -75,11 +75,11 @@ export default class Home extends React.Component {
                 <ActionReactionForm/>
                 <DiscordList/>
                 <GitHubList/>
-                <GoogleCalendarList/>
+                <SlackList/>
                 <InstagramList/>
                 <MessengerList/>
                 <DropBoxList/>
-                <OutlookList/>
+                <GmailList/>
                 <DropDown/>
                 <button className="disconnectButton" onClick={this.disconnect}>Disconnect</button>
             </div>
