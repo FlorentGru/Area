@@ -16,8 +16,6 @@ const slackRouter = require('./oauthRoutes/slackAuth');
 const webhooksRouter = require('./routers/endpoints');
 const areasRouter = require('./routers/areas');
 
-/*const passport = require('passport');
-const passportInit = require('./services/passportsInit');*/
 
 const cors = require('cors');
 const port = process.env.PORT;
@@ -30,8 +28,6 @@ app.use(bodyParser.raw());
 app.use(bodyParser.urlencoded({ extended:true}));
 app.use(express.json());
 
-/*app.use(passport.initialize());
-passportInit();*/
 
 swagger(require('./swagger'));
 
