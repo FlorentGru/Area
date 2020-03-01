@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const gmail = require('./gmailReaction');
-const outlook = require('./outlookReaction');
+const zoho = require('./zohoReaction');
 
 exports.react = async function(reaction, param) {
     if (reaction.name === "sendTo") {
@@ -18,7 +18,7 @@ exports.react = async function(reaction, param) {
         if (reaction.service === "gmail") {
             await gmail.sendMail(param1.value, param2.value, param);
         } else {
-            await outlook.sendMail(param1.value, param2.value, param);
+            await zoho.sendMail(param1.value, param2.value, param);
         }
     }
 };

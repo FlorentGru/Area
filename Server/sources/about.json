@@ -8,20 +8,20 @@
       "name": "discord",
       "actions": [{
         "name": "receiveMessage",
-        "description": "Receive a message in any channel of a server when he start with our parameter"
+        "description": "Receive a message in any channel of a server when he starts with our parameter"
       }],
       "reactions": [{
         "name": "sendMessage",
-        "description": "Send a message in a special channel of a server"
+        "description": "Send a message in a specific channel of a server"
       }]
     }, {
       "name": "github",
       "actions": [{
         "name": "push",
-        "description": "Someone push on the repository"
+        "description": "Someone pushes on the repository"
       }, {
         "name": "pullRequest",
-        "description": "Someone make a pull request on the repository"
+        "description": "Someone makes a pull request on the repository"
       }],
       "reactions": [{
         "name": "createIssue",
@@ -39,35 +39,35 @@
       "actions": [],
       "reactions": [{
         "name": "send_message",
-        "description": "Send a message to special channel in a slack server"
+        "description": "Send a message to specific channel in a slack server"
       }]
     }, {
       "name": "dropBox",
       "actions": [{
         "name": "create",
-        "description": "Someone create a files in the user's dropBox"
+        "description": "Someone creates a file in the user's dropBox"
       }, {
         "name": "delete",
-        "description": "Someone delete a files in the user's dropBox"
+        "description": "Someone deletes a file in the user's dropBox"
       }, {
         "name": "rename",
-        "description": "Someone rename a files in the user's dropBox"
+        "description": "Someone renames a file in the user's dropBox"
       }, {
         "name": "createFolder",
-        "description": "Someone create a folder in the user's dropBox"
+        "description": "Someone creates a folder in the user's dropBox"
       }, {
         "name": "move",
-        "description": "Someone move a files in the user's dropBox"
+        "description": "Someone moves a file in the user's dropBox"
       }],
       "reactions": []
     }, {
       "name": "timer",
       "actions": [{
         "name": "countdown",
-        "description": "Active X min after the start"
+        "description": "Triggers X min after the start"
       }, {
         "name": "loop",
-        "description": "Active X min after the start and its repeat every time"
+        "description": "Triggers X min after the start and it infinitely"
       }],
       "reactions": []
     }, {
