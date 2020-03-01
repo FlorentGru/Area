@@ -41,7 +41,7 @@ router.get('/oauth2/dropbox', auth, async (req, res) => {
             redirect_uri: `${process.env.SERVER_ADDRESS}/oauth2/dropbox/callback`,
         });
 
-        res.status(200).send(dropbox.generateAuthUrl() + `&state=${req.user.id.toString()} ${callback}`);
+        res.status(200).send(dropbox.generateAuthUrl() + `&state=${req.user.id.toString()}%20${callback}`);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -55,7 +55,7 @@ router.get('/oauth2/dropbox/callback', async function(req, res) {
 
             console.log('user\'s access_token: ', result.access_token);
 
-            const state = req.state.split(" ");
+            const state = params.state.split(" ");
             const userId = state[0];
             const callback = state[1];
             const token = result.access_token;
