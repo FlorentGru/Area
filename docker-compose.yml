@@ -17,6 +17,8 @@ services:
             - 8080:8080
         networks: 
             - app-network
+        links:
+            - db
 
     mobile_client:
         build:
@@ -33,10 +35,15 @@ services:
             dockerfile: Dockerfile
         image: web_client
         ports: 
-            - 8080:8080
+            - 8081:8081
         depends_on: 
             - mobile_client
             - api
+
+    db:
+        image: "mongo"
+        ports:
+            - "27017:27017"
 
 networks:
     app-network:
