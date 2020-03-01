@@ -21,6 +21,8 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity()
 {
+    lateinit var _ipAddress : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,9 +35,9 @@ class MainActivity : AppCompatActivity()
         val jsonobj = JSONObject()
 
         loginButton.setOnClickListener {
-            val ipAddress = ipEditText.text.toString()
+            _ipAddress = ipEditText.text.toString()
             val login = "/auth/login"
-            val url = "$ipAddress$login"
+            val url = "$_ipAddress$login"
 
             jsonobj.put("email",emailEditText.text)
             jsonobj.put("password",passwordEditText.text)
@@ -47,7 +49,8 @@ class MainActivity : AppCompatActivity()
                         response ->
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, navBar::class.java)
-                        intent.putExtra("url", ipAddress)
+                        intent.putExtra("baseUrl", _ipAddress)
+                        Toast.makeText(this, _ipAddress, Toast.LENGTH_SHORT).show()
                         startActivity(intent)
 
                     },Response.ErrorListener {

@@ -1,10 +1,12 @@
 package com.example.area.view.connection
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.area.R
 import com.example.area.presenter.ConnectionCallback
@@ -13,17 +15,14 @@ class ConnectionFragment() : Fragment() {
     private var _baseUrl= ""
     private var _connectionCallback = ConnectionCallback(this)
     private var _view : View? = null
-    private lateinit var _buttonGithub :Button;
+    private lateinit var _buttonGithub :Button
     var webViewToCall = ""
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _view = inflater.inflate(R.layout.connection, container, false)
-
+        _baseUrl = activity?.intent?.getStringExtra("baseUrl")!!
+        Toast.makeText(activity, _baseUrl, Toast.LENGTH_SHORT).show()
         if(arguments?.getString("str") != null) {
             val str = arguments?.getString("str")
             println(str)

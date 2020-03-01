@@ -10,7 +10,7 @@ class apiClient() {
                 .baseUrl(base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            return retrofit;
+            return retrofit
         }
     }
 }
