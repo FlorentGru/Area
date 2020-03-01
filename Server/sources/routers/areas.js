@@ -14,7 +14,7 @@ const listener = require('../webhooks/eventListener');
 const discord = require('../webhooks/discordAction');
 const { body, oneOf, validationResult } = require('express-validator');
 
-const fs = require('fs')
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -259,7 +259,7 @@ router.get('/area/reactions', async (req, res) => {
 
 router.get('/about.json', async(req, res) => {
     console.log(req.body);
-    let file = fs.readFileSync("sources/about.json")
+    let file = fs.readFileSync("sources/about.json");
     let about = JSON.parse(file);
     about.client.host = process.env.SERVER_ADDRESS;
     about.server.current_time = Date.now();
