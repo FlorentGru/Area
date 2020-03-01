@@ -18,7 +18,7 @@ exports.sendMail = async function(to, subject, content) {
         html: `<p>${content}</p>`
     }, function(err, data) {
         if (err) {
-            console.log("Error Occurs");
+            console.log(err);
         } else {
             console.log("Email Sent !");
         }

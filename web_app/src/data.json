@@ -7,23 +7,23 @@
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "GoogleCalendar": {
+    "Slack": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Instagram": {
+    "Timer": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Messenger": {
+    "Zoho": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "OneDrive": {
+    "DropBox": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Outlook": {
+    "Gmail": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     }

@@ -12,6 +12,8 @@ const listener = require('../webhooks/eventListener');
 
 let client = new Discord.Client();
 
+client.setMaxListeners(0);
+
 client.on("ready", () => {
     console.log('bot ready');
     trigger();
@@ -32,64 +34,65 @@ const restart = function () {
 exports.restart = restart;
 
 const trigger = function () {
-    AreActions.aggregate([
-        {
-            "$project": {
-                "_id": 1,
-                "areas": 1
-            }
-        },
-        { "$unwind": "$areas" },
-        { "$match": { "areas.action.service": "discord"} },
-    ], function (err, res) {
-        if (err) throw err;
-        res.forEach(function(area) {
+    client.on('message', message => {
+        AreActions.aggregate([
+            {
+                "$project": {
+                    "userId": 1,
+                    "areas": 1
+                }
+            },
+            {"$unwind": "$areas"},
+            {"$match": {"areas.action.service": "discord"}},
+        ], function (err, res) {
+            if (err) throw err;
+            res.forEach(function (area) {
 //            console.log("discord action: " + area.areas.action.name);
-            if (area.areas.action.name === 'received') {
-                message(area)
-            }
+                if (area.areas.action.name === 'received') {
+                    isMessage(area, message);
+                }
+            });
         });
     });
 };
 exports.triggers = trigger;
 
-const message = function (area) {
+const isMessage = function (area, message) {
     if (area.areas.action.params.length !== 3) {
         console.log(`wrong number of parameters, expected: 3`)
         return;
     }
 
-    const param1 = area.areas.action.params.find(({ name }) => name === 'server');
-    const param2 = area.areas.action.params.find(({ name }) => name === 'channel');
-    const param3 = area.areas.action.params.find(({ name }) => name === 'startWith');
+    const param1 = area.areas.action.params.find(({name}) => name === 'server');
+    const param2 = area.areas.action.params.find(({name}) => name === 'channel');
+    const param3 = area.areas.action.params.find(({name}) => name === 'startWith');
     if (!param1 || !param2 || !param3) {
         console.log("wrong parameters")
         return;
     }
 
-    client.on('message', message => {
-        // Ignore messages that aren't from a guild
-        if (!message.guild) return;
+    // Ignore messages that aren't from a guild
+    if (!message.guild) return;
 
-        if (message.author.bot) return;
+    if (message.author.bot) return;
 
 //        console.log(`Guild: ${message.guild.name}`);
 //        console.log(`Expected: ${param1.value}`);
-        if (message.guild.name !== param1.value) {
+    if (message.guild.name !== param1.value) {
 //            console.log("wrong server")
-            return;
-        }
+        return;
+    }
 
-        const channel = message.guild.channels.find(channel => channel.name === param2.value);
-        if (!channel || channel.id !== message.channel.id) {
+    const channel = message.guild.channels.find(channel => channel.name === param2.value);
+    if (!channel || channel.id !== message.channel.id) {
 //            console.log("wrong channel");
-            return;
-        }
+        return;
+    }
 //        console.log(`Channel: ${channel.name}`);
 //        console.log(`Expected: ${param2.value}`);
 
-        if (message.content.startsWith(param3.value)) {
-            eventEmitter.emit('react', area.userId, area.areas.reaction);
-        }
-    });
+    if (message.content.startsWith(param3.value)) {
+        const size = param3.value.length + 1;
+        eventEmitter.emit('react', area.userId, area.areas.reaction, message.content.substring(size));
+    }
 };

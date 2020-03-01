@@ -76,8 +76,9 @@ const isTriggered = function (accountId, accessToken, cursor, userId) {
             if (err) throw err;
             res.forEach(function(area) {
                 console.log("dropbox action: " + area.areas.action.name);
+
                 if (area.areas.action.name === tag) {
-                    eventEmitter.emit('react', area.userId, area.areas.reaction);
+                    eventEmitter.emit('react', area.userId, area.areas.reaction, reactContent);
                 }
             });
         });
@@ -105,21 +106,25 @@ const getAction = async function (token, cursor, res) {
         }
         else if (result.entries.length === 2 && result.entries[0]['.tag'] === 'deleted' && result.entries[1]['.tag'] === 'file') {
             if (result.entries[0].name === result.entries[1].name) {
-                action = 'rename';
-                name = result.entries[0].name + ' name change to ' + result.entries[1].name
+                action = 'renamed';
+                name = result.entries[0].name + ' name changed to ' + result.entries[1].name + " in your Dropbox"
             }
             else {
-                action = 'path change';
-                name = result.entries[0].path_lower + ' change to ' + result.entries[1].path_lower
+                action = 'path changed';
+                name = result.entries[0].path_lower + ' changed to ' + result.entries[1].path_lower + " in your Dropbox"
             }
         }
         else if (result.entries[0]['.tag'] === 'deleted') {
             action = 'deleted';
-            name = result.entries[0].name + ' deleted'
+            name = result.entries[0].name + ' deleted in your Dropbox'
         }
         else if (result.entries[0]['.tag'] === 'file') {
             action = 'created';
-            name = result.entries[0].name + ' created'
+            name = result.entries[0].name + ' created in your Dropbox'
+        }
+        else if (result.entries[0]['.tag'] === 'folder') {
+            action = 'createdFolder';
+            name = result.entries[0].name + ' folder created in your Dropbox'
         }
         res(action, name, result.cursor);
     })

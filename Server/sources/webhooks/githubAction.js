@@ -17,7 +17,6 @@ exports.createWebhook = async function (userId, action) {
         console.log("user not connected to service");
         return;
     }
-    console.log(tokens);
     const token = tokens.accessToken;
 
     const event = action.name;
@@ -36,8 +35,6 @@ exports.createWebhook = async function (userId, action) {
     let eventType = "push";
     if (event === "pullRequest")
         eventType = "pull_request";
-    if (event === "")
-        ;
 
     console.log(`token: ${token}`);
     console.log(`event: ${event}`);
@@ -65,7 +62,7 @@ exports.createWebhook = async function (userId, action) {
         });
 };
 
-exports.trigger = function(repo, owner, event) {
+exports.trigger = function(repo, owner, event, message) {
     AreActions.aggregate([
         {
             "$project": {
@@ -79,21 +76,21 @@ exports.trigger = function(repo, owner, event) {
         if (err)
             throw err;
         res.forEach(function(area) {
-            console.log("github action: " + area.areas.action.name);
             if (area.areas.action.name === event) {
-                checkParams(repo, owner, area);
+                console.log("github action: " + area.areas.action.name);
+                checkParams(repo, owner, area, message);
             }
         });
     });
 };
 
-const checkParams = function (repo, owner, area) {
+const checkParams = function (repo, owner, area, message) {
     const param1 = area.areas.action.params.find(({ name }) => name === 'owner');
     const param2 = area.areas.action.params.find(({ name }) => name === 'repo');
 
     if (!param1 || !param2) return;
 
     if (param1.value === owner && param2.value === repo) {
-        eventEmitter.emit('react', area.userId, area.areas.reaction);
+        eventEmitter.emit('react', area.userId, area.areas.reaction, message);
     }
 };

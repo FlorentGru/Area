@@ -14,6 +14,7 @@ const listener = require('../webhooks/eventListener');
 const discord = require('../webhooks/discordAction');
 const { body, oneOf, validationResult } = require('express-validator');
 
+const fs = require('fs')
 
 const router = express.Router();
 
@@ -80,8 +81,44 @@ router.get('/area/actions', async (req, res) => {
             ]
         },
         {
+            service: "timer",
+            name: "countdown",
+            params: [
+                {
+                    name: "hours",
+                    value: "integer"
+                },
+                {
+                    name: "minutes",
+                    value: "integer"
+                },
+                {
+                    name: "message",
+                    value: "String"
+                }
+            ]
+        },
+        {
+            service: "timer",
+            name: "loop",
+            params: [
+                {
+                    name: "hours",
+                    value: "integer"
+                },
+                {
+                    name: "minutes",
+                    value: "integer"
+                },
+                {
+                    name: "message",
+                    value: "String"
+                }
+            ]
+        },
+        {
             service: "dropbox",
-            name: "delete",
+            name: "deleted",
             params: [
             ]
         },
@@ -93,13 +130,13 @@ router.get('/area/actions', async (req, res) => {
         },
         {
             service: "dropbox",
-            name: "rename",
+            name: "renamed",
             params: [
             ]
         },
         {
             service: "dropbox",
-            name: "path change",
+            name: "path changed",
             params: [
             ]
         },
@@ -121,11 +158,7 @@ router.get('/area/reactions', async (req, res) => {
                 {
                     name: "webhookToken",
                     value: "String"
-                },
-                {
-                    name: "content",
-                    value: "String"
-                },
+                }
             ]
         },
         {
@@ -139,15 +172,11 @@ router.get('/area/reactions', async (req, res) => {
                 {
                     name: "subject",
                     value: "String"
-                },
-                {
-                    name: "content",
-                    value: "String"
-                },
+                }
             ]
         },
         {
-            service: "sclack",
+            service: "slack",
             name: "message",
             params: [
                 {
@@ -207,7 +236,7 @@ router.post('/area/new', auth, oneOf([
         }};
         await AreActions.findOneAndUpdate(query, update);
 
-        eventEmitter.emit('webhook', req.user.id, action);
+        eventEmitter.emit('webhook', req.user.id, action, reaction);
         res.status(201).send("Created :)");
     } catch(err) {
         console.log(err);
@@ -217,12 +246,11 @@ router.post('/area/new', auth, oneOf([
 
 router.get('/about.json', async(req, res) => {
     console.log(req.body);
-    let file = fs.readFileSync('../about.json');
+    let file = fs.readFileSync("sources/about.json")
     let about = JSON.parse(file);
     about.client.host = process.env.SERVER_ADDRESS;
     about.server.current_time = Date.now();
-    console.log(JSON.stringify(about));
-    res.status(200).send('success');
+    res.status(200).send(about);
 });
 
 module.exports = router;

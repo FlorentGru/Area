@@ -38,7 +38,6 @@ const mongoDBSchema = new mongoose.Schema({
 
 mongoDBSchema.statics.fetchAccessToken = async function(userId, service) {
     const tokenModel = await AccessTokens.findOne({userId: userId, "tokens.service": service});
-
     if (!tokenModel) {
         console.log("No access token found for this service");
         return null;
