@@ -14,7 +14,7 @@ export default async function getReactions() {
     try {
         const response = await axios({
             method: "get",
-            url: "https://localhost:8081/area/reactions",
+            url: `${localStorage.getItem("address")}/area/reactions`,
         });
         response.data.forEach(element => {
             myReactions[element.service].push(element.name)

@@ -1,12 +1,6 @@
 import React from 'react';
 import '../CSS/home.css'
 
-const axios = require('axios').default
-const token = localStorage.getItem("token")
-
-localStorage.setItem("github", false)
-localStorage.setItem("dropbox", false)
-
 export default class DropDown extends React.Component {
     constructor(props) {
         super(props);

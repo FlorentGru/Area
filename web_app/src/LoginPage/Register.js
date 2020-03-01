@@ -12,7 +12,7 @@ import logoGmail from '../logo/gmail.png'
 export default class RegisterPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {password: null, confirm_password: null, confirm_email: null, email: null}
+        this.state = {username: null, password: null, confirm_password: null, confirm_email: null, email: null}
     }
 
     returnLoginPage = () => {
@@ -39,7 +39,7 @@ export default class RegisterPage extends React.Component {
         if (err === 0) {
             let status = await registerUser(this.state.username, this.state.password, this.state.email)
             if (status === 201)
-                this.props.history.push('/')
+                this.props.history.push('/Home')
         }
     }
     render() {
@@ -47,6 +47,13 @@ export default class RegisterPage extends React.Component {
             <div>
             <form onSubmit={this.mySubmitHandler} className="formStyle">
             <h1>Area</h1>
+            <p>Enter your name</p>
+            <input
+                type='text'
+                name='username'
+                required={true}
+                onChange={this.myChangeHandler}
+            />
             <p>Enter your email</p>
             <input
                 type='text'
