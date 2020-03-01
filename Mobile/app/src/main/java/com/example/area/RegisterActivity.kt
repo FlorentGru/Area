@@ -11,8 +11,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
@@ -21,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
 
         registerBtn.setOnClickListener {
             val ipString = ipText.text.toString()
@@ -40,11 +39,10 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, response["success"].toString(), Toast.LENGTH_SHORT).show()
 
                 }, Response.ErrorListener {
-                    response ->
-                    Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show()
                 })
             que.add(req)
         }
+
         tvlogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

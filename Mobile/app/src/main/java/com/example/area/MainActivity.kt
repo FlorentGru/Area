@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity()
                 Request.Method.PUT,_ipAddress + "/config/address?address=" + _ipAddress,null,
             Response.Listener{
             }, Response.ErrorListener {
-                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
                 })
             jsonobj.put("email",emailEditText.text)
             jsonobj.put("password",passwordEditText.text)
@@ -63,7 +62,6 @@ class MainActivity : AppCompatActivity()
                         startActivity(intent)
 
                     },Response.ErrorListener {
-                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
                 })
             que.add(giveBaseUrl)
             que.add(req)

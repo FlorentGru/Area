@@ -20,11 +20,7 @@ import com.android.volley.toolbox.Volley
 import com.example.area.R
 import com.example.area.Service_Reaction
 import kotlinx.android.synthetic.main.service.*
-import org.json.JSONArray
-import org.json.JSONObject
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.synthetic.main.service_reaction.*
-import org.w3c.dom.Text
 
 class ServiceFragment : Fragment() {
 
@@ -41,6 +37,7 @@ class ServiceFragment : Fragment() {
         @SerializedName ("params")
         var params: List<Param> = mutableListOf())
 
+    private var _baseUrl = ""
     private var _view: View? = null
     private lateinit var _buttongmail : Button
     private lateinit var _buttonzoho : Button
@@ -60,26 +57,26 @@ class ServiceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var Action = Actions()
         _view = inflater.inflate(R.layout.service, container, false)
+        var Action = Actions()
 
-        val DiscordService: String = ActionDiscordTView.text.toString()
-        val GithubService: String = ActionGithubTView.text.toString()
-        val GmailService: String = ActionGmailTView.text.toString()
-        val DropboxService: String = ActionDropboxTView.text.toString()
-        val ZohoService: String = ActionZohoTView.text.toString()
-        val TimerService: String = ActionTimerTView.text.toString()
-        val SlackService: String = ActionSlackTView.text.toString()
+        //val DiscordService: String = ActionDiscordTView.text.toString()
+        //val GithubService: String = ActionGithubTView.text.toString()
+        //val GmailService: String = ActionGmailTView.text.toString()
+        //val DropboxService: String = ActionDropboxTView.text.toString()
+        //val ZohoService: String = ActionZohoTView.text.toString()
+        //val TimerService: String = ActionTimerTView.text.toString()
+        //val SlackService: String = ActionSlackTView.text.toString()
 
-        val DiscordNameMessage: String = ActionDiscordMessage.text.toString()
-        val GithubNamePush: String = ActionPushGithub.text.toString()
-        val GithubNamePullrequest: String = ActionPullRequestGithub.text.toString()
-        val TimerNameCountdown: String = ActionCountdownTimer.text.toString()
-        val TimerNameLoop: String = ActionLoppTimer.text.toString()
-        val DropboxNameDeleted: String = ActionDeletedDropbox.text.toString()
-        val DropboxNameCreated: String = ActionCreatedDropbox.text.toString()
-        val DropboxNameRenamed: String = ActionRenamedDropbox.text.toString()
-        val DropboxNamePatchchanged: String = ActionPathChangedDropbox.text.toString()
+        //val DiscordNameMessage: String = ActionDiscordMessage.text.toString()
+        //val GithubNamePush: String = ActionPushGithub.text.toString()
+        //val GithubNamePullrequest: String = ActionPullRequestGithub.text.toString()
+        //val TimerNameCountdown: String = ActionCountdownTimer.text.toString()
+        //val TimerNameLoop: String = ActionLoppTimer.text.toString()
+        //val DropboxNameDeleted: String = ActionDeletedDropbox.text.toString()
+        //val DropboxNameCreated: String = ActionCreatedDropbox.text.toString()
+        //val DropboxNameRenamed: String = ActionRenamedDropbox.text.toString()
+        //val DropboxNamePatchchanged: String = ActionPathChangedDropbox.text.toString()
 
 
         _buttonPushGithub = _view!!.findViewById(R.id.sendPushGithub)
@@ -96,52 +93,51 @@ class ServiceFragment : Fragment() {
         _buttonPushGithub.setOnClickListener {
             val ParamOwner: String = PushOwnerGithub.text.toString()
             val ParamRepo: String = PushRepoGithub.text.toString()
-            Action.service = GithubService
-            Action.name = GithubNamePush
+            //Action.service = GithubService
+            //Action.name = GithubNamePush
         }
         _buttonPullrequestGithub.setOnClickListener {
             val ParamRepo: String = PullRequestRepoGithub.text.toString()
             val ParamOwner: String = PullRequestOwnerGithub.text.toString()
-            Action.service = GithubService
-            Action.name = GithubNamePullrequest
+            //Action.service = GithubService
+            //Action.name = GithubNamePullrequest
         }
         _buttonDeletedDropbox.setOnClickListener {
-            Action.service = DropboxService
-            Action.service = DropboxNameDeleted
-            Toast.makeText(activity, DropboxService + DropboxNameDeleted, Toast.LENGTH_SHORT).show()
+            //Action.service = DropboxService
+            //Action.service = DropboxNameDeleted
         }
         _buttonCreatedDropbox.setOnClickListener {
-            Action.service = DropboxService
-            Action.name = DropboxNameCreated
+            //Action.service = DropboxService
+            //Action.name = DropboxNameCreated
         }
         _buttonRenamedDropbox.setOnClickListener {
-            Action.service = DropboxService
-            Action.name = DropboxNameRenamed
+            //Action.service = DropboxService
+            //Action.name = DropboxNameRenamed
         }
         _buttonPathchangedDropbox.setOnClickListener {
-            Action.service = DropboxService
-            Action.name = DropboxNamePatchchanged
+            //Action.service = DropboxService
+            //Action.name = DropboxNamePatchchanged
         }
         _buttonMessageDiscord.setOnClickListener {
             val ParamServer: String = DiscordActionServer.text.toString()
             val ParamChannel: String = DiscordActionChannel.text.toString()
             val ParamTrigger: String = DiscordActionTrigger.text.toString()
-            Action.service = DiscordService
-            Action.name = DiscordNameMessage
+            //Action.service = DiscordService
+            //Action.name = DiscordNameMessage
         }
         _buttonCountdownTimer.setOnClickListener {
             val ParamHours: String = TimerCountDownActionHours.text.toString()
             val ParamMinutes: String = TimerCountDownActionMinutes.text.toString()
             val ParamMessage: String = TimerCountDownActionMessage.text.toString()
-            Action.service = TimerService
-            Action.name = TimerNameCountdown
+            //Action.service = TimerService
+            //Action.name = TimerNameCountdown
         }
         _buttonLoopTimer.setOnClickListener {
             val ParamHours: String = TimerLoopActionHours.text.toString()
             val ParamMinutes: String = TimerLoopActionMinutes.text.toString()
             val ParamMessage: String = TimerLoopActionMessage.text.toString()
-            Action.service = TimerService
-            Action.name = TimerNameLoop
+            //Action.service = TimerService
+            //Action.name = TimerNameLoop
         }
 
 
