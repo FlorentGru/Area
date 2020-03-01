@@ -4,8 +4,8 @@ import '../CSS/login.css'
 import logoDiscord from '../logo/discord.png'
 import logoGitHub from '../logo/github.png'
 import logoSlack from '../logo/slack.png'
-import logoInstagram from '../logo/instagram.png'
-import logoMessenger from '../logo/messenger.svg'
+import logoTimer from '../logo/timer.png'
+import logoZoho from '../logo/zoho.png'
 import logoDropBox from '../logo/dropbox.png'
 import logoGmail from '../logo/gmail.png'
 
@@ -78,8 +78,8 @@ export default class RegisterPage extends React.Component {
             <img src={logoDiscord} className="imgDiscord" alt=""></img>
             <img src={logoGitHub} className="imgGitHub" alt=""></img>
             <img src={logoSlack} className="imgSlack" alt=""></img>
-            <img src={logoInstagram} className="imgInstagram" alt=""></img>
-            <img src={logoMessenger} className="imgMessenger" alt=""></img>
+            <img src={logoTimer} className="imgTimer" alt=""></img>
+            <img src={logoZoho} className="imgZoho" alt=""></img>
             <img src={logoDropBox} className="imgDropBox" alt=""></img>
             <img src={logoGmail} className="imgGmail" alt=""></img> 
             <br/>

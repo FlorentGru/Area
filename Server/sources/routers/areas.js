@@ -176,7 +176,7 @@ router.get('/area/reactions', async (req, res) => {
             ]
         },
         {
-            service: "sclack",
+            service: "slack",
             name: "message",
             params: [
                 {

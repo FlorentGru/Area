@@ -5,7 +5,9 @@ let myActions = {
     "github": [],
     "dropbox": [],
     "gmail": [],
-    "sclack": []
+    "slack": [],
+    "zoho": [],
+    "timer": []
 }
 
 export default async function getActions() {

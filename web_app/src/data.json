@@ -11,11 +11,11 @@
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Instagram": {
+    "Timer": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },
-    "Messenger": {
+    "Zoho": {
         "actions" : ["action1", "action2"],
         "reactions" : ["reaction1", "reaction2"]
     },

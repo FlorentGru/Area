@@ -8,8 +8,8 @@ import ActionReactionForm from './ActionReactionForm'
 import DiscordList from './ActionAndReactionLists/Discord'
 import GitHubList from './ActionAndReactionLists/GitHub'
 import SlackList from './ActionAndReactionLists/Slack'
-import InstagramList from './ActionAndReactionLists/Instagram'
-import MessengerList from './ActionAndReactionLists/Messenger'
+import TimerList from './ActionAndReactionLists/Timer'
+import ZohoList from './ActionAndReactionLists/Zoho'
 import DropBoxList from './ActionAndReactionLists/DropBox'
 import GmailList from './ActionAndReactionLists/Gmail'
 
@@ -18,8 +18,8 @@ const token = localStorage.getItem("token")
 localStorage.setItem("discord", false)
 localStorage.setItem("github", false)
 localStorage.setItem("Slack", false)
-localStorage.setItem("instagram", false)
-localStorage.setItem("messenger", false)
+localStorage.setItem("Timer", false)
+localStorage.setItem("Zoho", false)
 localStorage.setItem("DropBox", false)
 localStorage.setItem("Gmail", false)
 
@@ -76,8 +76,8 @@ export default class Home extends React.Component {
                 <DiscordList/>
                 <GitHubList/>
                 <SlackList/>
-                <InstagramList/>
-                <MessengerList/>
+                <TimerList/>
+                <ZohoList/>
                 <DropBoxList/>
                 <GmailList/>
                 <DropDown/>

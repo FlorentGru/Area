@@ -1,7 +1,5 @@
 import React from 'react';
-import data from '../../data.json'
 import ListAction from './ListActions'
-import '../../CSS/home.css'
 
 export default class DiscordList extends React.Component {
     render() {

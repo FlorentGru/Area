@@ -1,5 +1,4 @@
 import React from "react";
-import data from '../../data.json'
 import ListAction from './ListActions'
 
 export default class GmailForm extends React.Component {
