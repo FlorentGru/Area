@@ -229,6 +229,20 @@ router.get('/area/reactions', async (req, res) => {
             ]
         },
         {
+            service: "github",
+            name: "issue",
+            params: [
+                {
+                    name: "owner",
+                    value: "String"
+                },
+                {
+                    name: "repo",
+                    value: "String"
+                }
+            ]
+        },
+        {
             service: "gmail",
             name: "sendTo",
             params: [
@@ -249,6 +263,20 @@ router.get('/area/reactions', async (req, res) => {
                 {
                     name: "hook",
                     value: "url"
+                }
+            ]
+        },
+        {
+            service: "zoho",
+            name: "sendTo",
+            params: [
+                {
+                    name: "dest",
+                    value: "email"
+                },
+                {
+                    name: "subject",
+                    value: "String"
                 }
             ]
         }

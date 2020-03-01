@@ -12,14 +12,7 @@ const router = express.Router();
 const oauth = require('../models/updateToken');
 
 const githubOAuth2 = require('node-github-oauth2');
-githubOAuth2.initialize({
-    clientId: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    redirectURI: `${process.env.SERVER_ADDRESS}/oauth2/github/callback`,
-    scope: 'public_repo',
-    gitDirectory: 'Users',
-    userAgent: "Area - Epitech Project"
-});
+
 /**
  * Authenticate for github
  * @route GET /oauth2/github
@@ -47,7 +40,9 @@ router.get('/oauth2/github', auth, async (req, res) => {
         const state = req.user.id.toString() + ' ' + callback;
 
         console.log(`${process.env.SERVER_ADDRESS}/oauth2/github/callback`);
-        res.status(200).send({data: githubOAuth2.getRedirectURL(state)});
+        const data = githubOAuth2.getRedirectURL(state);
+        console.log(data);
+        res.status(200).send({data: data});
     } catch (err) {
         res.status(400).send({error: err});
     }

@@ -13,11 +13,9 @@ exports.updateToken = async function (userId, accessToken, refreshToken, service
         return;
     }
 
-    console.log("user tokens: ", userTokens);
     const serviceToken = userTokens.tokens.find(token => token.service === service);
-    console.log("service token: ", serviceToken);
     if (!serviceToken) {
-        console.log("push");
+        console.log("pushed new token");
         const update = {
             $push: {
                 tokens: {
@@ -30,6 +28,7 @@ exports.updateToken = async function (userId, accessToken, refreshToken, service
 
         await userTokens.updateOne(update);
     } else {
+        console.log("updated token");
         const update = {$set: {'tokens.$[elem].accessToken': accessToken, 'tokens.$[elem].refreshToken': refreshToken}};
         const options = {arrayFilters: [{'elem.service': service}]};
 
