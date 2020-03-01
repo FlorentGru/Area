@@ -49,12 +49,6 @@ const setReactions = async () => {
     }
 }
 
-// setGitHubUrl()
-// setDropBoxUrl()
-// setActions()
-// setReactions()
-
-
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props)

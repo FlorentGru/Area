@@ -19,6 +19,7 @@ export default async function getReactions() {
         response.data.forEach(element => {
             myReactions[element.service].push(element.name)
         });
+        localStorage.setItem("reactionsParams", JSON.stringify(response.data))
         return (myReactions)
     } catch(error) {
         return (400)

@@ -36,7 +36,6 @@ export default class DropDown extends React.Component {
                     <br/><br/><br/>
                 </div>) : (null)
             }
-            <div></div>
         </div>
         );
     }

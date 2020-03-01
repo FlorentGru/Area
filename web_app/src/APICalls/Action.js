@@ -19,6 +19,7 @@ export default async function getActions() {
         response.data.forEach(element => {
             myActions[element.service].push(element.name)
         });
+        localStorage.setItem("actionsParams", JSON.stringify(response.data))
         return (myActions)
     } catch(error) {
         return (400)

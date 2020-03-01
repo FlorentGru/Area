@@ -1,10 +1,41 @@
 import React from 'react';
 import '../CSS/home.css'
+import { Redirect } from 'react-router-dom';
+
+const getParamAction = (service, action) =>
+{
+    const obj = JSON.parse(localStorage.getItem("actionsParams"))
+    let result = null;
+
+    obj.forEach(element => {
+        if (element.service === service) {
+            if (element.name === action) {
+                result = element.params
+            }
+        }
+    });
+    return (result)
+}
+
+const getParamReaction = (service, reaction) => {
+    const obj = JSON.parse(localStorage.getItem("reactionsParams"))
+    let result = null;
+
+    obj.forEach(element => {
+        if (element.service === service) {
+            if (element.name === reaction) {
+                result = element.params
+            }
+        }
+    });
+    return (result)
+
+}
 
 export default class ActionReactionForm extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {service: null, action: null, reaction: null}
+        this.state = {service: null, action: null, reaction: null, valid: false}
     }
 
     myChangeHandler = (event) => {
@@ -15,12 +46,21 @@ export default class ActionReactionForm extends React.Component {
 
     submitNewActionReaction = (event) => {
         event.preventDefault()
-        console.log(this.state.service)
-        console.log(this.state.action)
-        console.log(this.state.reaction)
+        const paramAction = getParamAction(this.state.service, this.state.action)
+        const paramReaction = getParamReaction(this.state.service, this.state.reaction)
+        localStorage.setItem("finalParamAction", paramAction);
+        localStorage.setItem("finalParamRaection", paramReaction);
+        if (paramAction == null || paramReaction == null) {
+            alert("action ou reaction inconnue")
+        } else {this.setState({valid: true})}
     }
 
     render() {
+        localStorage.setItem("parametersAction", [])
+        localStorage.setItem("parametersReaction", [])
+        if (this.state.valid === true) {
+            return (<Redirect to='/CreateAREA'></Redirect>)
+        }
         return (
             <form className='formActionReaction' onSubmit={this.submitNewActionReaction}>
                 <p>Add an Area</p>
