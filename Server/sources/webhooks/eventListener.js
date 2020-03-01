@@ -31,12 +31,12 @@ emitter.on('webhook', async function(userId, action) {
 emitter.on('react', async function(userId, reaction, param) {
     if (reaction.service === "discord") {
         console.log("react discord");
-        discordR.react(reaction);
+        discordR.react(reaction, param);
     } else if (reaction.service === 'outlook' || reaction.service === 'gmail') {
         console.log("mail reaction");
-        await mailR.react(reaction);
+        await mailR.react(reaction, param);
     } else if (reaction.service === 'github') {
-        console.log("github reaction")
+        console.log("github reaction");
         await githubR.react(userId, reaction, param);
     }
 });
@@ -52,21 +52,32 @@ emitter.on('push', async function(body) {
     const owner = body.repository.owner.name;
     const event = "push";
 
+    console.log(body);
+
     if (!body.hook) {
-        githubA.trigger(repo, owner, event)
+        const author = body.pusher.name;
+        const message = author + " pushed on " + owner + "/" + repo;
+
+        githubA.trigger(repo, owner, event, message);
     }
 });
 
 emitter.on('pullRequest', async function(body) {
     const repo = body.repository.name;
     const owner = body.repository.owner.name;
-    const event = "push";
+    const event = "pullRequest";
 
     if (!body.action) {
         return;
     }
 
+    console.log(body);
+
     if (body.action === 'opened') {
-        github.trigger(repo, owner, event);
+        const title = body.pull_request.title;
+        const author = body.pull_request.user.login;
+        const message = "Pull request named " + title + " opened by " + author + " on " + owner + "/" + repo;
+
+        githubA.trigger(repo, owner, event, message);
     }
 });

@@ -81,7 +81,7 @@ router.get('/area/actions', async (req, res) => {
         },
         {
             service: "dropbox",
-            name: "delete",
+            name: "deleted",
             params: [
             ]
         },
@@ -93,13 +93,13 @@ router.get('/area/actions', async (req, res) => {
         },
         {
             service: "dropbox",
-            name: "rename",
+            name: "renamed",
             params: [
             ]
         },
         {
             service: "dropbox",
-            name: "path change",
+            name: "path changed",
             params: [
             ]
         },
