@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity()
                     Response.Listener {
                         response ->
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, navBar::class.java)
+                        val intent = Intent(this, NavDraw::class.java)
                         intent.putExtra("url", ipAddress)
                         startActivity(intent)
 
