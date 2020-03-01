@@ -1,6 +1,7 @@
 const request = require('request-promise');
 
 const hook = 'https://hooks.slack.com/services/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';
+let channel_id = 'CUR2S023H';
 
 const getData = async function() {
     var json = {
