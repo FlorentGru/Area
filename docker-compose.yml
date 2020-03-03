@@ -2,7 +2,7 @@ version: "3"
 services:
     api:
         build: 
-            context: ./server
+            context: ./Server
             dockerfile: Dockerfile
         image: api
         ports: 
@@ -42,7 +42,6 @@ services:
 
 volumes:
     apk:
-
 
 networks:
     app-network:
