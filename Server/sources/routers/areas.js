@@ -104,7 +104,7 @@ router.get('/user/areas', auth, async function (req, res) {
  * @security JWT
  * @param {string} areaId.query.required
  * @produces application/json
- * @returns {boolean} 200 - Deleted or not
+ * @returns {Array.<UserArea>} 200 - User remaining areas
  * @returns {Error} 401 - Unauthorized
  * @returns {Error} 500 - Unexpected error
  */
@@ -121,9 +121,10 @@ router.delete('/user/areas/delete', auth, async function (req, res) {
         await Area.findOneAndUpdate({userId}, update);
 
         const areas = await Area.findOne({userId});
+        if (!areas) throw ("Internal Error");
         console.log({remaining: areas.areas});
 
-        res.status(200).send({data: true});
+        res.status(200).send({data: areas.areas});
     } catch (err) {
         res.status(500).send({error: err});
     }
