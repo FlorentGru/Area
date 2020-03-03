@@ -14,6 +14,34 @@ AccessTokens.collection.drop();
 AreActions.collection.drop();*/
 
 const router = express.Router();
+
+/**
+ * Is the user connected to this service
+ * @route GET /oauth2/connected
+ * @operationId isConnected
+ * @group User
+ * @security JWT
+ * @param {string} service.query.required
+ * @returns {boolean} 200 - yes or no
+ * @returns {string} 401 - Unauthorized
+ */
+router.get('/user/is_connected', auth, async (req, res) => {
+    try {
+        const service = req.query.service;
+        if (!service) throw("Need service in query");
+
+        const token = await AccessTokens.fetchAccessToken(req.user.id, service);
+        console.log(token.accessToken);
+        if (!token) {
+            res.status(200).send(false);
+        } else {
+            res.status(200).send(true);
+        }
+    } catch (err) {
+        res.status(400).send({error: err});
+    }
+});
+
 /**
 * Config new server address
 * @route PUT /config/address
@@ -47,7 +75,7 @@ router.put('/config/address', async (req, res) => {
  */
 /**
  * Register new user
- * @route POST /auth/register
+ * @route POST /user/register
  * @operationId register
  * @group Users - General operations on users
  * @param {User.model} user.body.required - new user
@@ -55,7 +83,7 @@ router.put('/config/address', async (req, res) => {
  * @returns {string} 201 - JWT token
  * @returns {Error} default - Unexpected error
  */
-router.post('/auth/register', async (req, res) => {
+router.post('/user/register', async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();
@@ -86,8 +114,8 @@ router.post('/auth/register', async (req, res) => {
 });
 
 /**
- * User login
- * @route POST /auth/login
+ * User log in
+ * @route POST /user/login
  * @operationId login
  * @group Users - General operations on users
  * @param {Login.model} login.body.required - user credentials
@@ -95,7 +123,7 @@ router.post('/auth/register', async (req, res) => {
  * @returns {string} 200 - JWT token
  * @returns {Error} 401 - Login failed or Not authorized
  */
-router.post('/auth/login', async(req, res) => {
+router.post('/user/login', async(req, res) => {
     try {
         const {email, password} = req.body;
         const user = await User.findByCredentials(email, password);
