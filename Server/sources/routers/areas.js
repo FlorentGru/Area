@@ -4,9 +4,7 @@ const express = require('express');
 const auth = require('../middleware/JWTAuth');
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
+const Area = mongoose.model('Area');
 
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
@@ -40,7 +38,7 @@ router.post('/area/new', auth, oneOf([
     body('reaction').exists(),
     body('action.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
     body('action.name').exists().isAlpha(),
-    body('reaction.service').exists().isIn(['discord', 'oneDrive', 'messenger', 'github']),
+    body('reaction.service').exists().isIn(['discord', 'zoho', 'github']),
     body('reaction.name').exists().isAlpha(),
 ]), async(req, res) => {
     try {
@@ -56,19 +54,84 @@ router.post('/area/new', auth, oneOf([
                     reaction: reaction
                 }
             }};
-        await AreActions.findOneAndUpdate(query, update);
+        await Area.findOneAndUpdate(query, update);
 
         eventEmitter.emit('webhook', req.user.id, action, reaction);
-        res.status(201).send("Created :)");
+        res.status(201).send({data: "area created"});
     } catch(err) {
         console.log(err);
-        res.status(400).send(err);
+        res.status(400).send({error: err});
+    }
+});
+
+/**
+ * @typedef UserArea
+ * @property {string} id.required
+ * @property {Action.model} action.required
+ * @property {Action.model} reaction.required
+ */
+/**
+ * get a user's Actions/REActions
+ * @route GET /user/areas
+ * @operationId getAreas
+ * @group User - General operations on users
+ * @security JWT
+ * @produces application/json
+ * @returns {Array.<UserArea>} 200 - User areas
+ * @returns {Error} 401 - Unauthorized
+ * @returns {Error} 500 - Unexpected error
+ */
+router.get('/user/areas', auth, async function (req, res) {
+    try {
+        const userId = req.user.id;
+
+        console.log(`userId: ${userId}`);
+        const areas = await Area.findOne({userId});
+        if (!areas) throw "Internal Error";
+        console.log(areas.areas);
+
+        res.status(200).send({data: areas.areas});
+    } catch (err) {
+        res.status(500).send({error: err});
+    }
+});
+
+/**
+ * delete a user's Area
+ * @route DELETE /user/areas/delete
+ * @operationId deleteArea
+ * @group Area
+ * @security JWT
+ * @param {string} areaId.query.required
+ * @produces application/json
+ * @returns {boolean} 200 - Deleted or not
+ * @returns {Error} 401 - Unauthorized
+ * @returns {Error} 500 - Unexpected error
+ */
+router.delete('/user/areas/delete', auth, async function (req, res) {
+    try {
+        const deleteId = req.query.areaId;
+        const userId = req.user.id;
+
+        const update = { $pull: {
+            areas: {
+                _id: deleteId
+            }
+        }};
+        await Area.findOneAndUpdate({userId}, update);
+
+        const areas = await Area.findOne({userId});
+        console.log({remaining: areas.areas});
+
+        res.status(200).send({data: true});
+    } catch (err) {
+        res.status(500).send({error: err});
     }
 });
 
 /**
  * get supported Actions
- * @route POST /area/actions
+ * @route GET /area/actions
  * @operationId getActions
  * @group Area - Project Core: Actions and REActions
  * @produces application/json
@@ -199,13 +262,13 @@ router.get('/area/actions', async (req, res) => {
         },
     ];
 
-    res.status(200).send({actions});
+    res.status(200).send({data: actions});
 });
 
 
 /**
  * get supported REActions
- * @route POST /area/reactions
+ * @route GET /area/reactions
  * @operationId getReactions
  * @group Area - Project Core: Actions and REActions
  * @produces application/json
@@ -281,8 +344,7 @@ router.get('/area/reactions', async (req, res) => {
             ]
         }
     ];
-
-    res.status(200).send({reactions});
+    res.status(200).send({data: reactions});
 });
 
 router.get('/about.json', async(req, res) => {

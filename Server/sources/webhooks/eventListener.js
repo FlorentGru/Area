@@ -1,10 +1,5 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
-
 const emitter = require('./eventEmitter');
 
 const slackR = require('../services/slackReaction');
@@ -53,37 +48,27 @@ emitter.on('dropbox', async function(body) {
     dropboxA.updateActions(accoundId);
 });
 
-emitter.on('push', async function(body) {
+emitter.on('github', async function(body, event) {
     const repo = body.repository.name;
     const owner = body.repository.owner.name;
-    const event = "push";
+    if (!repo || !owner) return console.log("Error getting repo data");
 
-    console.log(body);
+    if (event === 'push') {
+        if (!body.hook) {
+            const author = body.pusher.name;
+            const message = `${author} pushed on ${owner}/${repo}`;
 
-    if (!body.hook) {
-        const author = body.pusher.name;
-        const message = author + " pushed on " + owner + "/" + repo;
+            githubA.trigger(repo, owner, event, message);
+        }
+    } else if (event === 'pullRequest') {
+        if (!body.action) return;
 
-        githubA.trigger(repo, owner, event, message);
-    }
-});
+        if (body.action === 'opened') {
+            const title = body.pull_request.title;
+            const author = body.pull_request.user.login;
+            const message = `Pull request named ${title} opened by ${author} on ${owner}/${repo}`;
 
-emitter.on('pullRequest', async function(body) {
-    const repo = body.repository.name;
-    const owner = body.repository.owner.name;
-    const event = "pullRequest";
-
-    if (!body.action) {
-        return;
-    }
-
-    console.log(body);
-
-    if (body.action === 'opened') {
-        const title = body.pull_request.title;
-        const author = body.pull_request.user.login;
-        const message = "Pull request named " + title + " opened by " + author + " on " + owner + "/" + repo;
-
-        githubA.trigger(repo, owner, event, message);
+            githubA.trigger(repo, owner, event, message);
+        }
     }
 });

@@ -6,35 +6,30 @@ const listener = require('../webhooks/eventListener');
 const dropboxA = require('../webhooks/dropboxAction');
 
 Router.post('/webhook/github/push', async (req, res) => {
-    console.log("GITHUB PUSH TRIGGERED")
+    console.log("GITHUB PUSH TRIGGERED");
     console.log(req.body);
-    eventEmitter.emit('push', req.body);
+    eventEmitter.emit('github', req.body, 'push');
     res.status(200).send('success');
 });
 
 Router.post('/webhook/github/pullRequest', async (req, res) => {
-    console.log("GITHUB PULL REQUEST TRIGGERED")
+    console.log("GITHUB PULL REQUEST TRIGGERED");
     console.log(req.body);
-    eventEmitter.emit('pullRequest', req.body);
+    eventEmitter.emit('github', req.body, 'pullRequest');
     res.status(200).send('success');
 });
 
 Router.post('/webhook/dropbox', async (req, res) => {
-    console.log("DROPBOX TRIGGERED")
+    console.log("DROPBOX TRIGGERED");
     console.log(req.body);
     eventEmitter.emit('dropbox', req.body);
     res.status(200).send('success');
 });
 
 Router.get('/webhook/dropbox', async (req, res) => {
+    console.log("DROPBOX CONFIRMED");
     console.log(req.body);
     res.status(200).send(req.query.challenge);
-});
-
-Router.post('/webhook/twitter', async (req, res) => {
-    console.log("TWITTER TRIGGERED")
-    console.log(req.body);
-    res.status(200).send('success');
 });
 
 module.exports = Router;

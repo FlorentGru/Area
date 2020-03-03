@@ -3,9 +3,8 @@ const GitHub = require("github-api");
 const Promise = require("es6-promise").Promise;
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
+const Area = mongoose.model('Area');
 
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
@@ -63,7 +62,7 @@ exports.createWebhook = async function (userId, action) {
 };
 
 exports.trigger = function(repo, owner, event, message) {
-    AreActions.aggregate([
+    Area.aggregate([
         {
             "$project": {
                 "userId": 1,

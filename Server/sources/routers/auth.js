@@ -7,7 +7,7 @@ const auth = require('../middleware/JWTAuth');
 const mongoose = require('mongoose')
 const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
+const Area = mongoose.model('Area');
 
 /*User.collection.drop();
 AccessTokens.collection.drop();
@@ -17,9 +17,9 @@ const router = express.Router();
 
 /**
  * Is the user connected to this service
- * @route GET /oauth2/connected
+ * @route GET /user/is_connected
  * @operationId isConnected
- * @group User
+ * @group User - General operations on users
  * @security JWT
  * @param {string} service.query.required
  * @returns {boolean} 200 - yes or no
@@ -77,7 +77,7 @@ router.put('/config/address', async (req, res) => {
  * Register new user
  * @route POST /user/register
  * @operationId register
- * @group Users - General operations on users
+ * @group User - General operations on users
  * @param {User.model} user.body.required - new user
  * @produces application/json
  * @returns {string} 201 - JWT token
@@ -100,7 +100,7 @@ router.post('/user/register', async (req, res) => {
             return;
         }
 
-        const areas = new AreActions( {
+        const areas = new Area( {
             userId: user.id,
             areas: []
         });
@@ -117,7 +117,7 @@ router.post('/user/register', async (req, res) => {
  * User log in
  * @route POST /user/login
  * @operationId login
- * @group Users - General operations on users
+ * @group User - General operations on users
  * @param {Login.model} login.body.required - user credentials
  * @produces application/json
  * @returns {string} 200 - JWT token
