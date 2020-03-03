@@ -11,6 +11,7 @@ const authRouter = require('./routers/auth');
 const discordRouter = require('./oauthRoutes/discordAuth');
 const dropboxRouter = require('./oauthRoutes/dropboxAuth');
 const githubRouter = require('./oauthRoutes/githubAuth');
+const spotifyRouter = require('./oauthRoutes/spotifyAuth');
 const slackRouter = require('./oauthRoutes/slackAuth');
 const webhooksRouter = require('./routers/endpoints');
 const areasRouter = require('./routers/areas');
@@ -35,6 +36,7 @@ app.use(discordRouter);
 app.use(dropboxRouter);
 app.use(slackRouter);
 app.use(githubRouter);
+app.use(spotifyRouter);
 app.use(webhooksRouter);
 app.use(areasRouter);
 
