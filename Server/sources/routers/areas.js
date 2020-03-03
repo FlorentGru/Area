@@ -199,7 +199,7 @@ router.get('/area/actions', async (req, res) => {
         },
     ];
 
-    res.status(200).send(actions);
+    res.status(200).send({actions});
 });
 
 
@@ -282,7 +282,7 @@ router.get('/area/reactions', async (req, res) => {
         }
     ];
 
-    res.status(200).send(reactions);
+    res.status(200).send({reactions});
 });
 
 router.get('/about.json', async(req, res) => {

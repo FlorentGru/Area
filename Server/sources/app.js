@@ -8,7 +8,6 @@ require('./mongodb');
 const bodyParser = require('body-parser');
 
 const authRouter = require('./routers/auth');
-const oauthRouter = require('./oauthRoutes/oauth2');
 const discordRouter = require('./oauthRoutes/discordAuth');
 const dropboxRouter = require('./oauthRoutes/dropboxAuth');
 const githubRouter = require('./oauthRoutes/githubAuth');
@@ -32,7 +31,6 @@ app.use(express.json());
 swagger(require('./swagger'));
 
 app.use(authRouter);
-app.use(oauthRouter);
 app.use(discordRouter);
 app.use(dropboxRouter);
 app.use(slackRouter);
