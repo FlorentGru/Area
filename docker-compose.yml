@@ -2,7 +2,7 @@ version: "3"
 services:
     api:
         build: 
-            context: ./Server
+            context: ./server
             dockerfile: Dockerfile
         image: api
         ports: 
