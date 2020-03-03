@@ -1,30 +1,16 @@
 version: "3"
 services:
-    nginx:
-        restart: always
-        build: 
-            context: ./nginx
-            dockerfile: Dockerfile
-        ports:
-            - '8082:80'
-
     api:
         build: 
             context: ./server
             dockerfile: Dockerfile
         image: api
         ports: 
-<<<<<<< HEAD
             - 8080:8080
         networks: 
             - app-network
         links:
             - db
-=======
-            - 8081:8081
-        networks: 
-            - app-network
->>>>>>> Finish to create the certificat and the part of nginx on docker
 
     mobile_client:
         build:
@@ -33,7 +19,6 @@ services:
         image: mobile
         depends_on: 
             - api
-            - nginx
 
     webapp:
         build: 
@@ -45,14 +30,19 @@ services:
         depends_on: 
             - mobile_client
             - api
-
-volumes:
-    apk:
-
+        volumes: 
+            - /app/node_modules
+            - ./web_app:/app
+            - apk:/var/www/:ro
+            
     db:
         image: "mongo"
         ports:
             - "27017:27017"
+
+volumes:
+    apk:
+
 
 networks:
     app-network:
