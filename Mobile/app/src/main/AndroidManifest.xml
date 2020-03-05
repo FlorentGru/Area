@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".WebViewActivity"/>
-        <activity android:name=".navBar">
+        <activity android:name=".NavBar">
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Service_Reaction" />
+        <activity android:name=".view.service.Service_Reaction" />
     </application>
 </manifest>

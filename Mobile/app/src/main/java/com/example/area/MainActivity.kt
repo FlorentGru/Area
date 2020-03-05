@@ -1,14 +1,12 @@
 package com.example.area
 
 import android.animation.Animator
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.view.View.VISIBLE
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.android.volley.Request
@@ -16,9 +14,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import com.android.volley.toolbox.Volley
-import org.json.JSONArray
 import org.json.JSONObject
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity()
 {
@@ -56,12 +52,13 @@ class MainActivity : AppCompatActivity()
                         val jsonObj : JSONObject = JSONObject(response.toString())
                         val token = jsonObj.get("token").toString()
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, navBar::class.java)
+                        val intent = Intent(this, NavBar::class.java)
                         intent.putExtra("token", token)
                         intent.putExtra("baseUrl", _ipAddress)
                         startActivity(intent)
 
                     },Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
             que.add(giveBaseUrl)
             que.add(req)

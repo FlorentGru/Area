@@ -21,7 +21,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/box"
                 android:gravity="center"
-                android:text="Github"
+                android:text="@string/github"
                 android:textColor="@color/whiteFont"
                 android:textSize="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -461,35 +461,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/button_drawable"
                 android:text="Send"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/ActionSlackTView"
-                android:layout_width="390dp"
-                android:layout_height="51dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/box"
-                android:gravity="center"
-                android:text="Slack"
-                android:textColor="@color/whiteFont"
-                android:textSize="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/sendButtonSlack"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="60dp"
-                android:background="@drawable/button_drawable"
-                android:text="Go to Reaction"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 

@@ -6,11 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.area.view.connection.ConnectionFragment
+import com.example.area.view.gesture_area.Gesture_areaFragment
 import com.example.area.view.networkLocation.NetworkFragment
 import com.example.area.view.service.ServiceFragment
 import kotlinx.android.synthetic.main.navbar.*
 
-class navBar : AppCompatActivity()
+class NavBar : AppCompatActivity()
 {
     var base_url : String = ""
 
@@ -32,6 +33,11 @@ class navBar : AppCompatActivity()
             R.id.notifications -> {
                 println("Ip pressed")
                 replaceFragment(NetworkFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.gesture_area -> {
+                println("Area pressed")
+                replaceFragment(Gesture_areaFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }

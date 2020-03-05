@@ -1,6 +1,5 @@
 package com.example.area.view.networkLocation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,8 +13,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.area.R
-import com.example.area.WebViewActivity
-import com.example.area.navBar
 import kotlinx.android.synthetic.main.config_serveur.*
 
 /**

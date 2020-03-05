@@ -130,31 +130,6 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/DropboxTView"
-                android:layout_width="390dp"
-                android:layout_height="59dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/box"
-                android:gravity="center"
-                android:text="Dropbox"
-                android:textColor="@color/whiteFont"
-                android:textSize="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/sendButtonDropbox"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/button_drawable"
-                android:text="Send"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/ActionZohoTView"
@@ -274,32 +249,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/TimerTView"
-                android:layout_width="390dp"
-                android:layout_height="59dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/box"
-                android:gravity="center"
-                android:text="Timer"
-                android:textColor="@color/whiteFont"
-                android:textSize="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/sendButtonTimer"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/button_drawable"
-                android:text="Send"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/SlackTView"
                 android:layout_width="390dp"
                 android:layout_height="51dp"
@@ -323,6 +272,17 @@
                 android:textColor="@color/whiteFont"
                 android:textColorHint="@color/whiteFont"
                 android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/SlackReactionhook"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Hook"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/sendButtonSlack"

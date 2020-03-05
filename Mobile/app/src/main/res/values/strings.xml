@@ -14,6 +14,7 @@
     <string name="Dropbox">Dropbox</string>
     <string name="GitHub">GitHub</string>
     <string name="Discord">Discord</string>
+    <string name="github"> github</string>
     <string name="CalendarGoogle">CalendarGoogle</string>
     <string name="Connection">Register yourself at your services</string>
     <string name="Network">Enter the new network location here</string>
@@ -23,6 +24,5 @@
     <string name="navBarService">Service</string>
     <string name="navBarNetLoc">Ip</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

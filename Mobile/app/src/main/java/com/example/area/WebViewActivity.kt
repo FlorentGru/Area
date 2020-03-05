@@ -18,7 +18,7 @@ class WebViewActivity : AppCompatActivity() {
         myWebView!!.webViewClient = object: WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, responseUrl: String): Boolean {
                 if (responseUrl.contains("https://www.exemple.com")) {
-                    val intent = Intent(this@WebViewActivity, navBar::class.java)
+                    val intent = Intent(this@WebViewActivity, NavBar::class.java)
                     intent.putExtra("baseUrl", intent.getStringExtra("baseUrl"))
                     startActivity(intent)
                 } else {
