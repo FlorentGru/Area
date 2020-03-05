@@ -26,6 +26,17 @@
     left: 90%;
 }
 
+.newAreaButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
 .box {
     width: 10%;
     border: 1px solid #333;
