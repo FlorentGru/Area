@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDown from '../DropDown'
+import DropDown from './DropDown'
 import {Redirect} from 'react-router-dom'
 
 class CreateArea extends React.Component {
@@ -7,11 +7,11 @@ class CreateArea extends React.Component {
         super(props);
         this.state = {action: '', valid: false};
     
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeAction = this.handleChangeAction.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    handleChange(event) {
+    handleChangeAction(event) {
         this.setState({action: event.target.action});
     }
     
@@ -32,8 +32,8 @@ class CreateArea extends React.Component {
             <form onSubmit={this.handleSubmit}>
                <label>
                 Choisissez votre Action:
-                <select action={this.state.action} onChange={this.handleChange}>
-                    <option/>
+                <select action={this.state.action} onChange={this.handleChangeAction}>
+                    <option />
                     <option action="Discord">Discord</option>
                     <option action="Dropbox">DropBox</option>
                     <option action="Github">GitHub</option>
