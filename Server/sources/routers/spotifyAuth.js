@@ -12,7 +12,7 @@ const btoa = require('btoa');
 
 const router = express.Router();
 
-const oauth = require('../models/updateToken');
+const oauth = require('../services/tokenService');
 var SpotifyWebApi = require('spotify-web-api-node');
 
 /**

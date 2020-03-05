@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 require('./mongodb');
 
 const authRouter = require('./routers/auth');
-const spotifyRouter = require('./oauthRoutes/spotifyAuth');
+const spotifyRouter = require('./routers/spotifyAuth');
 const discordRouter = require('./routers/discordAuth');
 const dropboxRouter = require('./routers/dropboxAuth');
 const githubRouter = require('./routers/githubAuth');

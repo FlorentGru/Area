@@ -10,8 +10,6 @@ const listener = require('../webhooks/eventListener');
 
 let client = new Discord.Client();
 
-client.setMaxListeners(0);
-
 client.on("ready", () => {
     console.log('bot ready');
     trigger();

@@ -3,7 +3,7 @@
 const Router = require('express').Router();
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
-const dropboxA = require('../webhooks/dropboxAction');
+const dropboxA = require('../actions/dropboxAction');
 
 Router.post('/webhook/github/push', async (req, res) => {
     console.log("GITHUB PUSH TRIGGERED");

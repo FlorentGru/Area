@@ -7,7 +7,7 @@ const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 const Area = mongoose.model('Area');
 
-const tokenUpdate = require('../models/updateToken');
+const tokenUpdate = require('../services/tokenService');
 
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');

@@ -12,7 +12,7 @@ const AccessTokens = mongoose.model('AccessTokens');
 
 const router = express.Router();
 
-const oauth = require('../models/updateToken');
+const oauth = require('../services/tokenService');
 
 
 /**
