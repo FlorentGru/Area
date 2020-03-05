@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDown from './DropDown'
+import DropDown from '../DropDown'
 import {Redirect} from 'react-router-dom'
 
 class CreateArea extends React.Component {
