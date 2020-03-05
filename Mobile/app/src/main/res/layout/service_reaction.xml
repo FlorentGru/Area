@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/blackDiscord">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/GithubTView"
+                android:layout_width="390dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Github"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ReactionIssueGithub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="issue"
+                android:textColor="@color/whiteFont"
+                android:textColorHint="@color/whiteFont"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/GithubReactionOwner"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Owner"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/GithubReactionrepo"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Repo"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/sendButtonGithub"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/GmailTView"
+                android:layout_width="390dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Gmail"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ReactionSendToGmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="sendTo"
+                android:textColor="@color/whiteFont"
+                android:textColorHint="@color/whiteFont"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/GmailReactionDest"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="destination"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/GmailReactionSubject"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Subject"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/sendButtonGmail"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/DropboxTView"
+                android:layout_width="390dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Dropbox"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sendButtonDropbox"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ActionZohoTView"
+                android:layout_width="390dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Zoho"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ReactionSendtToZoho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="sendTo"
+                android:textColor="@color/whiteFont"
+                android:textColorHint="@color/whiteFont"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/ReactionDestZoho"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Dest"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/ReactionSubjectZoho"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Subject"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/sendButtonZoho"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/DiscordTView"
+                android:layout_width="390dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Discord"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ReactionMessageDiscord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="message"
+                android:textColor="@color/whiteFont"
+                android:textColorHint="@color/whiteFont"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/DiscordReactionwebhookid"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="WebHookId"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/DiscordReactionWebhooktoken"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="WebHookToken"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/sendButtonDiscord"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/TimerTView"
+                android:layout_width="390dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Timer"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sendButtonTimer"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/SlackTView"
+                android:layout_width="390dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Slack"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ReactionMessageSlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="message"
+                android:textColor="@color/whiteFont"
+                android:textColorHint="@color/whiteFont"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/sendButtonSlack"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

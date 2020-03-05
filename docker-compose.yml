@@ -1,16 +1,8 @@
 version: "3"
 services:
-    nginx:
-        restart: always
-        build: 
-            context: ./nginx
-            dockerfile: Dockerfile
-        ports:
-            - '8082:80'
-
     api:
         build: 
-            context: ./Server/
+            context: ./server
             dockerfile: Dockerfile
         image: api
         ports: 
@@ -27,7 +19,6 @@ services:
         image: mobile
         depends_on: 
             - api
-            - nginx
 
     webapp:
         build: 
@@ -39,11 +30,18 @@ services:
         depends_on: 
             - mobile_client
             - api
-
+        volumes: 
+            - /app/node_modules
+            - ./web_app:/app
+            - apk:/var/www/:ro
+            
     db:
         image: "mongo"
         ports:
             - "27017:27017"
+
+volumes:
+    apk:
 
 networks:
     app-network:
