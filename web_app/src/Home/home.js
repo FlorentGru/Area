@@ -1,14 +1,6 @@
 import React from 'react';
 import DropDown from './DropDown'
 import {Redirect} from 'react-router-dom'
-// import ActionReactionForm from './ActionReactionForm'
-// import DiscordList from './ActionAndReactionLists/Discord'
-// import GitHubList from './ActionAndReactionLists/GitHub'
-// import SlackList from './ActionAndReactionLists/Slack'
-// import TimerList from './ActionAndReactionLists/Timer'
-// import ZohoList from './ActionAndReactionLists/Zoho'
-// import DropBoxList from './ActionAndReactionLists/DropBox'
-// import GmailList from './ActionAndReactionLists/Gmail'
 
 class CreateArea extends React.Component {
     constructor(props) {
