@@ -11,7 +11,7 @@ import com.example.area.view.networkLocation.NetworkFragment
 import com.example.area.view.service.ServiceFragment
 import kotlinx.android.synthetic.main.navbar.*
 
-class NavBar : AppCompatActivity()
+class navBar : AppCompatActivity()
 {
     var base_url : String = ""
 

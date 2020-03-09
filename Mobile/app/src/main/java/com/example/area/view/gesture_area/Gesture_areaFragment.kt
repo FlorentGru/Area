@@ -15,9 +15,6 @@ import com.example.area.R
 class Gesture_areaFragment : Fragment() {
 
     private var _view: View? = null
-    val NameArea = TextView(activity)
-    val buttonDelete = Button(activity)
-    val buttonDetails = Button(activity)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +22,10 @@ class Gesture_areaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _view = inflater.inflate(R.layout.gesture_area, container, false)
+
+        val NameArea = TextView(activity)
+        val buttonDelete = Button(activity)
+        val buttonDetails = Button(activity)
 
         val linearLayout = _view!!.findViewById<LinearLayout>(R.id.firstLayout)
         buttonDelete.text = "Delete"
