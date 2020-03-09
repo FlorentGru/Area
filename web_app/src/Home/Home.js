@@ -22,6 +22,8 @@ class CreateArea extends React.Component {
     
     handleSubmit(event) {
         if (this.state.action !== '' && this.state.reaction !== '' ) {
+            localStorage.setItem("action", this.state.action)
+            localStorage.setItem("reaction", this.state.reaction)
             this.setState({valid: true})
         }
         event.preventDefault();

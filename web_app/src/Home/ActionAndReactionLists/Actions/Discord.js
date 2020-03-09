@@ -3,8 +3,9 @@ import React from "react"
 export default class ActionDiscord extends React.Component {
     constructor(props) {
         super(props)
+
         this.state = {
-            actions: JSON.parse(localStorage.getItem("actions"))["discord"],
+            // actions: JSON.parse(localStorage.getItem("actionParams")),
             serveur: null,
             channel: null,
             message: null
@@ -24,9 +25,13 @@ export default class ActionDiscord extends React.Component {
     }
 
     render() {
-        console.log(this.state.actions)
+        // let actions = JSON.parse(localStorage.getItem("actionParams"));
+        // actions.forEach(element => {
+        //     console.log(element)
+        // })
+        console.log(JSON.parse(localStorage.getItem("actionsParams")))
         return (
-            <div>Actions de Discord
+            <div>Selectionnez une action de Discord
                 <form>
                     Message <br/>
                     Serveur
