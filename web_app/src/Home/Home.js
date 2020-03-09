@@ -5,18 +5,23 @@ import {Redirect} from 'react-router-dom'
 class CreateArea extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: '', valid: false};
+        this.state = {value: '', reaction: '',valid: false};
     
         this.handleChangeAction = this.handleChangeAction.bind(this);
+        this.handleChangeReaction = this.handleChangeReaction.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     handleChangeAction(event) {
-        this.setState({action: event.target.action});
+        this.setState({action: event.target.value});
+    }
+
+    handleChangeReaction(event) {
+        this.setState({reaction: event.target.value});
     }
     
     handleSubmit(event) {
-        if (this.state.action !== '') {
+        if (this.state.action !== '' && this.state.reaction !== '' ) {
             this.setState({valid: true})
         }
         event.preventDefault();
@@ -32,14 +37,26 @@ class CreateArea extends React.Component {
             <form onSubmit={this.handleSubmit}>
                <label>
                 Choisissez votre Action:
-                <select action={this.state.action} onChange={this.handleChangeAction}>
+                <select value={this.state.action} onChange={this.handleChangeAction}>
                     <option />
-                    <option action="Discord">Discord</option>
-                    <option action="Dropbox">DropBox</option>
-                    <option action="Github">GitHub</option>
-                    <option action="Spotify">Sportify</option>
+                    <option value="Discord">Discord</option>
+                    <option value="Dropbox">DropBox</option>
+                    <option value="Github">GitHub</option>
+                    <option value="Spotify">Sportify</option>
                 </select>
                 </label>
+                <br/>
+               <label>
+                Choisissez votre Reaction:
+                <select value={this.state.reaction} onChange={this.handleChangeReaction}>
+                    <option />
+                    <option value="Discord">Discord</option>
+                    <option value="Dropbox">DropBox</option>
+                    <option value="Github">GitHub</option>
+                    <option value="Spotify">Sportify</option>
+                </select>
+                </label>
+                <br/>
                 <input type="submit" value="Envoyer" />
             </form>
         );
