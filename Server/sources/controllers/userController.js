@@ -56,6 +56,7 @@ exports.login = async(req, res) => {
 
         res.status(200).send({data: token});
     } catch (err) {
+        console.log(err);
         if (!err.errmsg) res.status(400).send({error: err});
         else res.status(400).send({error: err.errmsg});
     }

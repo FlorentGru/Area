@@ -8,9 +8,34 @@ const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 const Area = mongoose.model('Area');
 
+const crypto = require('crypto'),
+    algorithm = 'aes-256-ecb',
+    key = new Buffer(process.env.ENCRYPTION_KEY, 'hex');
+
+function encrypt(text){
+    let iv = new Buffer('');
+    const cipher = crypto.createCipheriv(algorithm, key, iv);
+    let crypted = cipher.update(text,'utf8','hex');
+    crypted += cipher.final('hex');
+    return crypted;
+}
+
+function decrypt(text){
+    let iv = new Buffer('');
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    let dec = decipher.update(text,'hex','utf8');
+    dec += decipher.final('utf8');
+    return dec;
+}
+
+
 exports.login = async function(email, password)
 {
     if (!email || !password) throw ('Invalid body');
+
+    const crypt = encrypt(password);
+    console.log(password);
+    console.log(decrypt(crypt));
 
     const user = await User.findByCredentials(email, password);
 
@@ -21,6 +46,10 @@ exports.login = async function(email, password)
 exports.createUser = async function(email, name, password)
 {
     if (!email || !name || !password) throw ('Invalid body');
+
+    const crypt = encrypt(password);
+    console.log(password);
+    console.log(decrypt(crypt));
 
     const userBody = {
         email: email,
