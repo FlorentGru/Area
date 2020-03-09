@@ -40,7 +40,7 @@ export default class ActionDiscord extends React.Component {
                     <input type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
                     message
                     <input type="text" name="message" onChange={this.myChangeHandler}/> <br/>
-                    <input type="submit"/> <br/>
+                    <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
                 <form>
@@ -49,7 +49,7 @@ export default class ActionDiscord extends React.Component {
                     <input type="text"/> <br/>
                     channel
                     <input type="text"/> <br/>
-                    <input type="submit"/>
+                    <input type="submit" value="Create Action"/>
                 </form>                
             </div>
         )
