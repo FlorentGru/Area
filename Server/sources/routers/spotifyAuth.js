@@ -30,7 +30,7 @@ router.get('/oauth2/spotify', auth, async (req, res) => {
     try {
         const callback = req.query.callback;
         if (!callback) throw ("missing callback");
-        var scopes = ['user-read-private', 'user-read-email'],
+        var scopes = ['user-modify-playback-state', 'playlist-modify-public', 'playlist-modify-private', 'app-remote-control', 'playlist-read-private'],
             redirectUri = `${process.env.SERVER_ADDRESS}/oauth2/spotify/callback`,
             clientId = process.env.SPOTIFY_CLIENT_ID,
             state = req.user.id.toString() + '%20' + callback;
@@ -69,7 +69,7 @@ router.get('/oauth2/spotify/callback', async (req, res) => {
             });
         var json = await response.json();
         console.log(json);
-        await oauth.updateToken(userId, json.access_token, refresh_token, "spotify");
+        await oauth.updateToken(userId, json.access_token, json.refresh_token, "spotify");
         res.redirect(callback);
     } catch (err) {
         console.log("ERROR: ", err);
