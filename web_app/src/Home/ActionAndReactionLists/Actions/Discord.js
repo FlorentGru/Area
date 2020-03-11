@@ -5,7 +5,6 @@ export default class ActionDiscord extends React.Component {
         super(props)
 
         this.state = {
-            // actions: JSON.parse(localStorage.getItem("actionParams")),
             serveur: null,
             channel: null,
             message: null
@@ -25,16 +24,11 @@ export default class ActionDiscord extends React.Component {
     }
 
     render() {
-        // let actions = JSON.parse(localStorage.getItem("actionParams"));
-        // actions.forEach(element => {
-        //     console.log(element)
-        // })
-        console.log(JSON.parse(localStorage.getItem("actionsParams")))
         return (
             <div>Selectionnez une action de Discord
                 <form>
                     Message <br/>
-                    Serveur
+                    serveur
                     <input type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
                     channel
                     <input type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
@@ -45,10 +39,10 @@ export default class ActionDiscord extends React.Component {
                 <br/>
                 <form>
                     Mention <br/>
-                    Serveur
-                    <input type="text"/> <br/>
+                    serveur
+                    <input type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
                     channel
-                    <input type="text"/> <br/>
+                    <input type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/>
                 </form>                
             </div>

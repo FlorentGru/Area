@@ -1,11 +1,8 @@
 import React from 'react'
 import Discord from './Discord'
-// import GitHub from './Github'
-// import Slack from './Slack'
-// import Timer from './Timer'
-// import Zoho from './Zoho'
-// import Dropbox from './Dropbox'
-// import Gmail from './Gmail'
+import GitHub from './Github'
+import Timer from './Timer'
+import Dropbox from './Dropbox'
 
 export default class SelectAction extends React.Component {
     render() {
@@ -14,9 +11,24 @@ export default class SelectAction extends React.Component {
             return (
                 <Discord/>
             )
+        if (action === "Timer") {
+            return (
+                <Timer/>
+            )
+        }
+        if (action === "Github") {
+            return (
+                <GitHub/>
+            )
+        }
+        if (action === "Dropbox") {
+            return (
+                <Dropbox/>
+            )
+        }
         else
             return (
-                <div>Action Inconnue</div>
+                <div>Une Erreur est survenue: Action Inconnue</div>
             )
     }
 }
