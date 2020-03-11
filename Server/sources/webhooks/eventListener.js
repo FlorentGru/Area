@@ -8,7 +8,7 @@ const githubA = require('./githubAction');
 const discordR = require('../services/discordReaction');
 const discordA = require('../webhooks/discordAction');
 const mailR = require('../services/mailReaction');
-const spotifyR = require('../services/spotifyReaction');
+const spotifyR = require('../reactions/spotifyReaction');
 const dropboxA = require('./dropboxAction');
 const timer = require('./timerAction');
 

@@ -209,6 +209,22 @@ exports.getReactions = async (req, res) => {
                     value: "String"
                 }
             ]
+        },
+        {
+            service: "spotify",
+            name: "addSong",
+            params: []
+
+        },
+        {
+            service: "spotify",
+            name: "playSong",
+            params: []
+        },
+        {
+            service: "spotify",
+            name: "pause",
+            params: []
         }
     ];
     res.status(200).send({data: reactions});
