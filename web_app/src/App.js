@@ -5,7 +5,7 @@ import AddressPage from './Adress'
 import LoginPage from './LoginPage/Login'
 import RegisterPage from './LoginPage/Register'
 import SelectAction from './Home/ActionAndReactionLists/Actions/SelectAction'
-// import SelectReaction from './Home/CreateArea/SelectReaction'
+import SelectReaction from './Home/ActionAndReactionLists/Reactions/SelectReaction'
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <Route path="/Login" component={LoginPage}/>
       <Route path="/Register" component={RegisterPage}/>
       <Route path="/SelectAction" component={SelectAction}/>
-      {/* <Route path="/SelectReaction" component={SelectReaction}/> */}
+      <Route path="/SelectReaction" component={SelectReaction}/>
     </Router>
   );
 }
