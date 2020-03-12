@@ -53,9 +53,10 @@ class CreateArea extends React.Component {
                 <select value={this.state.reaction} onChange={this.handleChangeReaction}>
                     <option />
                     <option value="Discord">Discord</option>
-                    <option value="Dropbox">DropBox</option>
-                    <option value="Github">GitHub</option>
-                    <option value="Spotify">Sportify</option>
+                    <option value="Github">Github</option>
+                    <option value="Gmail">Gmail</option>
+                    <option value="Slack">Slack</option>
+                    <option value="Zoho">Zoho</option>
                 </select>
                 </label>
                 <br/>

@@ -1,12 +1,11 @@
 import React from "react"
 
-export default class ReactionDiscord extends React.Component {
+export default class ReactionSlack extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            webhookId: null,
-            webhookToken: null
+            hook: null
         }
     }
 
@@ -17,19 +16,17 @@ export default class ReactionDiscord extends React.Component {
     }
 
     onSubmit = () => {
-        console.log(this.webhookId)
-        console.log(this.webhookToken)
+        console.log(this.hook)
+        console.log(this.subject)
     }
 
     render() {
         return (
-            <div>Selectionnez une action de Discord
+            <div>Selectionnez une action de Slack
                 <form>
                     Message <br/>
-                    webhookId
-                    <input type="text" name="webhookId" onChange={this.myChangeHandler}/> <br/>
-                    webhookToken
-                    <input type="text" name="webhookToken" onChange={this.myChangeHandler}/> <br/>
+                    hook
+                    <input type="text" name="hook" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>
