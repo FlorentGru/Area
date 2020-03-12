@@ -1,4 +1,5 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
 
 export default class ActionDiscord extends React.Component {
     constructor(props) {
@@ -7,8 +8,25 @@ export default class ActionDiscord extends React.Component {
         this.state = {
             serveur: null,
             channel: null,
-            message: null
+            message: null,
+            valid: false
         }
+    }
+
+    mySubmitHandlerMessage = (event) => {
+        event.preventDefault();
+        console.log(this.state.serveur)
+        console.log(this.state.channel)
+        console.log(this.state.message)
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerMention = (event) => {
+        event.preventDefault();
+        console.log(this.state.serveur)
+        console.log(this.state.channel)
+        console.log(this.state.message)
+        this.setState({valid: true})
     }
 
     myChangeHandler = (event) => {
@@ -17,32 +35,29 @@ export default class ActionDiscord extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.serveur)
-        console.log(this.channel)
-        console.log(this.message)
-    }
-
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/SelectReaction"/>)
+        }
         return (
             <div>Selectionnez une action de Discord
-                <form>
+                <form onSubmit={this.mySubmitHandlerMessage}>
                     Message <br/>
                     serveur
-                    <input type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
+                    <input required={true} type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
                     channel
-                    <input type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
+                    <input required={true} type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
                     message
-                    <input type="text" name="message" onChange={this.myChangeHandler}/> <br/>
+                    <input required={true} type="text" name="message" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
+                <form onSubmit={this.mySubmitHandlerMention}>
                     Mention <br/>
                     serveur
-                    <input type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
+                    <input required={true} type="text" name="serveur" onChange={this.myChangeHandler}/> <br/>
                     channel
-                    <input type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
+                    <input required={true} type="text" name="channel" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/>
                 </form>                
             </div>
