@@ -1,4 +1,5 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
 
 export default class ActionDropbox extends React.Component {
     constructor(props) {
@@ -8,7 +9,8 @@ export default class ActionDropbox extends React.Component {
             deleted: null,
             create: null,
             rename: null,
-            pathChanged: null
+            pathChanged: null,
+            valid: false
         }
     }
 
@@ -18,28 +20,32 @@ export default class ActionDropbox extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
+    mySubmitHandler = () => {
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return(<Redirect to="/SelectReaction"/>)
+        }
         return (
             <div>Selectionnez une action de Dropbox
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Deleted <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Create <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Rename <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Path Changed <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>

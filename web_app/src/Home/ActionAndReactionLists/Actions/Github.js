@@ -16,13 +16,20 @@ export default class ActionGithub extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
+    mySubmitHandlerPush = () => {
+        console.log("push")
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerPull = () => {
+        console.log("pull")
+        this.setState({valid: true})
     }
 
     render() {
         return (
             <div>Selectionnez une action de Github
-                <form>
+                <form onSubmit={this.mySubmitHandlerPush}>
                     Push <br/>
                     owner
                     <input type="text" name="owner" onChange={this.myChangeHandler}/> <br/>
@@ -31,8 +38,8 @@ export default class ActionGithub extends React.Component {
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
-                    Push <br/>
+                <form onSubmit={this.mySubmitHandlerPull}>
+                    Pull Request <br/>
                     owner
                     <input type="text" name="owner" onChange={this.myChangeHandler}/> <br/>
                     repo
