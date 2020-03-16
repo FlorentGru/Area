@@ -13,6 +13,7 @@ import com.example.area.R
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.service.*
 import kotlinx.android.synthetic.main.service_reaction.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 class Service_Reaction : AppCompatActivity() {
@@ -41,11 +42,16 @@ class Service_Reaction : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.service_reaction)
         baseUrl = this?.intent?.getStringExtra("baseUrl")!!
-        var Actions = this?.intent?.getStringArrayExtra("Action")
+        //var Actions = this?.intent?.getStringArrayExtra("Action")
 
         var Reactions = Reactions()
         val jsonobj = JSONObject()
+        val jsonArrayAction = JSONArray()
+        val jsonArrayReaction = JSONArray()
+        val transferReaction = JSONObject()
+        val transferAction = JSONObject()
         val url = "$baseUrl/area/new"
+        var message : String
 
         _buttonIssueGithub = findViewById(R.id.sendButtonGithub)
         _buttonsendToGmail = findViewById(R.id.sendButtonGmail)
@@ -64,24 +70,35 @@ class Service_Reaction : AppCompatActivity() {
             Reactions.name = GithubNameIssue
             Reactions.params = Param(ParamOwner, "String")
             Reactions.params = Param(ParamRepo, "String")
-            //jsonobj.put("service",Action.service)
-            //jsonobj.put("name",Action.name)
-            //jsonobj.put("params", Action.params)
-            jsonobj.put("service",Reactions.service)
-            jsonobj.put("name",Reactions.name)
-            jsonobj.put("params", Reactions.params)
 
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(
-                Request.Method.POST, url, jsonobj,
-                Response.Listener {
-                        response ->
-                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+            transferAction.put("Service", "Ta mere ACTION")
+            transferAction.put("Sname", "Ta mere ACTION")
+            transferAction.put("params", "Ta mere ACTION")
 
-                }, Response.ErrorListener {
-                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
-                })
-            que.add(req)
+            jsonArrayAction.put(transferAction)
+            jsonobj.put("Action", jsonArrayAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonArrayReaction.put(transferReaction)
+            jsonobj.put("Reaction", jsonArrayReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            //val que = Volley.newRequestQueue(this)
+            //val req = JsonObjectRequest(
+            //    Request.Method.POST, url, jsonobj,
+            //    Response.Listener {
+            //            response ->
+            //        Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+
+            //    }, Response.ErrorListener {
+            //        Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+            //   })
+            //que.add(req)
 
         }
 
