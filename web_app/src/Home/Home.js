@@ -21,9 +21,14 @@ class CreateArea extends React.Component {
     }
     
     handleSubmit(event) {
+        let area = {
+            "action": null,
+            "reaction": null
+        }
         if (this.state.action !== '' && this.state.reaction !== '' ) {
             localStorage.setItem("action", this.state.action)
             localStorage.setItem("reaction", this.state.reaction)
+            localStorage.setItem("area", JSON.stringify(area))
             this.setState({valid: true})
         }
         event.preventDefault();
@@ -60,7 +65,7 @@ class CreateArea extends React.Component {
                 </select>
                 </label>
                 <br/>
-                <input type="submit" value="Envoyer" />
+                <input type="submit" value="Create Area" />
             </form>
         );
     }

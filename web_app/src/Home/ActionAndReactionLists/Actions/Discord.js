@@ -1,6 +1,13 @@
 import React from "react"
 import {Redirect} from 'react-router-dom'
 
+
+let action = {
+    "service": "discord",
+    "name": null,
+    "params": null
+}
+
 export default class ActionDiscord extends React.Component {
     constructor(props) {
         super(props)
@@ -15,17 +22,45 @@ export default class ActionDiscord extends React.Component {
 
     mySubmitHandlerMessage = (event) => {
         event.preventDefault();
-        console.log(this.state.serveur)
-        console.log(this.state.channel)
-        console.log(this.state.message)
+        action.name = "message"
+        action.params = [{
+            "name": "serveur",
+            "value": this.state.serveur
+        }, {
+            "name": "channel",
+            "value": this.state.channel
+        }, {
+            "name": "serveur",
+            "value": this.state.message
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        // console.log(this.state.serveur)
+        // console.log(this.state.channel)
+        // console.log(this.state.message)
         this.setState({valid: true})
     }
 
     mySubmitHandlerMention = (event) => {
         event.preventDefault();
-        console.log(this.state.serveur)
-        console.log(this.state.channel)
-        console.log(this.state.message)
+        action.name = "mention"
+        action.params = [{
+            "name": "serveur",
+            "value": this.state.serveur
+        }, {
+            "name": "channel",
+            "value": this.state.channel
+        }, {
+            "name": "serveur",
+            "value": this.state.message
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        // console.log(this.state.serveur)
+        // console.log(this.state.channel)
+        // console.log(this.state.message)
         this.setState({valid: true})
     }
 
