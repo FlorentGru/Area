@@ -7,11 +7,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 
-const dropboxA = require("../webhooks/dropboxAction");
+const dropboxA = require("../actions/dropboxAction");
 
 const router = express.Router();
 
-const oauth = require('../models/updateToken');
+const oauth = require('../services/tokenService');
 
 const dropboxV2Api = require('dropbox-v2-api');
 let dropbox = dropboxV2Api.authenticate({

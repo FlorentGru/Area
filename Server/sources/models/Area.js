@@ -47,6 +47,6 @@ const mongoDBSchema = new mongoose.Schema({
     }]
 });
 
-const AreActions = mongoose.model('AreActions', mongoDBSchema);
+const Area = mongoose.model('Area', mongoDBSchema);
 
-module.exports = AreActions;
+module.exports = Area;

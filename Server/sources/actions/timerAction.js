@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 
-const eventEmitter = require('./eventEmitter');
-const listener = require('./eventListener');
+const eventEmitter = require('../webhooks/eventEmitter');
+const listener = require('../webhooks/eventListener');
 
 exports.act = async function(userId, action, reaction) {
     const hours = action.params.find(({ name }) => name === 'hours');

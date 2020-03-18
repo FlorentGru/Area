@@ -2,7 +2,7 @@ version: "3"
 services:
     api:
         build: 
-            context: ./server
+            context: ./Server
             dockerfile: Dockerfile
         image: api
         ports: 
@@ -30,11 +30,6 @@ services:
         depends_on: 
             - mobile_client
             - api
-        volumes: 
-            - /app/node_modules
-            - ./web_app:/app
-            - apk:/var/www/:ro
-            
     db:
         image: "mongo"
         ports:

@@ -3,16 +3,12 @@
 const Discord = require('discord.js');
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
+const Area = mongoose.model('Area');
 
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
 
 let client = new Discord.Client();
-
-client.setMaxListeners(0);
 
 client.on("ready", () => {
     console.log('bot ready');
@@ -35,7 +31,7 @@ exports.restart = restart;
 
 const trigger = function () {
     client.on('message', message => {
-        AreActions.aggregate([
+        Area.aggregate([
             {
                 "$project": {
                     "userId": 1,
