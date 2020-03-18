@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let action = {
+    "service": "discord",
+    "name": null,
+    "params": null
+}
 
 export default class ActionTimer extends React.Component {
     constructor(props) {
@@ -7,7 +14,8 @@ export default class ActionTimer extends React.Component {
         this.state = {
             hours: null,
             minutes: null,
-            message: null
+            message: null,
+            valid: false
         }
     }
 
@@ -17,16 +25,49 @@ export default class ActionTimer extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.hours)
-        console.log(this.minutes)
-        console.log(this.message)
+    mySubmitHandlerCountdown = () => {
+        action.name = "countdown"
+        action.params = [{
+            "name": "hours",
+            "value": this.state.hours
+        }, {
+            "name": "minutes",
+            "value": this.state.minutes
+        }, {
+            "name": "message",
+            "value": this.state.message
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerLoop = () => {
+        action.name = "loop"
+        action.params = [{
+            "name": "hours",
+            "value": this.state.hours
+        }, {
+            "name": "minutes",
+            "value": this.state.minutes
+        }, {
+            "name": "message",
+            "value": this.state.message
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/SelectReaction"/>)
+        }
         return (
             <div>Selectionnez une action de Timer
-                <form>
+                <form onSubmit={this.mySubmitHandlerCountdown}>
                     Countdown <br/>
                     hours
                     <input type="text" name="hours" onChange={this.myChangeHandler}/> <br/>
@@ -37,7 +78,7 @@ export default class ActionTimer extends React.Component {
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form>
+                <form onSubmit={this.mySubmitHandlerLoop}>
                     Loop <br/>
                     hours
                     <input type="text" name="hours" onChange={this.myChangeHandler}/> <br/>

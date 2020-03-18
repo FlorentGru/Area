@@ -1,6 +1,13 @@
 import React from "react"
 import {Redirect} from 'react-router-dom'
 
+let action = {
+    "service": "dropbox",
+    "name": null,
+    "params": null
+}
+
+
 export default class ActionDropbox extends React.Component {
     constructor(props) {
         super(props)
@@ -20,7 +27,39 @@ export default class ActionDropbox extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    mySubmitHandler = () => {
+    mySubmitHandlerDeleted = () => {
+        action.name = "deleted"
+        action.params = []
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerCreated = () => {
+        action.name = "created"
+        action.params = []
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerRenamed = () => {
+        action.name = "renamed"
+        action.params = []
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerPath = () => {
+        action.name = "path changed"
+        action.params = []
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
         this.setState({valid: true})
     }
 
@@ -30,22 +69,22 @@ export default class ActionDropbox extends React.Component {
         }
         return (
             <div>Selectionnez une action de Dropbox
-                <form onSubmit={this.mySubmitHandler}>
+                <form onSubmit={this.mySubmitHandlerDeleted}>
                     Deleted <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form onSubmit={this.mySubmitHandler}>
+                <form onSubmit={this.mySubmitHandlerCreated}>
                     Create <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form onSubmit={this.mySubmitHandler}>
+                <form onSubmit={this.mySubmitHandlerRenamed}>
                     Rename <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
-                <form onSubmit={this.mySubmitHandler}>
+                <form onSubmit={this.mySubmitHandlerPath}>
                     Path Changed <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>

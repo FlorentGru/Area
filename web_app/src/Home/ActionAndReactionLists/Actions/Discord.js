@@ -1,7 +1,6 @@
 import React from "react"
 import {Redirect} from 'react-router-dom'
 
-
 let action = {
     "service": "discord",
     "name": null,
@@ -36,9 +35,6 @@ export default class ActionDiscord extends React.Component {
         let area = JSON.parse(localStorage.getItem("area"));
         area.action = action
         localStorage.setItem("area", JSON.stringify(area))
-        // console.log(this.state.serveur)
-        // console.log(this.state.channel)
-        // console.log(this.state.message)
         this.setState({valid: true})
     }
 
@@ -58,9 +54,6 @@ export default class ActionDiscord extends React.Component {
         let area = JSON.parse(localStorage.getItem("area"));
         area.action = action
         localStorage.setItem("area", JSON.stringify(area))
-        // console.log(this.state.serveur)
-        // console.log(this.state.channel)
-        // console.log(this.state.message)
         this.setState({valid: true})
     }
 

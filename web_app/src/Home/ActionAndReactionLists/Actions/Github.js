@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let action = {
+    "service": "github",
+    "name": null,
+    "params": null
+}
 
 export default class ActionGithub extends React.Component {
     constructor(props) {
@@ -17,16 +24,40 @@ export default class ActionGithub extends React.Component {
     }
 
     mySubmitHandlerPush = () => {
-        console.log("push")
+        alert("ici")
+        action.name = "push"
+        action.params = [{
+            "name": "owner",
+            "value": this.state.owner
+        }, {
+            "name": "repo",
+            "value": this.state.repo
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
         this.setState({valid: true})
     }
 
     mySubmitHandlerPull = () => {
-        console.log("pull")
+        action.name = "pullRequest"
+        action.params = [{
+            "name": "owner",
+            "value": this.state.owner
+        }, {
+            "name": "repo",
+            "value": this.state.repo
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.action = action
+        localStorage.setItem("area", JSON.stringify(area))
         this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/SelectReaction"/>)
+        }
         return (
             <div>Selectionnez une action de Github
                 <form onSubmit={this.mySubmitHandlerPush}>
