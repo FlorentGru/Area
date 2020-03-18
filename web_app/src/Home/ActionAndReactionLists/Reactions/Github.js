@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let reaction = {
+    "service": "github",
+    "name": null,
+    "params": null
+}
 
 export default class ReactionGmail extends React.Component {
     constructor(props) {
@@ -6,7 +13,8 @@ export default class ReactionGmail extends React.Component {
 
         this.state = {
             owner: null,
-            repo: null
+            repo: null,
+            valid: false
         }
     }
 
@@ -16,15 +24,28 @@ export default class ReactionGmail extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.owner)
-        console.log(this.repo)
+    mySubmitHandler = () => {
+        reaction.name = "issue"
+        reaction.params = [{
+            "name": "owner",
+            "value": this.state.owner
+        }, {
+            "name": "repo",
+            "value": this.state.repo
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/Home"/>)
+        }
         return (
             <div>Selectionnez une action de Github
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Issue <br/>
                     owner
                     <input type="text" name="owner" onChange={this.myChangeHandler}/> <br/>

@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let reaction = {
+    "service": "slack",
+    "name": null,
+    "params": null
+}
 
 export default class ReactionSlack extends React.Component {
     constructor(props) {
@@ -15,15 +22,25 @@ export default class ReactionSlack extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.hook)
-        console.log(this.subject)
+    mySubmitHandler = () => {
+        reaction.name = "message"
+        reaction.params = [{
+            "name": "hook",
+            "value": this.state.hook
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/Home"/>)
+        }
         return (
             <div>Selectionnez une action de Slack
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Message <br/>
                     hook
                     <input type="text" name="hook" onChange={this.myChangeHandler}/> <br/>

@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let reaction = {
+    "service": "discord",
+    "name": null,
+    "params": null
+}
 
 export default class ReactionDiscord extends React.Component {
     constructor(props) {
@@ -6,7 +13,8 @@ export default class ReactionDiscord extends React.Component {
 
         this.state = {
             webhookId: null,
-            webhookToken: null
+            webhookToken: null,
+            valid: false
         }
     }
 
@@ -16,15 +24,28 @@ export default class ReactionDiscord extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.webhookId)
-        console.log(this.webhookToken)
+    mySubmitHandler = () => {
+        reaction.name = "message"
+        reaction.params = [{
+            "name": "webhookId",
+            "value": this.state.webhookId
+        }, {
+            "name": "webhookToken",
+            "value": this.state.webhookToken
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return (<Redirect to="/Home"/>)
+        }
         return (
             <div>Selectionnez une action de Discord
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Message <br/>
                     webhookId
                     <input type="text" name="webhookId" onChange={this.myChangeHandler}/> <br/>

@@ -1,4 +1,11 @@
 import React from "react"
+import {Redirect} from 'react-router-dom'
+
+let reaction = {
+    "service": "zoho",
+    "name": null,
+    "params": null
+}
 
 export default class ReactionZoho extends React.Component {
     constructor(props) {
@@ -6,7 +13,8 @@ export default class ReactionZoho extends React.Component {
 
         this.state = {
             dest: null,
-            subject: null
+            subject: null,
+            valid: false
         }
     }
 
@@ -16,15 +24,29 @@ export default class ReactionZoho extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    onSubmit = () => {
-        console.log(this.dest)
-        console.log(this.subject)
+    mySubmitHandler = () => {
+        reaction.name = "message"
+        reaction.params = [{
+            "name": "dest",
+            "value": this.state.dest
+        }, {
+            "name": "subject",
+            "value": this.state.subject
+        }]
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        console.log(area)
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
     }
 
     render() {
+        if (this.state.valid) {
+            return(<Redirect to="/Home"/>)
+        }
         return (
             <div>Selectionnez une action de Zoho
-                <form>
+                <form onSubmit={this.mySubmitHandler}>
                     Send To <br/>
                     dest
                     <input type="text" name="dest" onChange={this.myChangeHandler}/> <br/>
