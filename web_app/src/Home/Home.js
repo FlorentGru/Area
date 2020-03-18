@@ -62,6 +62,7 @@ class CreateArea extends React.Component {
                     <option value="Gmail">Gmail</option>
                     <option value="Slack">Slack</option>
                     <option value="Zoho">Zoho</option>
+                    <option value="Spotify">Spotify</option>
                 </select>
                 </label>
                 <br/>

@@ -2,18 +2,19 @@ import React from "react"
 import {Redirect} from 'react-router-dom'
 
 let reaction = {
-    "service": "zoho",
+    "service": "spotify",
     "name": null,
-    "params": null
+    "params": []
 }
 
-export default class ReactionZoho extends React.Component {
+export default class ReactionSpotify extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            dest: null,
-            subject: null,
+            playSong: null,
+            addSong: null,
+            pause: null,
             valid: false
         }
     }
@@ -24,15 +25,8 @@ export default class ReactionZoho extends React.Component {
         this.setState({[event.target.name]: value});
     }
 
-    mySubmitHandler = () => {
-        reaction.name = "message"
-        reaction.params = [{
-            "name": "dest",
-            "value": this.state.dest
-        }, {
-            "name": "subject",
-            "value": this.state.subject
-        }]
+    mySubmitHandlerPlaySong = () => {
+        reaction.name = "playSong"
         let area = JSON.parse(localStorage.getItem("area"));
         area.reaction = reaction
         localStorage.setItem("area", JSON.stringify(area))
@@ -45,12 +39,18 @@ export default class ReactionZoho extends React.Component {
         }
         return (
             <div>Selectionnez une action de Zoho
-                <form onSubmit={this.mySubmitHandler}>
-                    Send To <br/>
-                    dest
-                    <input type="text" name="dest" onChange={this.myChangeHandler}/> <br/>
-                    subject
-                    <input type="text" name="subject" onChange={this.myChangeHandler}/> <br/>
+                <form onSubmit={this.mySubmitHandlerPlaySong}>
+                    Play Song <br/>
+                    <input type="submit" value="Create Reaction"/> <br/>
+                </form>
+                <br/>
+                <form onSubmit={this.mySubmitHandlerPlaySong}>
+                    Add Song <br/>
+                    <input type="submit" value="Create Reaction"/> <br/>
+                </form>
+                <br/>
+                <form onSubmit={this.mySubmitHandlerPlaySong}>
+                    Pause <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>

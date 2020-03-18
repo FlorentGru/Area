@@ -4,6 +4,7 @@ import GitHub from './Github'
 import Gmail from './Gmail'
 import Slack from './Slack'
 import Zoho from './Zoho'
+import Spotify from './Spotify'
 
 export default class SelectReaction extends React.Component {
     render() {
@@ -30,6 +31,11 @@ export default class SelectReaction extends React.Component {
         if (reaction === "Zoho") {
             return (
                 <Zoho/>
+            )
+        }
+        if (reaction === "Spotify") {
+            return(
+                <Spotify/>
             )
         }
         return (
