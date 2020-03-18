@@ -29,7 +29,7 @@ class Service_Reaction : AppCompatActivity() {
         @SerializedName("name")
         var name: String? = null,
         @SerializedName("params")
-        var params: Param? = null
+        var params: List<Param>? = null
     )
 
     private lateinit var baseUrl :String
@@ -68,8 +68,7 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = GithubService
             Reactions.name = GithubNameIssue
-            Reactions.params = Param(ParamOwner, "String")
-            Reactions.params = Param(ParamRepo, "String")
+            Reactions.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
 
             transferAction.put("Service", "Ta mere ACTION")
             transferAction.put("Sname", "Ta mere ACTION")
@@ -110,8 +109,7 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = GmailService
             Reactions.name = GmailNamesendTo
-            Reactions.params = Param(ParamDest, "email")
-            Reactions.params = Param(ParamSubject, "String")
+            Reactions.params = listOf<Param>(Param(ParamDest, "email"), Param(ParamSubject, "String"))
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
@@ -135,8 +133,7 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = ZohoService
             Reactions.name = ZohoNamesendTo
-            Reactions.params = Param(ParamDest, "email")
-            Reactions.params = Param(ParamSubject, "String")
+            Reactions.params = listOf<Param>(Param(ParamDest, "email"), Param(ParamSubject, "String"))
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
@@ -160,8 +157,7 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = DiscordService
             Reactions.name = DiscordNameMessage
-            Reactions.params = Param(ParamWebhookId, "String")
-            Reactions.params = Param(ParamWebhooktoken, "String")
+            Reactions.params = listOf<Param>(Param(ParamWebhookId, "String"), Param(ParamWebhooktoken, "String"))
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
