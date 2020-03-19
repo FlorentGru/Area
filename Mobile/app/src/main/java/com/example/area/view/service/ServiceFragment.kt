@@ -33,8 +33,13 @@ class ServiceFragment : Fragment() {
         @SerializedName ("name")
         var name: String? = null,
         @SerializedName ("params")
+<<<<<<< HEAD
         var params: Param? = null
     )
+=======
+        var params: List<Param> ? = null
+    ) : Serializable
+>>>>>>> 1fd3cb259a04184164becf2f8a3a6bf305487dc4
 
     private var _view: View? = null
     private lateinit var _buttongmail : Button
@@ -81,8 +86,7 @@ class ServiceFragment : Fragment() {
 
             Action.service = GithubService
             Action.name = GithubNamePush
-            Action.params = Param(ParamOwner, "String")
-            Action.params = Param(ParamRepo, "String")
+            Action.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
             Toast.makeText(activity, GithubService + GithubNamePush, Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -99,8 +103,7 @@ class ServiceFragment : Fragment() {
 
             Action.service = GithubService
             Action.name = GithubNamePullrequest
-            Action.params = Param(ParamOwner, "String")
-            Action.params = Param(ParamRepo, "String")
+            Action.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
             Toast.makeText(activity, GithubService, Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -152,9 +155,7 @@ class ServiceFragment : Fragment() {
 
             Action.service= DiscordService
             Action.name = DiscordNameMessage
-            Action.params = Param(ParamServer, "String")
-            Action.params = Param(ParamChannel, "String")
-            Action.params = Param(ParamTrigger, "String")
+            Action.params = listOf<Param>(Param(ParamServer, "String"), Param(ParamChannel, "String"), Param(ParamTrigger, "String"))
             Toast.makeText(activity, "Discord Message", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -172,9 +173,7 @@ class ServiceFragment : Fragment() {
 
             Action.service = TimerService
             Action.name = TimerNameCountdown
-            Action.params = Param(ParamHours, "integer")
-            Action.params = Param(ParamMinutes, "integer")
-            Action.params = Param(ParamMessage, "String")
+            Action.params = listOf<Param>(Param(ParamHours, "integer"), Param(ParamMinutes, "integer"), Param(ParamMessage, "String"))
             Toast.makeText(activity, "Count Timer", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -192,9 +191,7 @@ class ServiceFragment : Fragment() {
 
             Action.service = TimerService
             Action.name = TimerNameLoop
-            Action.params = Param(ParamHours, "integer")
-            Action.params = Param(ParamMinutes, "integer")
-            Action.params = Param(ParamMessage, "String")
+            Action.params = listOf<Param>(Param(ParamHours, "integer"), Param(ParamMinutes, "integer"), Param(ParamMessage, "String"))
             Toast.makeText(activity, "Loop Timer", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
