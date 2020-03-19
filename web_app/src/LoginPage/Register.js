@@ -16,7 +16,7 @@ export default class RegisterPage extends React.Component {
     }
 
     returnLoginPage = () => {
-        this.props.history.push("/")
+        this.props.history.push("/Login")
     }
 
     myChangeHandler = (event) => {
@@ -39,7 +39,7 @@ export default class RegisterPage extends React.Component {
         if (err === 0) {
             let status = await registerUser(this.state.username, this.state.password, this.state.email)
             if (status === 201)
-                this.props.history.push('/Home')
+                this.props.history.push('/Login')
         }
     }
     render() {

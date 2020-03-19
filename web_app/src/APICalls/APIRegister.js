@@ -4,7 +4,7 @@ export default async function registerUser(user_name, user_password, user_email)
     try {
         const response = await axios({
             method: "post",
-            url: `${localStorage.getItem("address")}/auth/register`,
+            url: `${localStorage.getItem("address")}/user/register`,
             headers: {'Content-Type': 'application/json'},
             data: {
                 "email": user_email,

@@ -1,45 +1,12 @@
 const axios = require('axios').default
 
-export default async function DiscordMessage() {
+export default async function AreaCreation(mydata) {
     try {
         const response = await axios({
             method: "post",
-            url: `${localStorage.getItem("address")}/area/new`,
+            url: `${localStorage.getItem("address")}/user/areas/new`,
             headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`},
-            data: {
-                "action": {
-                    "service": "timer",
-                    "name": "countdown",
-                    "params" : [
-                        {
-                            "name": "hours",
-                            "value": 0
-                        },
-                        {
-                            "name": "minutes",
-                            "value": 1
-                        },
-                        {
-                            "name": "message",
-                            "value": "Hello Word"
-                        }
-                    ]
-                },
-                "reaction": {
-                    "service": "gmail",
-                    "name": "sendTo",
-                    "params" : [
-                        {
-                            "name": "dest",
-                            "value": "lucas.huet-de-guerville@epitech.eu"
-                        },
-                        {
-                            "name": "subject",
-                            "value": "Area"
-                        }
-                    ]
-                }
-            }
+            data: mydata
         });
         console.log(response)
         return (200)

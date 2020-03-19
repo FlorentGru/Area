@@ -2,7 +2,7 @@ import React from "react"
 import {Redirect} from 'react-router-dom'
 
 let action = {
-    "service": "discord",
+    "service": "timer",
     "name": null,
     "params": null
 }

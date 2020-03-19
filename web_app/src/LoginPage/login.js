@@ -8,44 +8,24 @@ import logoTimer from '../logo/timer.png'
 import logoZoho from '../logo/zoho.png'
 import logoDropBox from '../logo/dropbox.png'
 import logoGmail from '../logo/gmail.png'
-import getActions from '../APICalls/Action'
-import getReactions from '../APICalls/Reaction'
 import GitHubAuth from '../APICalls/Github'
 import DropBoxAuth from '../APICalls/DropBox'
 
 const setGitHubUrl = async () => {
     const response = await GitHubAuth(localStorage.getItem("token"))
-    if (response !== 400) {
-        localStorage.setItem("GitHubUrl", response)
-    } else {
+    if (response === 400) {
         console.log("Can't connect to GitHub")
+    } else {
+        localStorage.setItem("GitHubUrl", response)
     }
 }
 
 const setDropBoxUrl = async () => {
     const response = await DropBoxAuth(localStorage.getItem("token"))
-    if (response !== 400) {
-        localStorage.setItem("DropBoxUrl", response)
-    } else {
+    if (response === 400) {
         console.log("Can't connect to DropBox")
-    }
-}
-
-const setActions = async () => {
-    const response = await getActions();
-    if (response !== 400) {
-        localStorage.setItem("actions", JSON.stringify(response))
     } else {
-        console.log("Can't get the actions")
-    }
-}
-
-const setReactions = async () => {
-    const response = await getReactions();
-    if (response !== 400) {
-        localStorage.setItem("reactions", JSON.stringify(response))
-    } else {
-        console.log("Can't get the reactions")
+        localStorage.setItem("DropBoxUrl", response)
     }
 }
 
@@ -65,11 +45,9 @@ export default class LoginPage extends React.Component {
         event.preventDefault()
         let response = await loginUser(this.state.email, this.state.password);
         if (response.status === 200) {
-            localStorage.setItem("token", response.data.token)
+            localStorage.setItem("token", response.data.data)
             setGitHubUrl()
             setDropBoxUrl()
-            setActions()
-            setReactions()
             this.props.history.push('/Home')
         }
     }

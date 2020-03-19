@@ -74,7 +74,7 @@ class CreateArea extends React.Component {
 
 export default class Home extends React.Component {
     disconnect = () => {
-        this.props.history.push("/")
+        this.props.history.push("/Login")
     }
 
     onClickHandlerCreateArea = () => {

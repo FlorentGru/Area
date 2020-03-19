@@ -1,5 +1,5 @@
 import React from "react"
-import {Redirect} from 'react-router-dom'
+import Area from '../../Area'
 
 let reaction = {
     "service": "discord",
@@ -41,7 +41,7 @@ export default class ReactionDiscord extends React.Component {
 
     render() {
         if (this.state.valid) {
-            return (<Redirect to="/Home"/>)
+            return (<Area/>)
         }
         return (
             <div>Selectionnez une action de Discord
