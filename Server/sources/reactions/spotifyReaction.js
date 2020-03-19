@@ -3,9 +3,7 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
 const fetch = require('node-fetch');
 
 exports.react = async function(userId, reaction, param) {
