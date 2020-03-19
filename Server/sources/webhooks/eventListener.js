@@ -2,15 +2,15 @@
 
 const emitter = require('./eventEmitter');
 
-const slackR = require('../services/slackReaction');
-const githubR = require('../services/githubReaction');
-const githubA = require('./githubAction');
-const discordR = require('../services/discordReaction');
-const discordA = require('../webhooks/discordAction');
-const mailR = require('../services/mailReaction');
+const slackR = require('../reactions/slackReaction');
+const githubR = require('../reactions/githubReaction');
+const githubA = require('../actions/githubAction');
+const discordR = require('../reactions/discordReaction');
+const discordA = require('../actions/discordAction');
+const mailR = require('../reactions/mailReaction');
 const spotifyR = require('../reactions/spotifyReaction');
-const dropboxA = require('./dropboxAction');
-const timer = require('./timerAction');
+const dropboxA = require('../actions/dropboxAction');
+const timer = require('../actions/timerAction');
 
 emitter.on('webhook', async function(userId, action, reaction) {
 
