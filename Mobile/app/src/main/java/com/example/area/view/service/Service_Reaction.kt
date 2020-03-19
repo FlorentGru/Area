@@ -46,8 +46,8 @@ class Service_Reaction : AppCompatActivity() {
 
         var Reactions = Reactions()
         val jsonobj = JSONObject()
-        val jsonArrayAction = JSONArray()
-        val jsonArrayReaction = JSONArray()
+        var jsonArrayAction = JSONArray()
+        var jsonArrayReaction = JSONArray()
         val transferReaction = JSONObject()
         val transferAction = JSONObject()
         val url = "$baseUrl/area/new"
@@ -58,7 +58,7 @@ class Service_Reaction : AppCompatActivity() {
         _buttonsendToZoho = findViewById(R.id.sendButtonZoho)
         _buttonMessageDiscord = findViewById(R.id.sendButtonDiscord)
 
-        //Todo : Comme pour les actions, bien récupérer les réactions et les envoyer au serveur afin qu'il puisse les créer
+        //gTodo : Comme pour les actions, bien récupérer les réactions et les envoyer au serveur afin qu'il puisse les créer
 
         _buttonIssueGithub.setOnClickListener {
             val GithubService: String = GithubTView.text.toString().toLowerCase()
@@ -71,9 +71,9 @@ class Service_Reaction : AppCompatActivity() {
             Reactions.params = Param(ParamOwner, "String")
             Reactions.params = Param(ParamRepo, "String")
 
-            transferAction.put("Service", "Ta mere ACTION")
-            transferAction.put("Sname", "Ta mere ACTION")
-            transferAction.put("params", "Ta mere ACTION")
+            transferAction.put("Service", "Tarte ACTION")
+            transferAction.put("Sname", "Tarte ACTION")
+            transferAction.put("params", "Tarte ACTION")
 
             jsonArrayAction.put(transferAction)
             jsonobj.put("Action", jsonArrayAction)
@@ -85,21 +85,23 @@ class Service_Reaction : AppCompatActivity() {
             jsonArrayReaction.put(transferReaction)
             jsonobj.put("Reaction", jsonArrayReaction)
 
+            jsonArrayAction = JSONArray()
+            jsonArrayReaction = JSONArray()
+
             message = jsonobj.toString()
             println(message)
 
-            //val que = Volley.newRequestQueue(this)
-            //val req = JsonObjectRequest(
-            //    Request.Method.POST, url, jsonobj,
-            //    Response.Listener {
-            //            response ->
-            //        Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+            val que = Volley.newRequestQueue(this)
+            val req = JsonObjectRequest(
+                Request.Method.POST, url, jsonobj,
+                Response.Listener {
+                        response ->
+                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
 
-            //    }, Response.ErrorListener {
-            //        Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
-            //   })
-            //que.add(req)
-
+                }, Response.ErrorListener {
+                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+               })
+            que.add(req)
         }
 
         _buttonsendToGmail.setOnClickListener {

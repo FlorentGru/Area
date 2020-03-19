@@ -34,7 +34,7 @@ class ServiceFragment : Fragment() {
         var name: String? = null,
         @SerializedName ("params")
         var params: Param? = null
-    ) : Serializable
+    )
 
     private var _view: View? = null
     private lateinit var _buttongmail : Button
@@ -87,7 +87,7 @@ class ServiceFragment : Fragment() {
 
             val intent = Intent(activity, Service_Reaction::class.java)
             intent.putExtra("baseUrl", _baseUrl)
-            //intent.putExtra("Action", Action as Serializable)
+            intent.putExtra("Action", Action)
             startActivity(intent)
         }
 
