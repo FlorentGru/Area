@@ -17,7 +17,7 @@ const router = express.Router();
  */
 /**
  * new Action/REAction
- * @route POST /user/area/new
+ * @route POST /user/areas/new
  * @operationId newArea
  * @group User
  * @security JWT
@@ -27,7 +27,7 @@ const router = express.Router();
  * @returns {Error} 401 - Unauthorized
  * @returns {Error} default - Unexpected error
  */
-router.post('/user/area/new', auth, userController.newArea);
+router.post('/user/areas/new', auth, userController.newArea);
 
 /**
  * @typedef UserArea
@@ -46,7 +46,7 @@ router.post('/user/area/new', auth, userController.newArea);
  * @returns {Error} 401 - Unauthorized
  * @returns {Error} 500 - Unexpected error
  */
-router.get('/user/areas', auth, userController.getAreas);
+router.get('/user/areas', auth, userController.getUserAreas);
 
 /**
  * delete a user's Area

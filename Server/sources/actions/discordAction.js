@@ -30,7 +30,16 @@ const restart = function () {
 exports.restart = restart;
 
 const trigger = function () {
+/*    Area.find({}, function (err, areas) {
+        areas.forEach(function(area) {
+            console.log(area)
+        });
+    });*/
+
     client.on('message', message => {
+        if (!message.guild) return;
+        if (message.author.bot) return;
+
         Area.aggregate([
             {
                 "$project": {
@@ -43,7 +52,7 @@ const trigger = function () {
         ], function (err, res) {
             if (err) throw err;
             res.forEach(function (area) {
-//            console.log("discord action: " + area.areas.action.name);
+            console.log("discord action: " + area.areas.action.name);
                 if (area.areas.action.name === 'message') {
                     isMessage(area, message);
                 }
@@ -61,9 +70,6 @@ const isMessage = function (area, message) {
         console.log("wrong parameters")
         return;
     }
-
-    if (!message.guild) return;
-    if (message.author.bot) return;
 
 //        console.log(`Guild: ${message.guild.name}`);
 //        console.log(`Expected: ${param1.value}`);

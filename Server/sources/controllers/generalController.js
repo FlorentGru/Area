@@ -37,20 +37,6 @@ exports.getActions = async (req, res) => {
             ]
         },
         {
-            service: "discord",
-            name: "mention",
-            params: [
-                {
-                    name: "server",
-                    value: "String"
-                },
-                {
-                    name: "channel",
-                    value: "String"
-                }
-            ]
-        },
-        {
             service: "github",
             name: "push",
             params: [
