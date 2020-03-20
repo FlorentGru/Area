@@ -13,7 +13,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.area.R
-import com.example.area.navBar
 import kotlinx.android.synthetic.main.service.*
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,20 +25,16 @@ class ServiceFragment : Fragment() {
         @SerializedName ("name")
         var name: String? = null,
         @SerializedName("value")
-        var value: String? = null)
-    data class Actions @JvmOverloads constructor(
+        var value: String? = null
+    ) : Serializable
+    data class Actions @JvmOverloads constructor (
         @SerializedName ("service")
         var service: String? = null,
         @SerializedName ("name")
         var name: String? = null,
         @SerializedName ("params")
-<<<<<<< HEAD
-        var params: Param? = null
-    )
-=======
         var params: List<Param> ? = null
     ) : Serializable
->>>>>>> 1fd3cb259a04184164becf2f8a3a6bf305487dc4
 
     private var _view: View? = null
     private lateinit var _buttongmail : Button
@@ -64,6 +59,7 @@ class ServiceFragment : Fragment() {
         _view = inflater.inflate(R.layout.service, container, false)
         _baseUrl = activity?.intent?.getStringExtra("baseUrl")!!
         var Action = Actions()
+        Action.service
 
         _buttonPushGithub = _view!!.findViewById(R.id.sendPushGithub)
         _buttonPullrequestGithub = _view!!.findViewById(R.id.sendPullRequestGithub)
@@ -91,7 +87,7 @@ class ServiceFragment : Fragment() {
 
             val intent = Intent(activity, Service_Reaction::class.java)
             intent.putExtra("baseUrl", _baseUrl)
-            intent.putExtra("Action", Action)
+            intent.putExtra("Action", Action as Serializable)
             startActivity(intent)
         }
 

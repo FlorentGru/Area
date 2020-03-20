@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.service.*
 import kotlinx.android.synthetic.main.service_reaction.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
 
 class Service_Reaction : AppCompatActivity() {
 
@@ -42,7 +43,7 @@ class Service_Reaction : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.service_reaction)
         baseUrl = this?.intent?.getStringExtra("baseUrl")!!
-        //var Actions = this?.intent?.getStringArrayExtra("Action")
+        var Actions = this?.intent?.extras?.get("Action") as Object
 
         var Reactions = Reactions()
         val jsonobj = JSONObject()
@@ -70,9 +71,9 @@ class Service_Reaction : AppCompatActivity() {
             Reactions.name = GithubNameIssue
             Reactions.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
 
-            transferAction.put("Service", "Tarte ACTION")
-            transferAction.put("Sname", "Tarte ACTION")
-            transferAction.put("params", "Tarte ACTION")
+            transferAction.put("service", Actions)
+            transferAction.put("name", "T")
+            transferAction.put("params", "T")
 
             jsonArrayAction.put(transferAction)
             jsonobj.put("Action", jsonArrayAction)
@@ -88,7 +89,9 @@ class Service_Reaction : AppCompatActivity() {
             jsonArrayReaction = JSONArray()
 
             message = jsonobj.toString()
-            println(message)
+            if (Actions != null) {
+                println(message)
+            }
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
