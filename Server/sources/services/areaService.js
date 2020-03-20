@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const AccessTokens = mongoose.model('AccessTokens');
 const Area = mongoose.model('Area');
 
+const discord = require('../actions/discordAction');
+
 exports.addArea = async function(userId, action, reaction)
 {
     if (!action || !reaction) throw ("Invalid Body");
@@ -38,10 +40,12 @@ exports.deleteArea = async function(userId, areaId)
     };
     await Area.findOneAndUpdate({userId}, update);
 
-    return await this.getAreas(userId);
+    discord.restart();
+
+    return await this.getUserAreas(userId);
 };
 
-exports.getAreas = async function(userId)
+exports.getUserAreas = async function(userId)
 {
     console.log(await Area.find());
     const area = await Area.findOne({userId});

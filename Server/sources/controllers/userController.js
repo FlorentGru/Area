@@ -11,6 +11,9 @@ exports.newArea = async(req, res) => {
         const action = req.body.action;
         const reaction = req.body.reaction;
 
+        console.log(`action: ${JSON.stringify(action, null, 2)}`);
+        console.log(`reaction: ${JSON.stringify(reaction, null, 2)}`);
+
         await areaService.addArea(req.user.id, action, reaction);
 
         res.status(201).send({data: "area created"});
@@ -35,10 +38,10 @@ exports.deleteArea = async function (req, res) {
     }
 };
 
-exports.getAreas = async function (req, res) {
+exports.getUserAreas = async function (req, res) {
     try {
         const userId = req.user.id;
-        const areas = await areaService.getAreas(userId);
+        const areas = await areaService.getUserAreas(userId);
 
         res.status(200).send({data: areas});
     } catch (err) {
