@@ -43,7 +43,7 @@ class Service_Reaction : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.service_reaction)
         baseUrl = this?.intent?.getStringExtra("baseUrl")!!
-        var Actions = this?.intent?.extras?.get("Action") as Object
+        var Actions = this?.intent?.extras?.get("Action") as ServiceFragment.Actions
 
         var Reactions = Reactions()
         val jsonobj = JSONObject()
@@ -71,9 +71,9 @@ class Service_Reaction : AppCompatActivity() {
             Reactions.name = GithubNameIssue
             Reactions.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
 
-            transferAction.put("service", Actions)
-            transferAction.put("name", "T")
-            transferAction.put("params", "T")
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", Actions.params)
 
             jsonArrayAction.put(transferAction)
             jsonobj.put("Action", jsonArrayAction)
