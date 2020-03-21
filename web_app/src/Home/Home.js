@@ -1,6 +1,8 @@
 import React from 'react';
 import DropDown from './DropDown'
 import {Redirect} from 'react-router-dom'
+import AreaList from '../APICalls/AreaList'
+import Area from './ListArea'
 
 class CreateArea extends React.Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class CreateArea extends React.Component {
     
         this.handleChangeAction = this.handleChangeAction.bind(this);
         this.handleChangeReaction = this.handleChangeReaction.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.mySubmitHandler = this.mySubmitHandler.bind(this);
     }
     
     handleChangeAction(event) {
@@ -20,7 +22,7 @@ class CreateArea extends React.Component {
         this.setState({reaction: event.target.value});
     }
     
-    handleSubmit(event) {
+    mySubmitHandler(event) {
         let area = {
             "action": null,
             "reaction": null
@@ -33,7 +35,7 @@ class CreateArea extends React.Component {
         }
         event.preventDefault();
     }
-    
+
     render() {
         if (this.state.valid) {
             return (
@@ -41,7 +43,7 @@ class CreateArea extends React.Component {
             )
         }
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.mySubmitHandler}>
                <label>
                 Choisissez votre Action:
                 <select value={this.state.action} onChange={this.handleChangeAction}>
@@ -73,6 +75,21 @@ class CreateArea extends React.Component {
 }
 
 export default class Home extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {area: null}
+    }
+
+    getMyAreas = async () => {
+        const response = await AreaList()
+        if (response.status === 200) {
+            this.setState({area: response.data.data})
+        } else {
+            console.log("error when loading areas")
+        }
+    }
+
     disconnect = () => {
         this.props.history.push("/Login")
     }
@@ -82,20 +99,16 @@ export default class Home extends React.Component {
     }
 
     render () {
+        if (this.state.area === null)
+            this.getMyAreas()
         return (
             <div>
-
-                {/* <ActionReactionForm/> */}
-                {/* <DiscordList/>
-                <GitHubList/>
-                <SlackList/>
-                <TimerList/>
-                <ZohoList/>
-                <DropBoxList/>
-                <GmailList/> */}
                 <DropDown/>
                 <CreateArea/>
-                {/* <button className="newAreaButton" onClick={this.onClickHandlerCreateArea}>Create New Area</button> */}
+                {this.props.area !== null ? (
+                    <Area area={this.state.area}/>
+                ) : null
+                }
                 <button  className="disconnectButton" onClick={this.disconnect}>Disconnect</button>
             </div>
             )

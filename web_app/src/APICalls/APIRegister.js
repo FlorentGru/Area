@@ -14,7 +14,8 @@ export default async function registerUser(user_name, user_password, user_email)
         })
         return (response.status)
     } catch (error) {
-            console.log(`Impossible de creer le compte: l'adresse email a déjà été utilisée, ou la connection au serveur est impossible`)
+        console.log(error)
+        console.log(`Impossible de creer le compte: l'adresse email a déjà été utilisée, ou la connection au serveur est impossible`)
         return (400)
     }
 }
