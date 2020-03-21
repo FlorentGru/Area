@@ -33,9 +33,10 @@ class MainActivity : AppCompatActivity()
 
         loginButton.setOnClickListener {
             _ipAddress = ipEditText.text.toString()
-            val login = "/auth/login"
+            val login = "/user/login"
             val url = "$_ipAddress$login"
 
+            Toast.makeText(this, _ipAddress + "/config/address?address=" + _ipAddress, Toast.LENGTH_LONG).show()
             val giveBaseUrl = JsonObjectRequest(
                 Request.Method.PUT,_ipAddress + "/config/address?address=" + _ipAddress,null,
             Response.Listener{
@@ -50,13 +51,12 @@ class MainActivity : AppCompatActivity()
                     Response.Listener {
                         response ->
                         val jsonObj : JSONObject = JSONObject(response.toString())
-                        val token = jsonObj.get("token").toString()
+                        val token = jsonObj.get("data").toString()
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, navBar::class.java)
                         intent.putExtra("token", token)
                         intent.putExtra("baseUrl", _ipAddress)
                         startActivity(intent)
-
                     },Response.ErrorListener {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
@@ -83,21 +83,12 @@ class MainActivity : AppCompatActivity()
             y(100f)
             duration = 1000
         }.setListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(p0: Animator?) {
-
-            }
-
+            override fun onAnimationRepeat(p0: Animator?) {}
             override fun onAnimationEnd(p0: Animator?) {
                 afterAnimationView.visibility = VISIBLE
             }
-
-            override fun onAnimationCancel(p0: Animator?) {
-
-            }
-
-            override fun onAnimationStart(p0: Animator?) {
-
-            }
+            override fun onAnimationCancel(p0: Animator?) {}
+            override fun onAnimationStart(p0: Animator?) {}
         })
     }
 }

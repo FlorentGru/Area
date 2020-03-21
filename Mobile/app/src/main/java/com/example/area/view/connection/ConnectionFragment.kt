@@ -17,6 +17,7 @@ class ConnectionFragment() : Fragment() {
     private var _view : View? = null
     private lateinit var _buttonGithub :Button
     private lateinit var _buttonDropbox :Button
+    private  lateinit var _buttonSpotify :Button
     var _urlWebView: String=""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,6 +30,10 @@ class ConnectionFragment() : Fragment() {
         _buttonDropbox = _view!!.findViewById(R.id.dropBox)
         _buttonDropbox.setOnClickListener {
             _connectionCallback.getResponse("dropbox", activity?.intent?.getStringExtra("token").toString())
+        }
+        _buttonSpotify = _view!!.findViewById(R.id.spotify)
+        _buttonSpotify.setOnClickListener {
+            _connectionCallback.getResponse("spotify", activity?.intent?.getStringExtra("token").toString())
         }
         return _view
     }
