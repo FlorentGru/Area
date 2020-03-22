@@ -10,14 +10,18 @@ import com.example.area.view.gesture_area.Gesture_areaFragment
 import com.example.area.view.networkLocation.NetworkFragment
 import com.example.area.view.service.ServiceFragment
 import kotlinx.android.synthetic.main.navbar.*
+import kotlin.reflect.KMutableProperty
 
 class navBar : AppCompatActivity()
 {
-    var base_url : String = ""
-
-    companion object {
-        var addr: String? = ""
+    companion object base_url {
+        var base :String? =""
+        fun set(baseUrl :String ?) {
+            base = baseUrl
+        }
+        fun get() : String? = base
     }
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item->
         when(item.itemId){
             R.id.connection -> {
@@ -46,6 +50,7 @@ class navBar : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        set(intent!!.getStringExtra("baseUrl"))
         setContentView(R.layout.navbar)
         nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }

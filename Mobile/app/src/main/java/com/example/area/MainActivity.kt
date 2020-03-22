@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity()
             val login = "/user/login"
             val url = "$_ipAddress$login"
 
-            Toast.makeText(this, _ipAddress + "/config/address?address=" + _ipAddress, Toast.LENGTH_LONG).show()
             val giveBaseUrl = JsonObjectRequest(
                 Request.Method.PUT,_ipAddress + "/config/address?address=" + _ipAddress,null,
             Response.Listener{
@@ -57,6 +56,7 @@ class MainActivity : AppCompatActivity()
                         intent.putExtra("token", token)
                         intent.putExtra("baseUrl", _ipAddress)
                         startActivity(intent)
+
                     },Response.ErrorListener {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
