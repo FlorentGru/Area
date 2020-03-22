@@ -1,12 +1,11 @@
 const axios = require('axios').default
 
-export default async function AreaCreation(mydata) {
+export default async function AreaDelete(id) {
     try {
         await axios({
-            method: "post",
-            url: `${localStorage.getItem("address")}/user/areas/new`,
+            method: "delete",
+            url: `${localStorage.getItem("address")}/user/areas/delete?areaId=${id}`,
             headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`},
-            data: mydata
         });
         return (200)
     } catch(error) {
