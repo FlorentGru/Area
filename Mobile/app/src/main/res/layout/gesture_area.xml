@@ -39,17 +39,6 @@
                 android:textColor="@color/whiteFont">
             </TextView>
 
-            <TextView
-                android:id="@+id/listAction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="You have no action/reaction"
-                android:textColor="@color/whiteFont"
-                android:textSize="15dp">
-            </TextView>
-
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
