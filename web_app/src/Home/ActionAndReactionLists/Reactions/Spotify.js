@@ -33,6 +33,22 @@ export default class ReactionSpotify extends React.Component {
         this.setState({valid: true})
     }
 
+    mySubmitHandlerAddSong = () => {
+        reaction.name = "addSong"
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
+    mySubmitHandlerPause = () => {
+        reaction.name = "pause"
+        let area = JSON.parse(localStorage.getItem("area"));
+        area.reaction = reaction
+        localStorage.setItem("area", JSON.stringify(area))
+        this.setState({valid: true})
+    }
+
     render() {
         if (this.state.valid) {
             return (<Area/>)
@@ -44,12 +60,12 @@ export default class ReactionSpotify extends React.Component {
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
                 <br/>
-                <form onSubmit={this.mySubmitHandlerPlaySong}>
+                <form onSubmit={this.mySubmitHandlerAddSong}>
                     Add Song <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
                 <br/>
-                <form onSubmit={this.mySubmitHandlerPlaySong}>
+                <form onSubmit={this.mySubmitHandlerPause}>
                     Pause <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>

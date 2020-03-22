@@ -33,6 +33,8 @@ export default class DropDown extends React.Component {
                     <br/><br/><br/>
                     <a className="dropDownButton" href={localStorage.getItem("DropBoxUrl")}> Connection DropBox</a>
                     <br/><br/><br/>
+                    <a className="dropDownButton" href={localStorage.getItem("SpotifyUrl")}> Connection Spotify</a>
+                    <br/><br/><br/>
                 </div>) : (null)
             }
         </div>

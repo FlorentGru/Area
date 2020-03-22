@@ -10,6 +10,7 @@ import logoDropBox from '../logo/dropbox.png'
 import logoGmail from '../logo/gmail.png'
 import GitHubAuth from '../APICalls/Github'
 import DropBoxAuth from '../APICalls/DropBox'
+import SpotifyAuth from '../APICalls/Spotify'
 
 const setGitHubUrl = async () => {
     const response = await GitHubAuth(localStorage.getItem("token"))
@@ -26,6 +27,15 @@ const setDropBoxUrl = async () => {
         console.log("Can't connect to DropBox")
     } else {
         localStorage.setItem("DropBoxUrl", response)
+    }
+}
+
+const setSpotifyUrl = async () => {
+    const response = await SpotifyAuth(localStorage.getItem("token"))
+    if (response === 400) {
+        console.log("Can't connect to Spotify")
+    } else {
+        localStorage.setItem("SpotifyUrl", response)
     }
 }
 
@@ -48,6 +58,7 @@ export default class LoginPage extends React.Component {
             localStorage.setItem("token", response.data.data)
             setGitHubUrl()
             setDropBoxUrl()
+            setSpotifyUrl()
             this.props.history.push('/Home')
         }
     }
@@ -96,7 +107,6 @@ export default class LoginPage extends React.Component {
             <img src={logoZoho} className="imgZoho" alt=""></img>
             <img src={logoDropBox} className="imgDropBox" alt=""></img>
             <img src={logoGmail} className="imgGmail" alt=""></img>
-            {/* <button onClick={this.props.history.push("/")} value="Change Ngrok"></button> */}
             </div>
         );
     }
