@@ -23,7 +23,7 @@ class ConnectionFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _view = inflater.inflate(R.layout.connection, container, false)
-        _baseUrl = navBar.get()
+        _baseUrl = navBar.getB()
         _buttonGithub = _view!!.findViewById(R.id.github)
         _buttonGithub.setOnClickListener {
             _connectionCallback.getResponse("github", activity?.intent?.getStringExtra("token").toString())

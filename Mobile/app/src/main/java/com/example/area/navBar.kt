@@ -16,10 +16,16 @@ class navBar : AppCompatActivity()
 {
     companion object base_url {
         var base :String? =""
-        fun set(baseUrl :String ?) {
+        var token :String? = ""
+        fun setB(baseUrl :String ?) {
             base = baseUrl
         }
-        fun get() : String? = base
+        fun getB() : String? = base
+
+        fun setT(tokeng :String ?) {
+            token = tokeng
+        }
+        fun getT() : String? = token
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item->
@@ -50,7 +56,8 @@ class navBar : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        set(intent!!.getStringExtra("baseUrl"))
+        setB(intent!!.getStringExtra("baseUrl"))
+        setT(intent!!.getStringExtra("token"))
         setContentView(R.layout.navbar)
         nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
