@@ -1,11 +1,5 @@
 'use strict';
 
-const express = require('express');
-
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const AccessTokens = mongoose.model('AccessTokens');
-
 const eventEmitter = require('../webhooks/eventEmitter');
 const listener = require('../webhooks/eventListener');
 
@@ -18,6 +12,8 @@ exports.act = async function(userId, action, reaction) {
         return;
     }
     const time = parseInt(hours.value) * 3600 + parseInt(minutes.value) * 60 * 1000;
+
+    if (hours.value === 0 && minutes.value === 0) return;
 
     if (action.name === "countdown") {
         setTimeout(function() {

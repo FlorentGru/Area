@@ -10,7 +10,6 @@ exports.sendMail = async function(to, subject, content) {
             pass: "Hasherlesmdpcestpourlesnuls#1",
         }
     });
-    console.log("here");
     let info = await transporter.sendMail({
         from: '"AREA" <area.epitek.nantes.2022@zohomail.com>',
         to: to,
@@ -24,6 +23,6 @@ exports.sendMail = async function(to, subject, content) {
             console.log("Email Sent !");
         }
     });
-    console.log(info);
+//    console.log(info);
 };
 

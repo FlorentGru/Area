@@ -135,11 +135,7 @@ exports.getReactions = async (req, res) => {
             name: "message",
             params: [
                 {
-                    name: "webhookId",
-                    value: "String"
-                },
-                {
-                    name: "webhookToken",
+                    name: "webhookUrl",
                     value: "String"
                 }
             ]

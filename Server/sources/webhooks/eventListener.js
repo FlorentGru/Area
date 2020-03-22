@@ -29,10 +29,10 @@ emitter.on('webhook', async function(userId, action, reaction) {
 
 emitter.on('react', async function(userId, reaction, param) {
     if (reaction.service === "discord") {
-        console.log("react discord");
+        console.log(`react discord with param: ${param}`);
         discordR.react(reaction, param);
     } else if (reaction.service === 'zoho' || reaction.service === 'gmail') {
-        console.log("mail reaction");
+        console.log(`${reaction.service} reaction`);
         await mailR.react(reaction, param);
     } else if (reaction.service === 'github') {
         console.log("github reaction");

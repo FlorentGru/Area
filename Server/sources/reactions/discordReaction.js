@@ -14,17 +14,21 @@ const sendMessage = function(webhookId, webhookToken, content) {
 
 exports.react = function(reaction, param) {
     if (reaction.name === "message") {
-        const param1 = reaction.params.find(({ name }) => name === 'webhookId');
-        const param2 = reaction.params.find(({ name }) => name === 'webhookToken');
-        if (!param1 || !param2) {
-            return;
-        }
+        const param1 = reaction.params.find(({ name }) => name === 'webhookUrl');
+        //const param1 = reaction.params.find(({ name }) => name === 'webhookId');
+        //const param2 = reaction.params.find(({ name }) => name === 'webhookToken');
+        if (!param1) return console.log("wrong parameter");
 
         if (!param || param.isEmpty) {
             param = "No content specified."
         }
+        const webhookUrl = param1.value.split("/");
+        const length = webhookUrl.length;
+
+        const webhookId = webhookUrl[length - 2];
+        const webhookToken = webhookUrl[length - 1];
 
         console.log("send message");
-        sendMessage(param1.value, param2.value, param);
+        sendMessage(webhookId, webhookToken, param);
     }
 };

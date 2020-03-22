@@ -31,7 +31,7 @@ router.post('/user/areas/new', auth, userController.newArea);
 
 /**
  * @typedef UserArea
- * @property {string} id.required
+ * @property {string} _id.required
  * @property {Action.model} action.required
  * @property {Action.model} reaction.required
  */

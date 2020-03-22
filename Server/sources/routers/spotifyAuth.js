@@ -69,7 +69,9 @@ router.get('/oauth2/spotify/callback', async (req, res) => {
             });
         var json = await response.json();
         console.log(json);
+
         await oauth.updateToken(userId, json.access_token, json.refresh_token, "spotify");
+
         res.redirect(callback);
     } catch (err) {
         console.log("ERROR: ", err);
