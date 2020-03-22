@@ -52,7 +52,7 @@ const trigger = function () {
         ], function (err, res) {
             if (err) throw err;
             res.forEach(function (area) {
-            console.log("discord action: " + area.areas.action.name);
+            //console.log("discord action: " + area.areas.action.name);
                 if (area.areas.action.name === 'message') {
                     isMessage(area, message);
                 }
@@ -67,7 +67,7 @@ const isMessage = function (area, message) {
     const param2 = area.areas.action.params.find(({name}) => name === 'channel');
     const param3 = area.areas.action.params.find(({name}) => name === 'startWith');
     if (!param1 || !param2 || !param3) {
-        console.log("wrong parameters")
+        //console.log("wrong parameters")
         return;
     }
 
