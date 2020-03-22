@@ -47,13 +47,13 @@ exports.deleteArea = async function(userId, areaId)
 
 exports.getUserAreas = async function(userId)
 {
-    console.log(await Area.find());
+    //console.log(await Area.find());
     const area = await Area.findOne({userId});
     if (!area) throw ('Internal Error');
 
     const areas = area.areas;
     if (!areas) throw "Internal Error";
-    console.log(areas);
+    console.log(`areas: ${areas}`);
 
     return areas;
 };
