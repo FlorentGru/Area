@@ -19,6 +19,8 @@ services:
         image: mobile
         depends_on: 
             - api
+        volumes: 
+            - apk:/usr/src/app/android/app/build/outputs/apk/:rw
 
     webapp:
         build: 
