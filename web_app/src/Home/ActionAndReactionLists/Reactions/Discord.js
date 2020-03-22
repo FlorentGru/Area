@@ -48,9 +48,9 @@ export default class ReactionDiscord extends React.Component {
                 <form onSubmit={this.mySubmitHandler}>
                     Message <br/>
                     webhookId
-                    <input type="text" name="webhookId" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="webhookId" onChange={this.myChangeHandler}/> <br/>
                     webhookToken
-                    <input type="text" name="webhookToken" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="webhookToken" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>

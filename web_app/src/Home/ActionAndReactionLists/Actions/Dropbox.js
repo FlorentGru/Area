@@ -71,22 +71,22 @@ export default class ActionDropbox extends React.Component {
             <div>Selectionnez une action de Dropbox
                 <form onSubmit={this.mySubmitHandlerDeleted}>
                     Deleted <br/>
-                    <input type="submit" value="Create Action"/> <br/>
+                    <input type="submit" required={true} value="Create Action"/> <br/>
                 </form>
                 <br/>
                 <form onSubmit={this.mySubmitHandlerCreated}>
                     Create <br/>
-                    <input type="submit" value="Create Action"/> <br/>
+                    <input type="submit" required={true} value="Create Action"/> <br/>
                 </form>
                 <br/>
                 <form onSubmit={this.mySubmitHandlerRenamed}>
                     Rename <br/>
-                    <input type="submit" value="Create Action"/> <br/>
+                    <input type="submit" required={true} value="Create Action"/> <br/>
                 </form>
                 <br/>
                 <form onSubmit={this.mySubmitHandlerPath}>
                     Path Changed <br/>
-                    <input type="submit" value="Create Action"/> <br/>
+                    <input type="submit" required={true} value="Create Action"/> <br/>
                 </form>
                 <br/>
             </div>

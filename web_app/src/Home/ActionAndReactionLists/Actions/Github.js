@@ -63,9 +63,9 @@ export default class ActionGithub extends React.Component {
                 <form onSubmit={this.mySubmitHandlerPush}>
                     Push <br/>
                     owner
-                    <input type="text" name="owner" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="owner" onChange={this.myChangeHandler}/> <br/>
                     repo
-                    <input type="text" name="repo" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="repo" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>

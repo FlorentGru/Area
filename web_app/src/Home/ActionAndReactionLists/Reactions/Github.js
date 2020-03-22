@@ -48,9 +48,9 @@ export default class ReactionGmail extends React.Component {
                 <form onSubmit={this.mySubmitHandler}>
                     Issue <br/>
                     owner
-                    <input type="text" name="owner" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="owner" onChange={this.myChangeHandler}/> <br/>
                     repo
-                    <input type="text" name="repo" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="repo" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>

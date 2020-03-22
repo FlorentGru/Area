@@ -70,20 +70,22 @@ export default class ActionTimer extends React.Component {
                 <form onSubmit={this.mySubmitHandlerCountdown}>
                     Countdown <br/>
                     hours
-                    <input type="text" name="hours" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="hours" onChange={this.myChangeHandler}/> <br/>
                     minutes
-                    <input type="text" name="minutes" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="minutes" onChange={this.myChangeHandler}/> <br/>
                     message
-                    <input type="text" name="message" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="message" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/> <br/>
                 </form>
                 <br/>
                 <form onSubmit={this.mySubmitHandlerLoop}>
                     Loop <br/>
                     hours
-                    <input type="text" name="hours" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="hours" onChange={this.myChangeHandler}/> <br/>
                     minutes
-                    <input type="text" name="minutes" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="minutes" onChange={this.myChangeHandler}/> <br/>
+                    message
+                    <input type="text" required={true} name="message" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Action"/>
                 </form>                
             </div>

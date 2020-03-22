@@ -43,7 +43,7 @@ export default class ReactionSlack extends React.Component {
                 <form onSubmit={this.mySubmitHandler}>
                     Message <br/>
                     hook
-                    <input type="text" name="hook" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="hook" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>

@@ -48,9 +48,9 @@ export default class ReactionZoho extends React.Component {
                 <form onSubmit={this.mySubmitHandler}>
                     Send To <br/>
                     dest
-                    <input type="text" name="dest" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="dest" onChange={this.myChangeHandler}/> <br/>
                     subject
-                    <input type="text" name="subject" onChange={this.myChangeHandler}/> <br/>
+                    <input type="text" required={true} name="subject" onChange={this.myChangeHandler}/> <br/>
                     <input type="submit" value="Create Reaction"/> <br/>
                 </form>
             </div>
