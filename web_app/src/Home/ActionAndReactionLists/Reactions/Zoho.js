@@ -25,7 +25,7 @@ export default class ReactionZoho extends React.Component {
     }
 
     mySubmitHandler = () => {
-        reaction.name = "message"
+        reaction.name = "sendTo"
         reaction.params = [{
             "name": "dest",
             "value": this.state.dest

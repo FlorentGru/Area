@@ -25,7 +25,7 @@ export default class ReactionGmail extends React.Component {
     }
 
     mySubmitHandler = () => {
-        reaction.name = "sentTo"
+        reaction.name = "sendTo"
         reaction.params = [{
             "name": "dest",
             "value": this.state.dest
