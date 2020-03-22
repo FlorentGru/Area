@@ -25,6 +25,6 @@
         <activity android:name=".navBar">
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Service_Reaction" />
+        <activity android:name=".view.service.Service_Reaction" />
     </application>
 </manifest>

@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ConnectionModel {
-    fun getWebView(connectionCallback: ConnectionCallback, base_url: String, servToConnect: String, token :String) {
+    fun getWebView(connectionCallback: ConnectionCallback, base_url: String?, servToConnect: String, token :String) {
         val service = apiClient.setRetrofit(base_url).create(Request::class.java)
         val call: Call<ApiResponse<ArrayList<Service>>> = service.getWebView(servToConnect, token)
 

@@ -6,17 +6,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.area.view.connection.ConnectionFragment
+import com.example.area.view.gesture_area.Gesture_areaFragment
 import com.example.area.view.networkLocation.NetworkFragment
 import com.example.area.view.service.ServiceFragment
 import kotlinx.android.synthetic.main.navbar.*
+import kotlin.reflect.KMutableProperty
 
 class navBar : AppCompatActivity()
 {
-    var base_url : String = ""
+    companion object base_url {
+        var base :String? =""
+        var token :String? = ""
+        fun setB(baseUrl :String ?) {
+            base = baseUrl
+        }
+        fun getB() : String? = base
 
-    companion object {
-        var addr: String? = ""
+        fun setT(tokeng :String ?) {
+            token = tokeng
+        }
+        fun getT() : String? = token
     }
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item->
         when(item.itemId){
             R.id.connection -> {
@@ -34,12 +45,19 @@ class navBar : AppCompatActivity()
                 replaceFragment(NetworkFragment())
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.gesture_area -> {
+                println("Area pressed")
+                replaceFragment(Gesture_areaFragment())
+                return@OnNavigationItemSelectedListener true
+            }
         }
         false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setB(intent!!.getStringExtra("baseUrl"))
+        setT(intent!!.getStringExtra("token"))
         setContentView(R.layout.navbar)
         nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }

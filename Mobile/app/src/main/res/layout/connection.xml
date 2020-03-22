@@ -45,6 +45,16 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/Dropbox" />
 
+            <Button
+                android:id="@+id/spotify"
+                android:layout_width="fill_parent"
+                android:background="@color/blueDiscord"
+                android:textColor="@color/whiteFont"
+                android:gravity="center"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/Spotify" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

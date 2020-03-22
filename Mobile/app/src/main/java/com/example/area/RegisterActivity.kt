@@ -23,7 +23,7 @@ class RegisterActivity : AppCompatActivity() {
 
         registerBtn.setOnClickListener {
             val ipString = ipText.text.toString()
-            val register = "/auth/register"
+            val register = "/user/register"
             val url = "$ipString$register"
 
             val jsonobj = JSONObject()

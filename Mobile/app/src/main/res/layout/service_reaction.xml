@@ -130,34 +130,9 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/DropboxTView"
-                android:layout_width="390dp"
-                android:layout_height="59dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/box"
-                android:gravity="center"
-                android:text="Dropbox"
-                android:textColor="@color/whiteFont"
-                android:textSize="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/sendButtonDropbox"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/button_drawable"
-                android:text="Send"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/ActionZohoTView"
+                android:id="@+id/ZohoTView"
                 android:layout_width="390dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="50dp"
@@ -241,55 +216,18 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/DiscordReactionwebhookid"
+                android:id="@+id/DiscordReactionwebhookurl"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:hint="WebHookId"
-                android:textColor="@color/colorTextView"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/DiscordReactionWebhooktoken"
-                android:layout_width="104dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:hint="WebHookToken"
+                android:hint="WebHookUrl"
                 android:textColor="@color/colorTextView"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
 
             <Button
                 android:id="@+id/sendButtonDiscord"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/button_drawable"
-                android:text="Send"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/TimerTView"
-                android:layout_width="390dp"
-                android:layout_height="59dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/box"
-                android:gravity="center"
-                android:text="Timer"
-                android:textColor="@color/whiteFont"
-                android:textSize="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/sendButtonTimer"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -324,13 +262,105 @@
                 android:textColorHint="@color/whiteFont"
                 android:textSize="20dp" />
 
+            <EditText
+                android:id="@+id/SlackReactionhook"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Hook"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp" />
+
             <Button
                 android:id="@+id/sendButtonSlack"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/SpotifyTView"
+                android:layout_width="390dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:text="Spotify"
+                android:textColor="@color/whiteFont"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="148dp"
+                android:textColorHint="@color/whiteFont"
+                android:id="@+id/AddSongSpotify"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="AddSong"
+                android:textSize="20dp"
+                android:textColor="@color/whiteFont"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/sendAddSongButtonSpotify"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="148dp"
+                android:textColorHint="@color/whiteFont"
+                android:id="@+id/PlaySongSpotify"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="PlaySong"
+                android:textSize="20dp"
+                android:textColor="@color/whiteFont"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/sendPlaySongButtonSpotify"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_drawable"
+                android:text="Send"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="148dp"
+                android:textColorHint="@color/whiteFont"
+                android:id="@+id/PauseSpotify"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="Pause"
+                android:textSize="20dp"
+                android:textColor="@color/whiteFont"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/sendPauseButtonSpotify"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/button_drawable"
                 android:text="Send"
                 android:textColor="@color/colorAccent"
