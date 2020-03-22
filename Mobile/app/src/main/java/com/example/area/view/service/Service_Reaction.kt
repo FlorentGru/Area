@@ -1,17 +1,15 @@
 package com.example.area.view.service
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.area.R
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.synthetic.main.service.*
 import kotlinx.android.synthetic.main.service_reaction.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -30,36 +28,44 @@ class Service_Reaction : AppCompatActivity() {
         @SerializedName("name")
         var name: String? = null,
         @SerializedName("params")
-        var params: List<Param>? = null
+        var params: JSONArray? = null
     )
 
     private lateinit var baseUrl :String
+    private lateinit var token :String
     private lateinit var _buttonIssueGithub : Button
     private lateinit var _buttonsendToGmail : Button
     private lateinit var _buttonsendToZoho : Button
     private lateinit var _buttonMessageDiscord : Button
+    private lateinit var _buttonMessageSlack : Button
+    private lateinit var _buttonAddSongSpotify : Button
+    private lateinit var _buttonPlaySongSpotify : Button
+    private lateinit var _buttonPauseSpotify : Button
+    val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.service_reaction)
         baseUrl = this?.intent?.getStringExtra("baseUrl")!!
+        token = this?.intent?.getStringExtra("token")!!
         var Actions = this?.intent?.extras?.get("Action") as ServiceFragment.Actions
 
         var Reactions = Reactions()
         val jsonobj = JSONObject()
-        var jsonArrayAction = JSONArray()
-        var jsonArrayReaction = JSONArray()
         val transferReaction = JSONObject()
         val transferAction = JSONObject()
-        val url = "$baseUrl/area/new"
+        val url = "$baseUrl/user/areas/new"
         var message : String
 
         _buttonIssueGithub = findViewById(R.id.sendButtonGithub)
         _buttonsendToGmail = findViewById(R.id.sendButtonGmail)
         _buttonsendToZoho = findViewById(R.id.sendButtonZoho)
         _buttonMessageDiscord = findViewById(R.id.sendButtonDiscord)
+        _buttonMessageSlack = findViewById(R.id.sendButtonSlack)
+        _buttonAddSongSpotify = findViewById(R.id.sendAddSongButtonSpotify)
+        _buttonPlaySongSpotify = findViewById(R.id.sendPlaySongButtonSpotify)
+        _buttonPauseSpotify = findViewById(R.id.sendPauseButtonSpotify)
 
-        //gTodo : Comme pour les actions, bien récupérer les réactions et les envoyer au serveur afin qu'il puisse les créer
 
         _buttonIssueGithub.setOnClickListener {
             val GithubService: String = GithubTView.text.toString().toLowerCase()
@@ -69,41 +75,42 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = GithubService
             Reactions.name = GithubNameIssue
-            Reactions.params = listOf<Param>(Param(ParamOwner, "String"), Param(ParamRepo, "String"))
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("owner", ParamOwner), Param("repo", ParamRepo))))
 
             transferAction.put("service", Actions.service)
             transferAction.put("name", Actions.name)
             transferAction.put("params", Actions.params)
 
-            jsonArrayAction.put(transferAction)
-            jsonobj.put("Action", jsonArrayAction)
+            jsonobj.put("Action", transferAction)
 
             transferReaction.put("service",Reactions.service)
             transferReaction.put("name",Reactions.name)
             transferReaction.put("params", Reactions.params)
 
-            jsonArrayReaction.put(transferReaction)
-            jsonobj.put("Reaction", jsonArrayReaction)
-
-            jsonArrayAction = JSONArray()
-            jsonArrayReaction = JSONArray()
+            jsonobj.put("Reaction", transferReaction)
 
             message = jsonobj.toString()
-            if (Actions != null) {
-                println(message)
-            }
+            println(message)
 
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(
-                Request.Method.POST, url, jsonobj,
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
                 Response.Listener {
-                        response ->
                     Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
-
-                }, Response.ErrorListener {
-                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
-               })
-            que.add(req)
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                })
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
         }
 
         _buttonsendToGmail.setOnClickListener {
@@ -114,19 +121,43 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = GmailService
             Reactions.name = GmailNamesendTo
-            Reactions.params = listOf<Param>(Param(ParamDest, "email"), Param(ParamSubject, "String"))
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("email", ParamDest), Param("subject", ParamSubject))))
 
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(
-                Request.Method.POST, url, jsonobj,
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
                 Response.Listener {
-                        response ->
                     Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
-
-                }, Response.ErrorListener {
-                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
-            que.add(req)
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
 
         }
 
@@ -138,44 +169,268 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = ZohoService
             Reactions.name = ZohoNamesendTo
-            Reactions.params = listOf<Param>(Param(ParamDest, "email"), Param(ParamSubject, "String"))
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("dest", ParamDest), Param("subject", ParamSubject))))
 
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(
-                Request.Method.POST, url, jsonobj,
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+                println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
                 Response.Listener {
-                        response ->
                     Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
-
-                }, Response.ErrorListener {
-                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
-            que.add(req)
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
+        }
 
+        _buttonMessageSlack.setOnClickListener {
+            val SlackService: String = SlackTView.text.toString().toLowerCase()
+            var SlackNamesendTo : String = ReactionMessageSlack.text.toString()
+            val ParamUrl = SlackReactionhook.text.toString()
+
+            Reactions.service = SlackService
+            Reactions.name = SlackNamesendTo
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("hool", ParamUrl))))
+
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
+                Response.Listener {
+                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                })
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
         }
 
         _buttonMessageDiscord.setOnClickListener {
             val DiscordService: String = DiscordTView.text.toString().toLowerCase()
             var DiscordNameMessage : String = ReactionMessageDiscord.text.toString()
-            val ParamWebhookId = DiscordReactionwebhookid.text.toString()
-            val ParamWebhooktoken = DiscordReactionWebhooktoken.text.toString()
+            val ParamWebhookId = DiscordReactionwebhookurl.text.toString()
 
             Reactions.service = DiscordService
             Reactions.name = DiscordNameMessage
-            Reactions.params = listOf<Param>(Param(ParamWebhookId, "String"), Param(ParamWebhooktoken, "String"))
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("webhookUrl", ParamWebhookId))))
 
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(
-                Request.Method.POST, url, jsonobj,
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
                 Response.Listener {
-                        response ->
                     Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
-
-                }, Response.ErrorListener {
-                    Toast.makeText(this, url, Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 })
-            que.add(req)
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
 
+        }
+
+        _buttonAddSongSpotify.setOnClickListener {
+            val SpotifyService: String = SpotifyTView.text.toString().toLowerCase()
+            var SpotifyNamesendTo : String = AddSongSpotify.text.toString()
+
+            Reactions.service = SpotifyService
+            Reactions.name = SpotifyNamesendTo
+
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
+                Response.Listener {
+                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                })
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
+        }
+
+        _buttonPlaySongSpotify.setOnClickListener {
+            val SpotifyService: String = SpotifyTView.text.toString().toLowerCase()
+            var SpotifyNamesendTo : String = PlaySongSpotify.text.toString()
+
+            Reactions.service = SpotifyService
+            Reactions.name = SpotifyNamesendTo
+
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
+                Response.Listener {
+                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                })
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
+        }
+
+        _buttonPauseSpotify.setOnClickListener {
+            val SpotifyService: String = SpotifyTView.text.toString().toLowerCase()
+            var SpotifyNamesendTo : String = PauseSpotify.text.toString()
+
+            Reactions.service = SpotifyService
+            Reactions.name = SpotifyNamesendTo
+
+            transferAction.put("service", Actions.service)
+            transferAction.put("name", Actions.name)
+            transferAction.put("params", JSONArray(gson.toJson(Actions.params)))
+            println(Reactions.params)
+
+            jsonobj.put("action", transferAction)
+
+            transferReaction.put("service",Reactions.service)
+            transferReaction.put("name",Reactions.name)
+            transferReaction.put("params", Reactions.params)
+
+            jsonobj.put("reaction", transferReaction)
+
+            message = jsonobj.toString()
+            println(message)
+
+            val queue = Volley.newRequestQueue(this)
+
+            val volleyEnrollRequest = object : JsonObjectRequest(
+                Method.POST, url, jsonobj,
+                Response.Listener {
+                    Toast.makeText(this, "Actions send", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                })
+            {
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = " $token"
+                    println(url)
+                    return headers
+                }
+            }
+            queue.add(volleyEnrollRequest)
         }
         return
     }

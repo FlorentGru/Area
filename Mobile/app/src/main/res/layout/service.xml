@@ -434,7 +434,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/button_drawable"
                 android:text="Send"
                 android:textColor="@color/colorAccent"
