@@ -45,7 +45,7 @@ class CreateArea extends React.Component {
         return (
             <form onSubmit={this.mySubmitHandler}>
                <label>
-                Choisissez votre Action:
+                Choose your Action:
                 <select value={this.state.action} onChange={this.handleChangeAction}>
                     <option />
                     <option value="Discord">Discord</option>
@@ -56,7 +56,7 @@ class CreateArea extends React.Component {
                 </label>
                 <br/>
                <label>
-                Choisissez votre Reaction:
+                Choose you Reaction:
                 <select value={this.state.reaction} onChange={this.handleChangeReaction}>
                     <option />
                     <option value="Discord">Discord</option>
@@ -78,13 +78,14 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {area: null}
+        this.state = {area: null, valid: false}
     }
 
     getMyAreas = async () => {
         const response = await AreaList()
         if (response.status === 200) {
             this.setState({area: response.data.data})
+            this.setState({valid: true})
         } else {
             console.log("error when loading areas")
         }
@@ -105,8 +106,10 @@ export default class Home extends React.Component {
             <div>
                 <DropDown/>
                 <CreateArea/>
-                {this.props.area !== null ? (
-                    <Area area={this.state.area}/>
+                {this.state.valid ? (
+                    this.state.area.map(function(name, index) {
+                        return (<Area key={index} area={name}/>)
+                    })
                 ) : null
                 }
                 <button  className="disconnectButton" onClick={this.disconnect}>Disconnect</button>

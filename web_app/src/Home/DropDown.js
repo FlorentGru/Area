@@ -23,7 +23,7 @@ export default class DropDown extends React.Component {
     render() {
         return (
         <div>
-            <button className="menuButton" onClick={this.showMenu}>Se connecter à un Service</button>
+            <button className="menuButton" onClick={this.showMenu}>Connect to a Service</button>
             {
             this.state.show
                 ? (
