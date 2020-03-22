@@ -4,9 +4,7 @@ const GitHub = require("github-api");
 const Promise = require("es6-promise").Promise;
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
 
 exports.react = async function(userId, reaction, param) {
     if (reaction.name === "issue") {

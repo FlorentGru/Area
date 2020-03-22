@@ -4,16 +4,27 @@ const express = require('express');
 
 const auth = require('../middleware/JWTAuth');
 
-const mongoose = require('mongoose')
-const User = mongoose.model('User');
-const AccessTokens = mongoose.model('AccessTokens');
-const AreActions = mongoose.model('AreActions');
+const userController = require('../controllers/userController');
+const generalController = require('../controllers/generalController');
 
 /*User.collection.drop();
 AccessTokens.collection.drop();
 AreActions.collection.drop();*/
 
 const router = express.Router();
+
+/**
+ * Is the user connected to this service
+ * @route GET /user/is_connected
+ * @operationId isConnected
+ * @group User - General operations on users
+ * @security JWT
+ * @param {string} service.query.required
+ * @returns {boolean} 200 - yes or no
+ * @returns {string} 401 - Unauthorized
+ */
+router.get('/user/is_connected', auth, userController.isConnected);
+
 /**
 * Config new server address
 * @route PUT /config/address
@@ -25,21 +36,7 @@ const router = express.Router();
 * @returns {string} 400 - Invalid address
 * @returns {Error} default - Unexpected error
 */
-router.put('/config/address', async (req, res) => {
-    try {
-        const address = req.query.address;
-        if (!address) throw ('no address');
-        if (!address.startsWith("https://") || !address.endsWith('.ngrok.io')) {
-            throw ('invalid address');
-        }
-
-        process.env.SERVER_ADDRESS = address;
-        console.log(process.env.SERVER_ADDRESS);
-        res.status(200).send({data: "success"});
-    } catch (err) {
-        res.status(400).send(err);
-    }
-});
+router.put('/config/address', generalController.configAddress);
 
 /**
  * @typedef Error
@@ -47,64 +44,26 @@ router.put('/config/address', async (req, res) => {
  */
 /**
  * Register new user
- * @route POST /auth/register
+ * @route POST /user/register
  * @operationId register
- * @group Users - General operations on users
+ * @group User - General operations on users
  * @param {User.model} user.body.required - new user
  * @produces application/json
  * @returns {string} 201 - JWT token
  * @returns {Error} default - Unexpected error
  */
-router.post('/auth/register', async (req, res) => {
-    try {
-        const user = new User(req.body);
-        await user.save();
-        const token = await user.generateAuthToken();
-
-        const accessTokens = new AccessTokens({
-            userId: user.id,
-            tokens: []
-        });
-        await accessTokens.save();
-
-        const userTokens = await AccessTokens.findOne({ userId: user.id});
-        if (!userTokens) {
-            return;
-        }
-
-        const areas = new AreActions( {
-            userId: user.id,
-            areas: []
-        });
-        await areas.save();
-
-        res.status(201).send({token})
-    } catch (err) {
-        console.log(err);
-        res.status(400).send(err);
-    }
-});
+router.post('/user/register', userController.register);
 
 /**
- * User login
- * @route POST /auth/login
+ * User log in
+ * @route POST /user/login
  * @operationId login
- * @group Users - General operations on users
+ * @group User - General operations on users
  * @param {Login.model} login.body.required - user credentials
  * @produces application/json
  * @returns {string} 200 - JWT token
  * @returns {Error} 401 - Login failed or Not authorized
  */
-router.post('/auth/login', async(req, res) => {
-    try {
-        const {email, password} = req.body;
-        const user = await User.findByCredentials(email, password);
-
-        const token = await user.generateAuthToken();
-        res.status(200).send({token});
-    } catch (err) {
-        res.status(401).send(err);
-    }
-});
+router.post('/user/login', userController.login);
 
 module.exports = router;

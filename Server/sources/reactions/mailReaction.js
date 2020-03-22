@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const gmail = require('./gmailReaction');
+const gmail = require('../actions/gmailReaction');
 const zoho = require('./zohoReaction');
 
 exports.react = async function(reaction, param) {

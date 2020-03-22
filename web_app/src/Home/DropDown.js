@@ -8,7 +8,6 @@ export default class DropDown extends React.Component {
         this.state = {
             show: false,
         }
-
         this.showMenu = this.showMenu.bind(this)
     }
 

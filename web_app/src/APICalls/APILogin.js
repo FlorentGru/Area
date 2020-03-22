@@ -13,7 +13,8 @@ export default async function loginUser(user_email, user_password) {
         })
         return (response)
     } catch(error) {
-        alert(`Mauvais mot de passe ou email`)
+        console.log("Mauvais mot de passe ou email")
+        // alert(`Mauvais mot de passe ou email`)
         return (400)
     }
 }

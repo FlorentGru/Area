@@ -7,7 +7,7 @@ exports.sendMail = async function(to, subject, content) {
         secure: true,
         auth: {
             user: "area.epitek.nantes.2022@zohomail.com",
-            pass: "Hasherlesmdpcestpourlesnuls#1",S
+            pass: "Hasherlesmdpcestpourlesnuls#1",
         }
     });
     console.log("here");
