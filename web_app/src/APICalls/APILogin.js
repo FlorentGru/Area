@@ -13,7 +13,7 @@ const axios = require('axios').default;
 
 export default async function loginUser(user_email, user_password) {
     try {
-        const encryptedPassword = encrypt(user_password)
+        // const encryptedPassword = encrypt(user_password)
         const response = await axios({
             method: "post",
             url: `${localStorage.getItem("address")}/user/login`,

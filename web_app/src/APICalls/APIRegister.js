@@ -13,7 +13,7 @@ const axios = require('axios').default;
 
 export default async function registerUser(user_name, user_password, user_email) {
     try {
-        const encryptedPassword = encrypt(user_password)
+        // const encryptedPassword = encrypt(user_password)
         const response = await axios({
             method: "post",
             url: `${localStorage.getItem("address")}/user/register`,
