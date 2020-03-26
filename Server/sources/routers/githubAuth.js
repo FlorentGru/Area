@@ -11,7 +11,7 @@ const router = express.Router();
 
 const oauth = require('../services/tokenService');
 
-const githubOAuth2 = require('node-github-oauth2');
+let githubOAuth2 = require('node-github-oauth2');
 
 /**
  * Authenticate for github
@@ -28,6 +28,7 @@ router.get('/oauth2/github', auth, async (req, res) => {
         const callback = req.query.callback;
         if (!callback) throw ("missing callback");
 
+        githubOAuth2 = require('node-github-oauth2');
         githubOAuth2.initialize({
             clientId: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
