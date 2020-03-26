@@ -33,9 +33,12 @@ exports.login = async function(email, password)
 {
     if (!email || !password) throw ('Invalid body');
 
-    const crypt = encrypt(password);
-    console.log(password);
-    console.log(decrypt(crypt));
+//    console.log(password);
+    try {
+        console.log(decrypt(password));
+    } catch (err) {
+        console.log("password not encrypted");
+    }
 
     const user = await User.findByCredentials(email, password);
 

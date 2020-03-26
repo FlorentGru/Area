@@ -30,7 +30,16 @@ const restart = function () {
 exports.restart = restart;
 
 const trigger = function () {
+/*    Area.find({}, function (err, areas) {
+        areas.forEach(function(area) {
+            console.log(area)
+        });
+    });*/
+
     client.on('message', message => {
+        if (!message.guild) return;
+        if (message.author.bot) return;
+
         Area.aggregate([
             {
                 "$project": {
@@ -43,7 +52,7 @@ const trigger = function () {
         ], function (err, res) {
             if (err) throw err;
             res.forEach(function (area) {
-//            console.log("discord action: " + area.areas.action.name);
+            //console.log("discord action: " + area.areas.action.name);
                 if (area.areas.action.name === 'message') {
                     isMessage(area, message);
                 }
@@ -58,27 +67,18 @@ const isMessage = function (area, message) {
     const param2 = area.areas.action.params.find(({name}) => name === 'channel');
     const param3 = area.areas.action.params.find(({name}) => name === 'startWith');
     if (!param1 || !param2 || !param3) {
-        console.log("wrong parameters")
         return;
     }
-
-    if (!message.guild) return;
-    if (message.author.bot) return;
-
-//        console.log(`Guild: ${message.guild.name}`);
-//        console.log(`Expected: ${param1.value}`);
     if (message.guild.name !== param1.value) {
- //           console.log("wrong server")
+//        console.log("wrong server")
         return;
     }
 
     const channel = message.guild.channels.find(channel => channel.name === param2.value);
     if (!channel || channel.id !== message.channel.id) {
-//            console.log("wrong channel");
+//        console.log("wrong channel");
         return;
     }
-//        console.log(`Channel: ${channel.name}`);
-//        console.log(`Expected: ${param2.value}`);
 
     if (message.content.startsWith(param3.value)) {
         const size = param3.value.length + 1;

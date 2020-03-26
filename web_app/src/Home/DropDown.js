@@ -23,7 +23,7 @@ export default class DropDown extends React.Component {
     render() {
         return (
         <div>
-            <button className="menuButton" onClick={this.showMenu}>Se connecter à un Service</button>
+            <button className="menuButton" onClick={this.showMenu}>Connect to a Service</button>
             {
             this.state.show
                 ? (
@@ -32,6 +32,8 @@ export default class DropDown extends React.Component {
                     <a className="dropDownButton" href={localStorage.getItem("GitHubUrl")}> Connection GitHub</a>
                     <br/><br/><br/>
                     <a className="dropDownButton" href={localStorage.getItem("DropBoxUrl")}> Connection DropBox</a>
+                    <br/><br/><br/>
+                    <a className="dropDownButton" href={localStorage.getItem("SpotifyUrl")}> Connection Spotify</a>
                     <br/><br/><br/>
                 </div>) : (null)
             }

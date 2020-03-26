@@ -7,7 +7,7 @@ const User = mongoose.model('User');
 const AccessTokens = mongoose.model('AccessTokens');
 
 exports.updateToken = async function (userId, accessToken, refreshToken, service) {
-    const userTokens = await AccessTokens.findOne({ userId: mongoose.Types.ObjectId(userId)});
+    const userTokens = await AccessTokens.findOne({ userId: userId});
     if (!userTokens) return console.log("wrong user ?");
 
     const serviceToken = userTokens.tokens.find(token => token.service === service);

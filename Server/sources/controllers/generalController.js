@@ -37,20 +37,6 @@ exports.getActions = async (req, res) => {
             ]
         },
         {
-            service: "discord",
-            name: "mention",
-            params: [
-                {
-                    name: "server",
-                    value: "String"
-                },
-                {
-                    name: "channel",
-                    value: "String"
-                }
-            ]
-        },
-        {
             service: "github",
             name: "push",
             params: [
@@ -149,11 +135,7 @@ exports.getReactions = async (req, res) => {
             name: "message",
             params: [
                 {
-                    name: "webhookId",
-                    value: "String"
-                },
-                {
-                    name: "webhookToken",
+                    name: "webhookUrl",
                     value: "String"
                 }
             ]

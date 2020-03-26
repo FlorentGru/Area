@@ -55,7 +55,7 @@ router.get('/oauth2/dropbox/callback', async function(req, res) {
         await dropbox.getToken(params.code, async function (err, result) {
             if (err) throw ("error fetching token");
 
-            console.log('user\'s access_token: ', result.access_token);
+            console.log('dropbox user\'s access_token: ', result.access_token);
 
             if (!params.state) throw ("fetch access token failed dropbox");
             const state = params.state.split(" ");
