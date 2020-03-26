@@ -47,6 +47,7 @@ class ConnectionFragment() : Fragment() {
         val intent = Intent(activity, WebViewActivity::class.java)
         intent.putExtra("url", _urlWebView)
         intent.putExtra("baseUrl", activity?.intent?.getStringExtra("baseUrl"))
+        intent.putExtra("token", activity?.intent?.getStringExtra("token"))
         startActivity(intent)
     }
 }

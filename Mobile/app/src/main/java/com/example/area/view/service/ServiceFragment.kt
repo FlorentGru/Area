@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.area.R
+import com.example.area.navBar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.service.*
 import com.google.gson.annotations.SerializedName
@@ -17,34 +18,34 @@ import java.io.Serializable
 class ServiceFragment : Fragment() {
 
     data class Param @JvmOverloads constructor(
-        @SerializedName ("name")
+        @SerializedName("name")
         var name: String? = null,
         @SerializedName("value")
         var value: String? = null
     ) : Serializable
-    data class Actions @JvmOverloads constructor (
-        @SerializedName ("service")
+
+    data class Actions @JvmOverloads constructor(
+        @SerializedName("service")
         var service: String? = null,
-        @SerializedName ("name")
+        @SerializedName("name")
         var name: String? = null,
-        @SerializedName ("params")
+        @SerializedName("params")
         var params: List<Param>? = null
     ) : Serializable
 
     private var _view: View? = null
-    private lateinit var _buttongmail : Button
-    private lateinit var _baseUrl :String
-    private lateinit var token :String
+    private var _baseUrl: String? =""
+    private var token: String? = ""
 
-    private lateinit var _buttonPushGithub : Button
-    private lateinit var _buttonPullrequestGithub : Button
-    private lateinit var _buttonDeletedDropbox : Button
-    private lateinit var _buttonCreatedDropbox : Button
-    private lateinit var _buttonRenamedDropbox : Button
-    private lateinit var _buttonPathchangedDropbox : Button
-    private lateinit var _buttonMessageDiscord : Button
-    private lateinit var _buttonCountdownTimer : Button
-    private lateinit var _buttonLoopTimer : Button
+    private lateinit var _buttonPushGithub: Button
+    private lateinit var _buttonPullrequestGithub: Button
+    private lateinit var _buttonDeletedDropbox: Button
+    private lateinit var _buttonCreatedDropbox: Button
+    private lateinit var _buttonRenamedDropbox: Button
+    private lateinit var _buttonPathchangedDropbox: Button
+    private lateinit var _buttonMessageDiscord: Button
+    private lateinit var _buttonCountdownTimer: Button
+    private lateinit var _buttonLoopTimer: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,24 +53,24 @@ class ServiceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _view = inflater.inflate(R.layout.service, container, false)
-        _baseUrl = activity?.intent?.getStringExtra("baseUrl")!!
-        token = activity?.intent?.getStringExtra("token")!!
-        var Action = Actions()
+        _baseUrl = navBar.getB()
+        token = navBar.getT()
+        val Action = Actions()
 
         _buttonPushGithub = _view!!.findViewById(R.id.sendPushGithub)
         _buttonPullrequestGithub = _view!!.findViewById(R.id.sendPullRequestGithub)
         _buttonDeletedDropbox = _view!!.findViewById(R.id.sendDeletedButtonDropbox)
-        _buttonCreatedDropbox= _view!!.findViewById(R.id.sendCreateddButtonDropbox)
-        _buttonRenamedDropbox =_view!!.findViewById(R.id.sendRenameddButtonDropbox)
-        _buttonPathchangedDropbox =_view!!.findViewById(R.id.sendPathChangedButtonDropbox)
+        _buttonCreatedDropbox = _view!!.findViewById(R.id.sendCreateddButtonDropbox)
+        _buttonRenamedDropbox = _view!!.findViewById(R.id.sendRenameddButtonDropbox)
+        _buttonPathchangedDropbox = _view!!.findViewById(R.id.sendPathChangedButtonDropbox)
         _buttonMessageDiscord = _view!!.findViewById(R.id.sendMessageDiscord)
-        _buttonCountdownTimer =_view!!.findViewById(R.id.sendCountDownButtonTimer)
-        _buttonLoopTimer =_view!!.findViewById(R.id.sendLoopButtonTimer)
+        _buttonCountdownTimer = _view!!.findViewById(R.id.sendCountDownButtonTimer)
+        _buttonLoopTimer = _view!!.findViewById(R.id.sendLoopButtonTimer)
 
 
         _buttonPushGithub.setOnClickListener {
             val GithubService: String = ActionGithubTView.text.toString().toLowerCase()
-            var GithubNamePush : String = ActionPushGithub.text.toString()
+            var GithubNamePush: String = ActionPushGithub.text.toString()
             val ParamOwner: String = PushOwnerGithub.text.toString()
             val ParamRepo: String = PushRepoGithub.text.toString()
 
@@ -168,9 +169,13 @@ class ServiceFragment : Fragment() {
             val ParamChannel: String = DiscordActionChannel.text.toString().toLowerCase()
             val ParamTrigger: String = DiscordActionTrigger.text.toString().toLowerCase()
 
-            Action.service= DiscordService
+            Action.service = DiscordService
             Action.name = DiscordNameMessage
-            Action.params = listOf<Param>(Param("server", ParamServer), Param("channel", ParamChannel), Param("startWith", ParamTrigger))
+            Action.params = listOf<Param>(
+                Param("server", ParamServer),
+                Param("channel", ParamChannel),
+                Param("startWith", ParamTrigger)
+            )
             Toast.makeText(activity, "Discord Message", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -189,7 +194,11 @@ class ServiceFragment : Fragment() {
 
             Action.service = TimerService
             Action.name = TimerNameCountdown
-            Action.params = listOf(Param("hours", ParamHours), Param("minutes", ParamMinutes), Param("message", ParamMessage))
+            Action.params = listOf(
+                Param("hours", ParamHours),
+                Param("minutes", ParamMinutes),
+                Param("message", ParamMessage)
+            )
             Toast.makeText(activity, "Count Timer", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -208,7 +217,11 @@ class ServiceFragment : Fragment() {
 
             Action.service = TimerService
             Action.name = TimerNameLoop
-            Action.params = listOf<Param>(Param("hours", ParamHours), Param("minutes", ParamMinutes), Param("message", ParamMessage))
+            Action.params = listOf<Param>(
+                Param("hours", ParamHours),
+                Param("minutes", ParamMinutes),
+                Param("message", ParamMessage)
+            )
             Toast.makeText(activity, "Loop Timer", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(activity, Service_Reaction::class.java)
@@ -217,13 +230,6 @@ class ServiceFragment : Fragment() {
             intent.putExtra("Action", Action as Serializable)
             startActivity(intent)
         }
-
-        _buttongmail = _view!!.findViewById(R.id.sendButtonGmail)
-        _buttongmail.setOnClickListener {
-            Toast.makeText(activity, "Move to Reaction", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, Service_Reaction::class.java)
-            startActivity(intent)
-        }
-        return _view
+    return _view
     }
 }

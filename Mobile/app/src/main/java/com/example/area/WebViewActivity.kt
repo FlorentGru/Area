@@ -20,6 +20,7 @@ class WebViewActivity : AppCompatActivity() {
                 if (responseUrl.contains("https://www.exemple.com")) {
                     val intent = Intent(this@WebViewActivity, navBar::class.java)
                     intent.putExtra("baseUrl", intent.getStringExtra("baseUrl"))
+                    intent.putExtra("token", intent.getStringExtra("token"))
                     startActivity(intent)
                 } else {
                     myWebView!!.loadUrl(responseUrl)
