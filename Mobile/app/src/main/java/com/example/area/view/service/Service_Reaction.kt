@@ -121,7 +121,7 @@ class Service_Reaction : AppCompatActivity() {
 
             Reactions.service = GmailService
             Reactions.name = GmailNamesendTo
-            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("email", ParamDest), Param("subject", ParamSubject))))
+            Reactions.params = JSONArray(gson.toJson(listOf<Param>(Param("dest", ParamDest), Param("subject", ParamSubject))))
 
             transferAction.put("service", Actions.service)
             transferAction.put("name", Actions.name)
