@@ -36,6 +36,8 @@ services:
             - /app/node_modules
             - ./web_app:/app
             - apk:/var/www/:ro
+        stdin_open: true
+
     db:
         image: "mongo"
         ports:
