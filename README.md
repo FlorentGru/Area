@@ -1,9 +1,9 @@
-#AREA
+# AREA
 
 The objective of this project is to create a business application by implementing a software suite.
 The authenticated user can create some AREA in order to execute a REAction when an Action is found.
 
-##Configuration
+## Configuration
 Requires docker, docker-compose and ngrok
 ```bash
 docker-compose build
@@ -17,10 +17,10 @@ docker-compose up
 ngrok http https://localhost8080/
 ```
 
-##Routes Api
-###Config address
+## Routes Api
+### Config address
 PUT `/config/address`
-#####response
+##### response
 
 Code:   
 - 200 on success if the config address starts with `https://` and ends with `.ngrok.io`
@@ -30,9 +30,9 @@ Content:
 - on success : `success`
 - on error : the error throws : `invalid address`
 
-###User Register
+### User Register
 POST `/auth/register`
-#####response
+##### response
 
 Code:   
 - 201 on success
@@ -42,9 +42,9 @@ Content:
 - on success : user's Token
 - on error : the error throws
 
-###User Login
+### User Login
 POST `/auth/login`
-#####response
+##### response
 
 Code:   
 - 200 on success
@@ -54,25 +54,25 @@ Content:
 - on success : user's Token
 - on error : the error throws
 
-###Area action
+### Area action
 GET `/area/actions`
-#####response
+##### response
 
 Code: 200
 
 Content: A Json of all **actions** with their **Service's name**, their **name** and all their **parameters**
 
-###Area reaction
+### Area reaction
 GET `/area/reactions`
-#####response
+##### response
 
 Code: 200
 
 Content: A Json of all **reactions** with their **Service's name**, their **name** and all their **parameters**
 
-###Create an Area
+### Create an Area
 POST `/area/new`
-#####response
+##### response
 
 Code:   
 - 201 on success
@@ -82,9 +82,9 @@ Content:
 - on success : `created`
 - on error : the error throws
 
-###Create an Area
+### Create an Area
 POST `/area/new`
-#####response
+##### response
 
 Code: 201
 
